@@ -177,12 +177,12 @@ public class LoginToSalesforce extends AddRACIinProgram {
 
             obj.openBrowserOnChrome();
             obj.loginIntoSalesforce();
-            obj.AllWork();
-            driver.quit();
+            //obj.AllWork();
+            //driver.quit();
 
-            obj1.openBrowserOnChrome();
-            obj1.loginIntoSalesforce();
-            obj1.AddRaci();
+            //obj1.openBrowserOnChrome();
+            //obj1.loginIntoSalesforce();
+            //obj1.AddRaci();
 
         }
         catch(Exception e){
