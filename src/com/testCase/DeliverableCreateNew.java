@@ -82,18 +82,22 @@ public class DeliverableCreateNew {
         driver.findElement(By.xpath("//div/input[@role=\"combobox\" and @title=\"Search Projects\"]")).sendKeys("Extron Project");
         driver.findElement(By.xpath("//div[@title=\"Extron Project\"]")).click();
 
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[2]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[1]/div/div/div[3]/div[1]/div/div/lightning-picklist/lightning-dual-listbox/div/div[2]/div/div[3]/div/ul/li[1]/div/span/span")).sendKeys("Extron Project");
-        driver.findElement(By.xpath("driver.findElement(By.xpath(\"//div[@title=\\\"Extron Project\\\"]\")).click();")).click();
+
+       // driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[1]/div/div/div[3]/div[1]/div/div/lightning-picklist/lightning-dual-listbox/div/div[2]/div/div[3]/div/ul/li[1]/div/span/span")).click();
+       // driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[2]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[1]/div/div/div[3]/div[1]/div/div/lightning-picklist/lightning-dual-listbox/div/div[2]/div/div[4]/lightning-button-icon[1]/button")).click();
+
+
+
+
+
 
         driver.findElement(By.xpath("//div/input[@type=\"text\" and @maxlength=\"80\"]")).sendKeys("New Deliverable 2");
 
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[2]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[1]/div/div/div[3]/div[1]/div/div/lightning-picklist/lightning-dual-listbox/div/div[2]/div/div[3]/div/ul/li[1]/div/span/span")).sendKeys(" Project");
+       // driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[2]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[1]/div/div/div[3]/div[1]/div/div/lightning-picklist/lightning-dual-listbox/div/div[2]/div/div[3]/div/ul/li[1]/div/span/span")).sendKeys(" Project");
 
         driver.findElement(By.xpath("//div/input[@title=\"Search DeliverableTypes\"or@data-interactive-lib-uid=12]")).sendKeys("Extron DT ");
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[2]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[3]/div[1]/div/div/div/div/div/div[1]/div/div/div[2]/ul/li[3]/a/div[2]/div[1]")).click();
+        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[3]/div[1]/div/div/div/div/div/div[1]/div/div/div[2]/ul/li[3]/a/div[2]/div[1]")).click();
 
-        driver.findElement(By.xpath("//div/input[@title=\"Search objects\" or @data-interactive-lib-uid=\"13\"]")).sendKeys("Extron Object ");
-        driver.findElement(By.xpath("")).click();
 
 
         driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[3]/div/div/div/div/div/div/div/div/div[2]/div[1]")).sendKeys("test");
@@ -103,12 +107,19 @@ public class DeliverableCreateNew {
     @Test(priority = 3)
     public void EditDeliverable() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[4]/div[1]/section/div/div/div[1]/div[3]/div/div[1]/div/div[1]/div/header/div[2]/div/div[2]/ul/li[3]/a/div")));
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[4]/div[1]/section/div/div/div[1]/div[3]/div/div[1]/div/div[1]/div[1]/header/div[2]/div/div[2]/ul/li[4]/div/div[1]/div/div/a/lightning-icon/lightning-primitive-icon")));
         myDynamicElement.click();
 
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[9]/div/ul/li[2]/a")));
+        myDynamicElement.click();
+
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/div[2]/div/div/div/div[2]/section/div/footer/button[1]")));
+        myDynamicElement.click();
+
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/div[2]/div/article/div[3]/div/div[2]/div/div/div[1]/div/div/div/div/input")));
         myDynamicElement.clear();
-        myDynamicElement.sendKeys("");
+
+        myDynamicElement.sendKeys("New Del 2");
 
         driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/div[2]/div/article/div[3]/div/div[4]/div/div/div/div/div/div/div/div/div[2]/div[1]")).sendKeys("test");
 
