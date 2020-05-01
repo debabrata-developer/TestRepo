@@ -1,0 +1,31 @@
+Index: src/com/TestCase/testClass.java
+===================================================================
+--- src/com/TestCase/testClass.java	(revision 6c80991c424fc2f421786d06a2acd25f934c9f35)
++++ src/com/TestCase/testClass.java	(revision 6c80991c424fc2f421786d06a2acd25f934c9f35)
+@@ -1,26 +0,0 @@
+-package com.TestCase;
+-
+-import org.testng.Assert;
+-import org.testng.annotations.Test;
+-
+-public class testClass {
+-
+-    @Test
+-    void setup() {
+-        System.out.println("this is setup method");
+-    }
+-
+-    @Test
+-    void login() {
+-        System.out.println("this is login");
+-        String ex = "Avro";
+-        String ac = "Avr";
+-        Assert.assertEquals(ex,ac);
+-    }
+-
+-    @Test
+-    void exit() {
+-        System.out.println("this is exit");
+-    }
+-}
+-
