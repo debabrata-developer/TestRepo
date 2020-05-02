@@ -1,4 +1,4 @@
-package com.TestCase.createEdit;
+package com.testCase.createEdit;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -88,10 +88,10 @@ public class OrganizationCreateEdit {
         myDynamicElement.sendKeys("Selenium Test Organization");
 
         //Timesheet Auto Approval Days
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div/div[1]/div/div/div/input")).sendKeys("7");
+        driver.findElement(By.xpath("(//*[@data-aura-class=\"uiInputSmartNumber\"])[1]")).sendKeys("7");///html/body/div[4]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div/div[1]/div/div/div/input
 
         //Expense Auto Approval Days
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div/div[2]/div/div/div/input")).sendKeys("9");//(//div/input[@class="input uiInputSmartNumber"  and @data-aura-class="uiInputSmartNumber"])[2]
+        driver.findElement(By.xpath("(//*[@data-aura-class=\"uiInputSmartNumber\"])[2]")).sendKeys("9");///html/body/div[4]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div/div[2]/div/div/div/input
 
         //Historical Comments
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\" ]")).sendKeys("Selenium Test Historical Comment");
@@ -114,11 +114,11 @@ public class OrganizationCreateEdit {
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/input[@class=\" input\" and @type=\"text\"]")));
         myDynamicElement.sendKeys(" Edit");
 
-        //Expense Auto Approval Days
-        driver.findElement(By.xpath("(//div/input[@class=\"input uiInputSmartNumber\"  and @data-aura-class=\"uiInputSmartNumber\"])[2]")).sendKeys("9");
-
         //Timesheet Auto Approval Days
-        driver.findElement(By.xpath("(//div/input[@class=\"input uiInputSmartNumber\"  and @data-aura-class=\"uiInputSmartNumber\"])[1]")).sendKeys("1");
+        driver.findElement(By.xpath("(//*[@data-aura-class=\"uiInputSmartNumber\"])[1]")).sendKeys("1");
+
+        //Expense Auto Approval Days
+        driver.findElement(By.xpath("(//*[@data-aura-class=\"uiInputSmartNumber\"])[2]")).sendKeys("9");
 
         //Historical Comments
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\" ]")).sendKeys("Selenium Test Historical Comment Edit");
