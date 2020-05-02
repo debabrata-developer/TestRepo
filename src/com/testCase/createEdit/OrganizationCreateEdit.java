@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -99,10 +100,22 @@ public class OrganizationCreateEdit {
         //Click Save Button
         driver.findElement(By.xpath("//button[@title=\"Save\" ]//span[text()='Save']")).click();
 
+        //get Toast Message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+        System.out.println("the toast message value--->"+ToastMessage);
+
+        //Expected Toast Message Value Set
+        String ExpectedValue = "Organization \"Selenium Test Organization\" was created.";
+        System.out.println("the ExpectedValue--->"+ExpectedValue);
+
+        //Check
+        Assert.assertEquals(ToastMessage,ExpectedValue);
+
         Thread.sleep(5000);
     }
 
-    @Test(priority = 3)
+    /*@Test(priority = 3)
     public void EditOrganization() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
@@ -127,7 +140,7 @@ public class OrganizationCreateEdit {
         driver.findElement(By.xpath("//button[@title=\"Save\" ]//span[text()='Save']")).click();
 
         Thread.sleep(5000);
-    }
+    }*/
 
     @AfterTest
     public void close(){
