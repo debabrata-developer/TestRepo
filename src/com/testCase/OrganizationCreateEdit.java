@@ -1,4 +1,4 @@
-package com.testCase;
+package com.TestCase;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -18,11 +18,14 @@ import java.util.concurrent.TimeUnit;
 public class OrganizationCreateEdit {
 
     public WebDriver driver;
-    public static final String userName = "techcloud@platinumpmo.com";
-    public static final String password = "tech@1234567$";
+
     @BeforeTest
-    public void openBrowserOnChrome() {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\rupak\\Downloads\\testing salenium\\chromedriver_win32_80_0_3987_106-20200427T071327Z-001\\chromedriver_win32_80_0_3987_106\\chromedriver.exe");
+    public void setup() {
+        String userName = "techcloud@platinumpmo.com";
+        String password = "tech@1234567$";
+        String webDriverPath = "E:\\automation testing\\Jre\\Automation\\chromedriver_win32_80_0_3987_106\\chromedriver.exe";
+        //opening chrome
+        System.setProperty("webdriver.chrome.driver", webDriverPath);
         ChromeOptions opt = new ChromeOptions();
         ArrayList<String> l1 = new ArrayList<String>();
         l1.add("--disable-notifications");
@@ -33,9 +36,10 @@ public class OrganizationCreateEdit {
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
         driver.get("https://login.salesforce.com");
-    }
-    @Test(priority = 0)
-    public void loginIntoSalesforce(){
+
+        //read excel
+
+        //login to salesforce
         WebElement userNameElement = driver.findElement(By.id("username"));
         WebElement passwordElement = driver.findElement(By.id("password"));
         userNameElement.sendKeys(userName);
@@ -43,6 +47,7 @@ public class OrganizationCreateEdit {
         driver.findElement(By.id("Login")).click();
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
 
+        //Redirect to sObject
     }
 
     @Test(priority = 1)
