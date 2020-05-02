@@ -1,0 +1,37 @@
+Index: src/com/TestCase/testClass.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.TestCase;\r\n\r\nimport org.testng.Assert;\r\nimport org.testng.annotations.Test;\r\n\r\npublic class testClass {\r\n\r\n    @Test\r\n    void setup() {\r\n        System.out.println(\"this is setup method\");\r\n    }\r\n\r\n    @Test\r\n    void login() {\r\n        System.out.println(\"this is login\");\r\n        String ex = \"Avro\";\r\n        String ac = \"Avr\";\r\n        Assert.assertEquals(ex,ac);\r\n    }\r\n\r\n    @Test\r\n    void exit() {\r\n        System.out.println(\"this is exit\");\r\n    }\r\n}\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/com/TestCase/testClass.java	(revision a15d617a421828a4d8a64d8abdb1f4a67a693b61)
++++ src/com/TestCase/testClass.java	(date 1588429918569)
+@@ -1,26 +1,5 @@
+ package com.TestCase;
+ 
+-import org.testng.Assert;
+-import org.testng.annotations.Test;
+-
+-public class testClass {
+-
+-    @Test
+-    void setup() {
+-        System.out.println("this is setup method");
+-    }
++public class TestClass {
+ 
+-    @Test
+-    void login() {
+-        System.out.println("this is login");
+-        String ex = "Avro";
+-        String ac = "Avr";
+-        Assert.assertEquals(ex,ac);
+-    }
+-
+-    @Test
+-    void exit() {
+-        System.out.println("this is exit");
+-    }
+ }
+-
