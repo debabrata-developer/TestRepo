@@ -1,4 +1,5 @@
-package com.TestCase;
+package com.TestCase.others;
+
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +16,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class DeliverableCreateNew {
+public class DeliverableCreateEdit {
     public WebDriver driver;
     public static final String userName = "techcloud@platinumpmo.com";
     public static final String password = "tech@1234567$";
@@ -83,8 +84,8 @@ public class DeliverableCreateNew {
         driver.findElement(By.xpath("//div[@title=\"Extron Project\"]")).click();
 
 
-       // driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[1]/div/div/div[3]/div[1]/div/div/lightning-picklist/lightning-dual-listbox/div/div[2]/div/div[3]/div/ul/li[1]/div/span/span")).click();
-       // driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[2]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[1]/div/div/div[3]/div[1]/div/div/lightning-picklist/lightning-dual-listbox/div/div[2]/div/div[4]/lightning-button-icon[1]/button")).click();
+        // driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[1]/div/div/div[3]/div[1]/div/div/lightning-picklist/lightning-dual-listbox/div/div[2]/div/div[3]/div/ul/li[1]/div/span/span")).click();
+        // driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[2]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[1]/div/div/div[3]/div[1]/div/div/lightning-picklist/lightning-dual-listbox/div/div[2]/div/div[4]/lightning-button-icon[1]/button")).click();
 
 
 
@@ -93,7 +94,7 @@ public class DeliverableCreateNew {
 
         driver.findElement(By.xpath("//div/input[@type=\"text\" and @maxlength=\"80\"]")).sendKeys("New Deliverable 2");
 
-       // driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[2]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[1]/div/div/div[3]/div[1]/div/div/lightning-picklist/lightning-dual-listbox/div/div[2]/div/div[3]/div/ul/li[1]/div/span/span")).sendKeys(" Project");
+        // driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[2]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[1]/div/div/div[3]/div[1]/div/div/lightning-picklist/lightning-dual-listbox/div/div[2]/div/div[3]/div/ul/li[1]/div/span/span")).sendKeys(" Project");
 
         driver.findElement(By.xpath("//div/input[@title=\"Search DeliverableTypes\"or@data-interactive-lib-uid=12]")).sendKeys("Extron DT ");
         driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[3]/div[1]/div/div/div/div/div/div[1]/div/div/div[2]/ul/li[3]/a/div[2]/div[1]")).click();
@@ -129,4 +130,5 @@ public class DeliverableCreateNew {
 
 
 }
+
 

@@ -1,4 +1,5 @@
-package com.TestCase;
+package com.TestCase.others;
+
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +16,7 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class WorkpackageCreateNew {
+public class WorkPackageCreateEdit {
     public WebDriver driver;
     public static final String userName = "techcloud@platinumpmo.com";
     public static final String password = "tech@1234567$";
