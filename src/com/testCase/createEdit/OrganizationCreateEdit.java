@@ -115,7 +115,7 @@ public class OrganizationCreateEdit {
         Thread.sleep(5000);
     }
 
-    /*@Test(priority = 3)
+    @Test(priority = 3)
     public void EditOrganization() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
@@ -139,8 +139,20 @@ public class OrganizationCreateEdit {
         //Click Save Button
         driver.findElement(By.xpath("//button[@title=\"Save\" ]//span[text()='Save']")).click();
 
+        //get Toast Message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+        System.out.println("the toast message value--->"+ToastMessage);
+
+        //Expected Toast Message Value Set
+        String ExpectedValue = "Organization \"Selenium Test Organization Edit\" was saved.";
+        System.out.println("the ExpectedValue--->"+ExpectedValue);
+
+        //Check
+        Assert.assertEquals(ToastMessage,ExpectedValue);
+
         Thread.sleep(5000);
-    }*/
+    }
 
     @AfterTest
     public void close(){
