@@ -72,11 +72,6 @@ public class OrganizationCreateEdit {
     }
 
     @Test(priority = 1)
-    public void testMethod(){
-        System.out.println("it is test method");
-    }
-
-    @Test(priority = 2)
     public void CreateOrganization() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
@@ -115,7 +110,7 @@ public class OrganizationCreateEdit {
         Thread.sleep(5000);
     }
 
-    @Test(priority = 3)
+    @Test(priority = 2)
     public void EditOrganization() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
