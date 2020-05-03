@@ -5,6 +5,7 @@
     <test name="sObject Create and Edit" >
         <classes>
             <class name="com.testCase.createEdit.OrganizationCreateEdit" />
+            <class name="com.testCase.createEdit.PortfolioCreateEdit" />
         </classes>
     </test>
 

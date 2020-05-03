@@ -118,9 +118,9 @@ public class OrganizationCreateEdit {
         WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Edit\"]//div[text()='Edit']")));
         myDynamicElement.click();
 
-        /*Organization Name
+        //Organization Name
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/input[@class=\" input\" and @type=\"text\"]")));
-        myDynamicElement.sendKeys(" Edit");*/
+        myDynamicElement.sendKeys(" Edit");
 
         //Timesheet Auto Approval Days
         driver.findElement(By.xpath("(//*[@data-aura-class=\"uiInputSmartNumber\"])[1]")).sendKeys("1");
