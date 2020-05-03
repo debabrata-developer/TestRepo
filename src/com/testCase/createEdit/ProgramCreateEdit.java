@@ -33,17 +33,14 @@ public class ProgramCreateEdit {
     }
 
     @BeforeTest
-    public void Setup(){
+    public void Setup() throws InterruptedException {
 
         //get WebDriver Path
         String webDriverPath = sheet.getRow(3).getCell(2).getStringCellValue();
-        System.out.println(webDriverPath);
 
         //get UserName & Password
         String username = sheet.getRow(1).getCell(2).getStringCellValue();
-        System.out.println(username);
         String password = sheet.getRow(2).getCell(2).getStringCellValue();
-        System.out.println(password);
 
         //Open Chrome & go to Salesforce login page
         System.setProperty("webdriver.chrome.driver", webDriverPath);
@@ -63,6 +60,7 @@ public class ProgramCreateEdit {
         driver.findElement(By.xpath("//input[@id='username']")).sendKeys(username);
         driver.findElement(By.xpath("//input[@id='password']")).sendKeys(password);
         driver.findElement(By.id("Login")).click();
+        Thread.sleep(50000);
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
 
         //get sObject URL
@@ -101,19 +99,30 @@ public class ProgramCreateEdit {
         driver.findElement(By.xpath("(//div/input[@class=\" input\" and @type=\"text\"])[1]")).sendKeys("Selenium Test Program");
 
         //Target Start Date
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy ");
-        Date date = new Date();
-        String cdate= dateFormat.format(date);
-        driver.findElement(By.xpath("(//div/input[@class=\" input\" and @type=\"text\"])[2]")).sendKeys(cdate);
+        driver.findElement(By.xpath("(//div/input[@class=\" input\" and @type=\"text\"])[2]")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//span[text()='13']")).click();
 
         //Target Completion Date
-        date = new Date(5);
-        cdate= dateFormat.format(date);
-        driver.findElement(By.xpath("(//div/input[@class=\" input\" and @type=\"text\"])[3]")).sendKeys(cdate);
+        driver.findElement(By.xpath("(//div/input[@class=\" input\" and @type=\"text\"])[3]")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.xpath("//span[text()='18']")).click();
 
         //Sensitive Data
         driver.findElement(By.xpath("//div[@data-value=\"HR Sensitive Data\"]")).click();
         driver.findElement(By.xpath("//button[@title=\"Move selection to Chosen\"]/lightning-primitive-icon")).click();
+
+        //Estimated Budget
+        driver.findElement(By.xpath("//input[@data-aura-class=\"uiInputSmartNumber\"]")).sendKeys("50");
+        Thread.sleep(1000);
+
+        //Program PhaseIf
+        driver.findElement(By.xpath("(//a[@role=\"button\" and @class=\"select\"])[1]")).sendKeys("ASAP: 1- Preparation");
+        Thread.sleep(2000);
+
+        //Program Condition
+        driver.findElement(By.xpath("(//a[@role=\"button\" and @class=\"select\"])[2]")).sendKeys("Yellow");
+        Thread.sleep(2000);
 
         //Program Sponsor
         String PSponsor = sheet.getRow(37).getCell(3).getStringCellValue();
@@ -125,46 +134,37 @@ public class ProgramCreateEdit {
         String BLead = sheet.getRow(37).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys(BLead);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+BLead+"\"]")).click();
+        driver.findElement(By.xpath("(//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+BLead+"\"])[2]")).click();
 
         //Technology Lead
         String TLead = sheet.getRow(37).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys(TLead);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+TLead+"\"]")).click();
+        driver.findElement(By.xpath("(//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+TLead+"\"])[3]")).click();
 
         //Program Manager
         String PManager = sheet.getRow(37).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[4]")).sendKeys(PManager);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+PManager+"\"]")).click();
+        driver.findElement(By.xpath("(//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+PManager+"\"])[4]")).click();
 
         //Financial Advisor
         String FAdvisor = sheet.getRow(37).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[5]")).sendKeys(FAdvisor);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+FAdvisor+"\"]")).click();
+        driver.findElement(By.xpath("(//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+FAdvisor+"\"])[5]")).click();
 
         //Administrator
         String Administrator = sheet.getRow(37).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[6]")).sendKeys(Administrator);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+Administrator+"\"]")).click();
-
-        //Estimated Budget
-        driver.findElement(By.xpath("//input[@data-aura-class=\"uiInputSmartNumber\"]")).sendKeys("50");
-
-        //Program PhaseIf
-        driver.findElement(By.xpath("(//a[@role=\"button\" and @class=\"select\"])[1]")).sendKeys("ASAP: 1- Preparation");
-
-        //Program Condition
-        driver.findElement(By.xpath("(//a[@role=\"button\" and @class=\"select\"])[2]")).sendKeys("Yellow");
+        driver.findElement(By.xpath("(//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+Administrator+"\"])[6]")).click();
 
         //Solution Integrator
         String SIntegrator = sheet.getRow(38).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("//input[@title=\"Search Solution Integrator\" and @placeholder=\"Search Solution Integrator...\"]")).sendKeys(SIntegrator);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[contains(text(),'"+SIntegrator+"')]")).click();
+        driver.findElement(By.xpath("//div[contains(@title,\""+SIntegrator+"\")]")).click();
 
         //Program Description
         driver.findElement(By.xpath("(//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"])")).sendKeys("Test Selenium Description");
