@@ -85,6 +85,7 @@ public class PortfolioCreateEdit {
         String OrgLookup = sheet.getRow(11).getCell(3).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/input[@placeholder=\"Search Organization...\"]")));
         myDynamicElement.sendKeys(OrgLookup);
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+OrgLookup+"\"]")));
         myDynamicElement.click();
 
@@ -93,8 +94,8 @@ public class PortfolioCreateEdit {
 
         //Select Portfolio Owner
         String UserLookup = sheet.getRow(37).getCell(3).getStringCellValue();
-        System.out.println("user is--->"+UserLookup);
         driver.findElement(By.xpath("//div/input[@placeholder=\"Search People...\" and @title=\"Search People\"]")).sendKeys(UserLookup);
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+UserLookup+"\"]")));
         myDynamicElement.click();
 
@@ -133,6 +134,7 @@ public class PortfolioCreateEdit {
         myDynamicElement.sendKeys(Keys.BACK_SPACE);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/input[@placeholder=\"Search Organization...\"]")));
         myDynamicElement.sendKeys(OrgLookup);
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\"Extron Organization\"]")));
         myDynamicElement.click();
 
@@ -144,6 +146,7 @@ public class PortfolioCreateEdit {
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//a[@class=\"pill focused uiPill--default uiPill\"])")));
         myDynamicElement.sendKeys(Keys.BACK_SPACE);
         driver.findElement(By.xpath("//div/input[@placeholder=\"Search People...\" and @title=\"Search People\"]")).sendKeys(UserLookup);
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+UserLookup+"\"]")));
         myDynamicElement.click();
 
