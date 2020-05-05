@@ -1,5 +1,6 @@
 package com.extraTesting;
 
+
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
@@ -9,19 +10,19 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Testing {
+
     static WebDriver driver;
     // Read Excel File
     File src = new File("C:\\AMIGO Selenium Excel Sheet.xlsx");
@@ -32,9 +33,9 @@ public class Testing {
     public Testing() throws IOException {
     }
 
+
     @BeforeTest
     public void Setup(){
-
         //get WebDriver Path
         String webDriverPath = sheet.getRow(3).getCell(2).getStringCellValue();
         System.out.println(webDriverPath);
@@ -66,258 +67,105 @@ public class Testing {
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
 
         //get sObject URL
-        String sObject = sheet.getRow(13).getCell(2).getStringCellValue();
+        String sObject = sheet.getRow(22).getCell(2).getStringCellValue();
+        System.out.println(sObject);
 
         //redirect to sObject
         driver.get(sObject);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
-
     @Test(priority = 1)
-    public void CreateProgram() throws InterruptedException {
+    public void CreateCEJ() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
-
-        //click New Button
-        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\" and text()='New']")));
+        //Click On New Button
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
         myDynamicElement.click();
 
-        //Select Organization
-        String OrgLookup = sheet.getRow(11).getCell(3).getStringCellValue();
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/input[@placeholder=\"Search Organization...\"]")));
-        myDynamicElement.sendKeys(OrgLookup);
         Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+OrgLookup+"\"]")));
-        myDynamicElement.click();
-
-        //Select Portfolio
-        String PortLookup = sheet.getRow(12).getCell(3).getStringCellValue();
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/input[@placeholder=\"Search Portfolios...\"]")));
-        myDynamicElement.sendKeys(PortLookup);
+        //Click On Associated Organization
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Organization\"]")));
+        myDynamicElement.sendKeys("Extron Organization");
         Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+PortLookup+"\"]")));
-        myDynamicElement.click();
+        driver.findElement(By.xpath("//div[@title=\"Extron Organization\"]")).click();
 
-        //Program Name
-        driver.findElement(By.xpath("(//div/input[@class=\" input\" and @type=\"text\"])[1]")).sendKeys("Selenium Test Program");
+        //Click On Associated Portfolio
+        driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys("Extron Portfolio");
+        driver.findElement(By.xpath("//div[@title=\"Extron Portfolio\"]")).click();
 
-        //Target Start Date
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy ");
-        Date date = new Date();
-        String cdate= dateFormat.format(date);
-        driver.findElement(By.xpath("(//div/input[@class=\" input\" and @type=\"text\"])[2]")).sendKeys(cdate);
+        //Click On Associated Program
+        driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys("Extron Program");
+        driver.findElement(By.xpath("//div[@title=\"Extron Program\"]")).click();
 
-        //Target Completion Date
-        date = new Date(5);
-        cdate= dateFormat.format(date);
-        driver.findElement(By.xpath("(//div/input[@class=\" input\" and @type=\"text\"])[3]")).sendKeys(cdate);
+        //Cutover Event Journal Name
+        driver.findElement(By.xpath("//input[@class=\" input\"]")).sendKeys("Test Selenium CEJ");
 
-        //Sensitive Data
-        driver.findElement(By.xpath("//div[@data-value=\"HR Sensitive Data\"]")).click();
-        driver.findElement(By.xpath("//button[@title=\"Move selection to Chosen\"]/lightning-primitive-icon")).click();
+        //Priority
+        driver.findElement(By.xpath("//a[@class=\"select\"]")).click();
+        driver.findElement(By.xpath("//a[@title=\"Normal\"]")).click();
 
-        //Program Sponsor
-        String PSponsor = sheet.getRow(37).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys(PSponsor);
+        //Event Description
+        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[3]/div/div/div/div/div/div[2]/div[1]")).sendKeys("Testing Event");
+
+        //Cutover Event Coordinator
+        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[3]/div/div/div[1]/div[1]/div/div/div/div/div/div[1]/div/input")).sendKeys("Techcloud Developer");
+        driver.findElement(By.xpath("//div[@title=\"Techcloud Developer\"]")).click();
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+PSponsor+"\"]")).click();
-
-        //Business Lead
-        String BLead = sheet.getRow(37).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys(BLead);
+        //Cutover Event Owner
+        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[3]/div/div/div[1]/div[2]/div/div/div/div/div/div[1]/div/input")).sendKeys("Techcloud Developer");
+        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[3]/div/div/div[1]/div[2]/div/div/div/div/div/div[1]/div/div/div[2]/ul/li[1]/a/div[2]/div[1]")).click();
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+BLead+"\"]")).click();
+        //Cutover Event Resolution Signoff
+        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[3]/div/div/div[2]/div[1]/div/div/div/div/div/div[1]/div/input")).sendKeys("Techcloud Developer");
+        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[3]/div/div/div[2]/div[1]/div/div/div/div/div/div[1]/div/div/div[2]/ul/li/a/div[2]/div[1]")).click();
 
-        //Technology Lead
-        String TLead = sheet.getRow(37).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys(TLead);
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+TLead+"\"]")).click();
+        //Cutover Resolution
+        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[3]/div/div/div[3]/div/div/div/div/div/div[2]/div[1]")).sendKeys("Testing Cutover Resolution");
 
-        //Program Manager
-        String PManager = sheet.getRow(37).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[4]")).sendKeys(PManager);
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+PManager+"\"]")).click();
+        //Historical Comment
+        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[4]/div/div/div/div/div/div/div/div/div[2]/div[1]")).sendKeys("Test Historical Comment");
 
-        //Financial Advisor
-        String FAdvisor = sheet.getRow(37).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[5]")).sendKeys(FAdvisor);
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+FAdvisor+"\"]")).click();
+        //Save CEJ
+        driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
 
-        //Administrator
-        String Administrator = sheet.getRow(37).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[6]")).sendKeys(Administrator);
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+Administrator+"\"]")).click();
 
-        //Estimated Budget
-        driver.findElement(By.xpath("//input[@data-aura-class=\"uiInputSmartNumber\"]")).sendKeys("50");
-
-        //Program PhaseIf
-        driver.findElement(By.xpath("(//a[@role=\"button\" and @class=\"select\"])[1]")).sendKeys("ASAP: 1- Preparation");
-
-        //Program Condition
-        driver.findElement(By.xpath("(//a[@role=\"button\" and @class=\"select\"])[2]")).sendKeys("Yellow");
-
-        //Solution Integrator
-        String SIntegrator = sheet.getRow(38).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("//input[@title=\"Search Solution Integrator\" and @placeholder=\"Search Solution Integrator...\"]")).sendKeys(SIntegrator);
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[contains(text(),'"+SIntegrator+"')]")).click();
-
-        //Program Description
-        driver.findElement(By.xpath("(//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"])")).sendKeys("Test Selenium Description");
-
-        //Program Charter
-        driver.findElement(By.xpath("(//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"])")).sendKeys("Test Selenium Charter");
-
-        //Program Charter (overflow)
-        driver.findElement(By.xpath("(//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"])")).sendKeys("Test Selenium Charter (overflow)");
-
-        //Historical Comments
-        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\" ]")).sendKeys("Selenium Test Historical Comment");
-
-        //Click Save Button
-        driver.findElement(By.xpath("//button[@title=\"Save\" ]//span[text()='Save']")).click();
-
-        //get Toast Message
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
-        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
-
-        //Expected Toast Message Value Set
-        String ExpectedValue = "Program \"Selenium Test Program\" was created.";
-
-        //Check
-        Assert.assertEquals(ToastMessage,ExpectedValue);
-
-        Thread.sleep(5000);
     }
-
-    /*@Test(priority = 2)
-    public void EditProgram() throws InterruptedException {
+    @Test(priority = 2)
+    public void EditCEJ() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
-
-        //click New Button
-        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\" and text()='New']")));
+        //Edit Button
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Edit\"]")));
         myDynamicElement.click();
 
-        //Select Organization
-        String OrgLookup = sheet.getRow(11).getCell(3).getStringCellValue();
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/input[@placeholder=\"Search Organization...\"]")));
-        myDynamicElement.sendKeys(OrgLookup);
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+OrgLookup+"\"]")));
+        //Edit popup
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Edit']")));
         myDynamicElement.click();
 
-        //Select Portfolio
-        String PortLookup = sheet.getRow(12).getCell(3).getStringCellValue();
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/input[@placeholder=\"Search Portfolios...\"]")));
-        myDynamicElement.sendKeys(PortLookup);
+        //CEJ Name
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@class=\" input\"]")));
+        myDynamicElement.clear();
+        myDynamicElement.sendKeys("Test Selenium CEJ-Edit");
+
+        //Prority
+        driver.findElement(By.xpath("//a[@class=\"select\"]")).click();
+        driver.findElement(By.xpath("//a[@title=\"Low\"]")).click();
         Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+PortLookup+"\"]")));
-        myDynamicElement.click();
+        //Cutover event Signoff
+        // driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/article/div[3]/div/div[2]/div/div/div[5]/div[1]/div/div/div/div/div/div[1]/div/input")).sendKeys("Debabrata Ghosh");
+        // driver.findElement(By.xpath("//div[@title=\"Debabrata Ghosh\"]")).click();
 
-        //Program Name
-        driver.findElement(By.xpath("(//div/input[@class=\" input\" and @type=\"text\"])[1]")).sendKeys("Selenium Test Program");
 
-        //Target Start Date
-        DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy ");
-        Date date = new Date();
-        String cdate= dateFormat.format(date);
-        driver.findElement(By.xpath("(//div/input[@class=\" input\" and @type=\"text\"])[2]")).sendKeys(cdate);
+        //Historical comment
+        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/article/div[3]/div/div[3]/div/div/div[1]/div/div/div/div/div/div[2]/div[1]")).sendKeys("Test Historical Comment-Edit");
 
-        //Target Completion Date
-        date = new Date(5);
-        cdate= dateFormat.format(date);
-        driver.findElement(By.xpath("(//div/input[@class=\" input\" and @type=\"text\"])[3]")).sendKeys(cdate);
+        //Save
+        driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
 
-        //Sensitive Data
-        driver.findElement(By.xpath("//div[@data-value=\"HR Sensitive Data\"]")).click();
-        driver.findElement(By.xpath("//button[@title=\"Move selection to Chosen\"]/lightning-primitive-icon")).click();
 
-        //Program Sponsor
-        String PSponsor = sheet.getRow(37).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys(PSponsor);
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+PSponsor+"\"]")).click();
-
-        //Business Lead
-        String BLead = sheet.getRow(37).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys(BLead);
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+BLead+"\"]")).click();
-
-        //Technology Lead
-        String TLead = sheet.getRow(37).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys(TLead);
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+TLead+"\"]")).click();
-
-        //Program Manager
-        String PManager = sheet.getRow(37).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[4]")).sendKeys(PManager);
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+PManager+"\"]")).click();
-
-        //Financial Advisor
-        String FAdvisor = sheet.getRow(37).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[5]")).sendKeys(FAdvisor);
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+FAdvisor+"\"]")).click();
-
-        //Administrator
-        String Administrator = sheet.getRow(37).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[6]")).sendKeys(Administrator);
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+Administrator+"\"]")).click();
-
-        //Estimated Budget
-        driver.findElement(By.xpath("//input[@data-aura-class=\"uiInputSmartNumber\"]")).sendKeys("50");
-
-        //Program PhaseIf
-        driver.findElement(By.xpath("(//a[@role=\"button\" and @class=\"select\"])[1]")).sendKeys("ASAP: 1- Preparation");
-
-        //Program Condition
-        driver.findElement(By.xpath("(//a[@role=\"button\" and @class=\"select\"])[2]")).sendKeys("Yellow");
-
-        //Solution Integrator
-        String SIntegrator = sheet.getRow(38).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("//input[@title=\"Search Solution Integrator\" and @placeholder=\"Search Solution Integrator...\"]")).sendKeys(SIntegrator);
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[contains(text(),'"+SIntegrator+"')]")).click();
-
-        //Program Description
-        driver.findElement(By.xpath("(//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"])")).sendKeys("Test Selenium Description");
-
-        //Program Charter
-        driver.findElement(By.xpath("(//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"])")).sendKeys("Test Selenium Charter");
-
-        //Program Charter (overflow)
-        driver.findElement(By.xpath("(//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"])")).sendKeys("Test Selenium Charter (overflow)");
-
-        //Historical Comments
-        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\" ]")).sendKeys("Selenium Test Historical Comment");
-
-        //Click Save Button
-        driver.findElement(By.xpath("//button[@title=\"Save\" ]//span[text()='Save']")).click();
-
-        //get Toast Message
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
-        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
-
-        //Expected Toast Message Value Set
-        String ExpectedValue = "Program \"Selenium Test Program\" was created.";
-
-        //Check
-        Assert.assertEquals(ToastMessage,ExpectedValue);
-
-        Thread.sleep(5000);
-    }*/
-
+    }
     @AfterTest
     public void close(){
         //closing the chrome
         driver.quit();
     }
+
 }
