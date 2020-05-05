@@ -1,4 +1,4 @@
-package com.testCase;
+package com.TestCase;
 
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -67,6 +68,7 @@ public class ProjectCreateEdit {
         //Clicking on Associated Organization
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder=\"Search Organization...\"]")));
         myDynamicElement.sendKeys("Extron Organization");
+       Thread.sleep(2000);
         //clicking  on Extron organization
         driver.findElement(By.xpath("//div[@title=\"Extron Organization\"]")).click();
         Thread.sleep(2000);
@@ -78,59 +80,83 @@ public class ProjectCreateEdit {
         //clicking on associated program
         driver.findElement(By.xpath("//input[@placeholder=\"Search Programs...\"]")).sendKeys("Extron Program");
         driver.findElement(By.xpath("//div[@title=\"Extron Program\"]")).click();
+        //Merge Current Status
+        driver.findElement(By.xpath("(//a[@class=\"select\"])[2]")).click();
+        driver.findElement(By.xpath("//a[@title=\"Initialize\"]")).click();
+      Thread.sleep(1000);
         //Name of Project
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[1]/div/div/div/div/input")).sendKeys("New SElenium Project");
+        driver.findElement(By.xpath("(//input[@class=\" input\"])[1]")).sendKeys("New Selenium Project");
         //project description
         driver.findElement(By.xpath("//textarea[@class=\" textarea\"]")).sendKeys("Testing");
         //target start date
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[3]/div[1]/div/div/div/div/input")).click();
+        driver.findElement(By.xpath("(//a[@class=\"datePicker-openIcon display\"])[1]")).click();
         //select date
-        driver.findElement(By.xpath("//button[@class=\"today slds-button slds-align_absolute-center slds-text-link\"]")).click();
+        driver.findElement(By.xpath("//span[text()='14']")).click();
         //target completion date
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[4]/div[1]/div/div/div/div/input")).click();
+        driver.findElement(By.xpath("(//a[@class=\"datePicker-openIcon display\"])[2]")).click();
         //arrow of datepicker
         driver.findElement(By.xpath("//a[@title=\"Go to next month\"]")).click();
         //select date
-        driver.findElement(By.xpath("/html/body/div[9]/div/div[2]/table/tbody/tr[4]/td[5]/span")).click();
+        driver.findElement(By.xpath("//span[text()='20']")).click();
         Thread.sleep(1000);
         //Budget
         driver.findElement(By.xpath("//input[@class=\"input uiInputSmartNumber\"]")).sendKeys("5000000");
         //capital
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[6]/div[1]/div/div/div/div/div/div/div/a")).click();
+        driver.findElement(By.xpath("(//a[@class=\"select\"and@role=\"button\"])[5]")).click();
         driver.findElement(By.xpath("//a[@title=\"Capital\"]")).click();
+       Thread.sleep(2000);
         //timesheet approver
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[7]/div[1]/div/div/div/div/div/div[1]/div/input")).sendKeys("Techcloud Developer");
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys("Techcloud Developer");
+        Thread.sleep(2000);
         driver.findElement(By.xpath("//div[@title=\"Techcloud Developer\"]")).click();
         Thread.sleep(2000);
         //project condition
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[3]/div[2]/div/div/div/div/div[1]/div/div/a")).click();
+        driver.findElement(By.xpath("(//a[@class=\"select\"])[3]")).click();
         driver.findElement(By.xpath("//a[@title=\"Yellow\"]")).click();
         //project manager
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[5]/div[2]/div/div/div/div/div/div[1]/div/input")).sendKeys("Techcloud Developer");
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[5]/div[2]/div/div/div/div/div/div[1]/div/div/div[2]/ul/li/a/div[2]/div[1]")).click();
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys("Techcloud Developer");
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//div[@title=\"Techcloud Developer\"]")).click();
         //Business Process Manager
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[6]/div[2]/div/div/div/div/div/div[1]/div/input")).click();
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[6]/div[2]/div/div/div/div/div/div[1]/div/div/div[2]/ul/li/a/div[2]/div[1]")).click();
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys("Techcloud Developer");
+       Thread.sleep(2000);
+        driver.findElement(By.xpath("(//div[@title=\"Techcloud Developer\"])[2]")).click();
         Thread.sleep(2000);
         //Solution Integrator
         driver.findElement(By.xpath("//input[@title=\"Search Solution Integrator\"]")).sendKeys("Extron Solution Integrator");
+       Thread.sleep(2000);
         driver.findElement(By.xpath("//div[@title=\"Extron Solution Integrator\"]")).click();
         //Expense Approver
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[8]/div[2]/div/div/div/div/div/div[1]/div/input")).sendKeys("Techcloud Developer");
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[8]/div[2]/div/div/div/div/div/div[1]/div/div/div[2]/ul/li/a/div[2]/div[1]")).click();
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[4]")).sendKeys("Techcloud Developer");
+       Thread.sleep(2000);
+        driver.findElement(By.xpath("(//div[@title=\"Techcloud Developer\"])[4]")).click();
         //Project Charter
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[3]/div/div/div[1]/div/div/div/div/div/div[2]/div[1]")).sendKeys("Testing");
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
 
         //Project Charter Overflow
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[3]/div/div/div[2]/div/div/div/div/div/div[2]/div[1]")).sendKeys("Testing");
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
         //Historical Comment
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[4]/div/div/div/div/div/div/div/div/div[2]/div[1]")).sendKeys("Test Historical Comment");
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment");
 
         Thread.sleep(1000);
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
+
+        //get Toast Message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+
+        //Expected Toast Message Value Set
+        String ExpectedValue = "Project \"New Selenium Project\" was created.";
+
+        //Check
+        Assert.assertEquals(ToastMessage,ExpectedValue);
+
+        Thread.sleep(5000);
+
+
     }
 
-    @Test(priority = 2)
+    /*@Test(priority = 2)
     public void EditProject () throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //drop down to edit
@@ -161,7 +187,7 @@ public class ProjectCreateEdit {
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
 
 
-    }
+    }*/
 
 
 

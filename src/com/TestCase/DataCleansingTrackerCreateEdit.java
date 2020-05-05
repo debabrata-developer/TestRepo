@@ -1,4 +1,4 @@
-package com.testCase;
+package com.TestCase;
 
 import com.sun.xml.internal.ws.api.server.WSEndpoint;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -10,6 +10,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -108,7 +110,7 @@ public class DataCleansingTrackerCreateEdit {
         driver.findElement(By.xpath("//a[@title=\"Aged open items\"]")).click();
 
         //Data Sets Impacted
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[3]/div[2]/div/div/div/div/div[2]/div[1]")).sendKeys("Testing");
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
         Thread.sleep(2000);
 
         //StakeHolder Group
@@ -117,8 +119,8 @@ public class DataCleansingTrackerCreateEdit {
 
         Thread.sleep(2000);
         //Associated Deliverable
-        driver.findElement(By.xpath("//input[@title=\"Search Deliverables\"]")).sendKeys("Extron Deliverable 2");
-        driver.findElement(By.xpath("//div[@title=\"Extron Delieverable 2\"]")).click();
+        driver.findElement(By.xpath("//input[@title=\"Search Deliverables\"]")).sendKeys("Extron Deliverable");
+        driver.findElement(By.xpath("//div[@title=\"Extron Deliverable Retest\"]")).click();
 
         //Associated System
         driver.findElement(By.xpath("//input[@title=\"Search Systems\"]")).sendKeys("Extron System");
@@ -126,11 +128,11 @@ public class DataCleansingTrackerCreateEdit {
 
 
         //Cleansing Start Date
-        driver.findElement(By.xpath("//a[@class=\"datePicker-openIcon display\"][1]")).click();
+        driver.findElement(By.xpath("(//a[@class=\"datePicker-openIcon display\"])[1]")).click();
         driver.findElement(By.xpath("//span[text()='20']")).click();
 
         //Estimated Finish Data
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[6]/div[2]/div/div/div/div/input")).click();
+        driver.findElement(By.xpath("(//a[@class=\"datePicker-openIcon display\"])[2]")).click();
         driver.findElement(By.xpath("//a[@title=\"Go to next month\"]")).click();
         driver.findElement(By.xpath("//span[text()='10'][1]")).click();
 
@@ -140,15 +142,29 @@ public class DataCleansingTrackerCreateEdit {
         Thread.sleep(2000);
 
         //Cleansing Procedure
-        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"][1]")).sendKeys("Testing");
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
 
         //Historical Comment
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[4]/div/div/div/div/div/div/div/div/div[2]/div[1]")).sendKeys("Test Historical Comment");
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment");
 
         //Save
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
        Thread.sleep(2000);
+
+        //get Toast Message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+
+        //Expected Toast Message Value Set
+        String ExpectedValue = "Data Cleansing Tracker \"Test Selenium Data Cleansing Tracker\" was created.";
+
+        //Check
+        Assert.assertEquals(ToastMessage,ExpectedValue);
+
+        Thread.sleep(5000);
+
     }
+
     @Test(priority = 2)
     public void EditDataCleansingTracker() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -174,15 +190,32 @@ public class DataCleansingTrackerCreateEdit {
         driver.findElement(By.xpath("//input[@class=\"input uiInputSmartNumber\"]")).sendKeys("8");
 
         //Historical Comment
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/div[2]/div/article/div[3]/div/div[4]/div/div/div/div/div/div/div/div/div[2]/div[1]")).sendKeys("Test Historical Comment-Edit");
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment-Edit");
 
         //Save
-       // driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
+       driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
+
+        //get Toast Message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+
+        //Expected Toast Message Value Set
+        String ExpectedValue = "Data Cleansing Tracker \"Data Cleansing Tracker-Edit\" was saved.";
+
+        //Check
+        Assert.assertEquals(ToastMessage,ExpectedValue);
+
+        Thread.sleep(5000);
 
 
 
 
+    }
 
+    @AfterTest
+    public void close(){
+        //closing the chrome
+        driver.quit();
     }
 
 

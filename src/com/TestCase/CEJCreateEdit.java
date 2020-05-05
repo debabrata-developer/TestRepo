@@ -1,4 +1,4 @@
-package com.testCase;
+package com.TestCase;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -103,32 +104,44 @@ public class CEJCreateEdit {
         driver.findElement(By.xpath("//a[@title=\"Normal\"]")).click();
 
         //Event Description
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[3]/div/div/div/div/div/div[2]/div[1]")).sendKeys("Testing Event");
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing Event");
 
         //Cutover Event Coordinator
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[3]/div/div/div[1]/div[1]/div/div/div/div/div/div[1]/div/input")).sendKeys("Techcloud Developer");
-        driver.findElement(By.xpath("//div[@title=\"Techcloud Developer\"]")).click();
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys("Techcloud Developer");
+        driver.findElement(By.xpath("(//div[@title=\"Techcloud Developer\"])[1]")).click();
          Thread.sleep(2000);
         //Cutover Event Owner
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[3]/div/div/div[1]/div[2]/div/div/div/div/div/div[1]/div/input")).sendKeys("Techcloud Developer");
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[3]/div/div/div[1]/div[2]/div/div/div/div/div/div[1]/div/div/div[2]/ul/li[1]/a/div[2]/div[1]")).click();
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys("Techcloud Developer");
+        driver.findElement(By.xpath("(//div[@title=\"Techcloud Developer\"])[2]")).click();
         Thread.sleep(2000);
         //Cutover Event Resolution Signoff
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[3]/div/div/div[2]/div[1]/div/div/div/div/div/div[1]/div/input")).sendKeys("Techcloud Developer");
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[3]/div/div/div[2]/div[1]/div/div/div/div/div/div[1]/div/div/div[2]/ul/li/a/div[2]/div[1]")).click();
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys("Techcloud Developer");
+        driver.findElement(By.xpath("(//div[@title=\"Techcloud Developer\"])[3]")).click();
 
         //Cutover Resolution
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[3]/div/div/div[3]/div/div/div/div/div/div[2]/div[1]")).sendKeys("Testing Cutover Resolution");
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing Cutover Resolution");
 
         //Historical Comment
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[4]/div/div/div/div/div/div/div/div/div[2]/div[1]")).sendKeys("Test Historical Comment");
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment");
 
         //Save CEJ
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
 
+        //get Toast Message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+
+        //Expected Toast Message Value Set
+        String ExpectedValue = "Cutover Event Journal \"Test Selenium CEJ\" was created.";
+
+        //Check
+        Assert.assertEquals(ToastMessage,ExpectedValue);
+
+        Thread.sleep(5000);
 
     }
-    @Test(priority = 2)
+
+     @Test(priority = 2)
     public void EditCEJ() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Edit Button
@@ -154,11 +167,22 @@ public class CEJCreateEdit {
 
 
         //Historical comment
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/article/div[3]/div/div[3]/div/div/div[1]/div/div/div/div/div/div[2]/div[1]")).sendKeys("Test Historical Comment-Edit");
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment-Edit");
 
         //Save
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
 
+         //get Toast Message
+         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
+         String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+
+         //Expected Toast Message Value Set
+         String ExpectedValue = "Cutover Event Journal \"Test Selenium CEJ-Edit\" was saved.";
+
+         //Check
+         Assert.assertEquals(ToastMessage,ExpectedValue);
+
+         Thread.sleep(5000);
 
     }
     @AfterTest
