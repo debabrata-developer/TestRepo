@@ -2,7 +2,6 @@ package com.TestCase;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -18,11 +17,9 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class PortfolioCreateEdit {
-
+public class ObjectCreateEdit {
     static WebDriver driver;
     // Read Excel File
     File src = new File("C:\\AMIGO Selenium Excel Sheet.xlsx");
@@ -30,7 +27,7 @@ public class PortfolioCreateEdit {
     XSSFWorkbook workbook = new XSSFWorkbook(input);
     XSSFSheet sheet = workbook.getSheetAt(0);
 
-    public PortfolioCreateEdit() throws IOException {
+    public ObjectCreateEdit() throws IOException {
     }
 
     @BeforeTest
@@ -66,7 +63,7 @@ public class PortfolioCreateEdit {
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
 
         //get sObject URL
-        String sObject = sheet.getRow(12).getCell(2).getStringCellValue();
+        String sObject = sheet.getRow(31).getCell(2).getStringCellValue();
         System.out.println(sObject);
 
         //redirect to sObject
@@ -74,31 +71,39 @@ public class PortfolioCreateEdit {
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
     @Test(priority = 1)
-    public void CreatePortfolio() throws InterruptedException {
+    public void CreateObject()throws InterruptedException{
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        //Clicking on New Button
-        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a/div[@title=\"New\"]")));
+        //Click On New Button
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
         myDynamicElement.click();
 
-
-        //Clicking on Associated Organization
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder=\"Search Organization...\"]")));
+        //Associated Organization
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Organization\"]")));
         myDynamicElement.sendKeys("Extron Organization");
+        Thread.sleep(1000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Organization\"]")));
         myDynamicElement.click();
+
         Thread.sleep(2000);
 
-        //Portfolio Name
-        driver.findElement(By.xpath("//input[@class=\" input\"]")).sendKeys("Test Selenium Portfolio");
-
-        //Portfolio Owner
-        driver.findElement(By.xpath("//input[@title=\"Search People\"]")).sendKeys("Techcloud Developer");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Techcloud Developer\"]")));
+        //Associated portfolio
+        driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys("Extron Portfolio");
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Portfolio\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+
+        //Associated Program
+        driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys("Extron Program");
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Program\"]")));
+        myDynamicElement.click();
+
+        //Name Of Object
+        driver.findElement(By.xpath("//input[@class=\" input\"]")).sendKeys("Test Selenium Object");
+
+        //Object Description
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
 
         //Historical Comment
-        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Selenium Portfolio");
+        driver.findElement(By.xpath("//textarea[@class=\" textarea\"]")).sendKeys("Test Historical Comment");
 
         //Save
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
@@ -108,7 +113,7 @@ public class PortfolioCreateEdit {
         String ToastMessage = myDynamicElement.getAttribute("innerHTML");
 
         //Expected Toast Message Value Set
-        String ExpectedValue = "Portfolio \"Test Selenium Portfolio\" was created.";
+        String ExpectedValue = "Object \"Test Selenium Object\" was created.";
 
         //Check
         Assert.assertEquals(ToastMessage,ExpectedValue);
@@ -117,19 +122,25 @@ public class PortfolioCreateEdit {
     }
 
     @Test(priority = 2)
-    public void EditPortfolio() throws InterruptedException {
+    public void EditObject() throws InterruptedException{
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Edit Button
-        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Edit\"]")));
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//lightning-icon[@class=\"slds-button__icon slds-icon-utility-down slds-icon_container forceIcon\"])[2]")));
         myDynamicElement.click();
+
+        //Edit
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Edit\"]")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
 
         //Name
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@class=\" input\"]")));
         myDynamicElement.clear();
-        myDynamicElement.sendKeys("Test Selenium Portfolio-Edit");
+        myDynamicElement.sendKeys("Test Selenium Object-Edit");
 
         //Historical Comment
-        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical comment-Edit");
+        driver.findElement(By.xpath("//textarea[@class=\" textarea\"]")).sendKeys("Test Historical Comment-Edit");
 
         //Save
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
@@ -139,7 +150,7 @@ public class PortfolioCreateEdit {
         String ToastMessage = myDynamicElement.getAttribute("innerHTML");
 
         //Expected Toast Message Value Set
-        String ExpectedValue = "Portfolio \"Test Selenium Portfolio-Edit\" was saved.";
+        String ExpectedValue = "Object \"Test Selenium Object-Edit\" was saved.";
 
         //Check
         Assert.assertEquals(ToastMessage,ExpectedValue);
@@ -149,11 +160,8 @@ public class PortfolioCreateEdit {
     }
 
     @AfterTest
-    public void terminateBrowser(){
-
-        driver.close();
+    public void close(){
+        //closing the chrome
+        driver.quit();
     }
-
-
-
 }

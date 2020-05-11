@@ -11,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -21,43 +22,55 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class ProjectCreateEdit {
-    public WebDriver driver;
+    static WebDriver driver;
+    // Read Excel File
+    File src = new File("C:\\AMIGO Selenium Excel Sheet.xlsx");
+    FileInputStream input = new FileInputStream(src);
+    XSSFWorkbook workbook = new XSSFWorkbook(input);
+    XSSFSheet sheet = workbook.getSheetAt(0);
+
+    public ProjectCreateEdit() throws IOException {
+    }
 
     @BeforeTest
-    public void Setup() throws IOException, InterruptedException {
-        // Read Excel File
-        File src = new File("C:\\AMIGO Selenium Excel Sheet.xlsx");
-        FileInputStream input = new FileInputStream(src);
-        XSSFWorkbook wb = new XSSFWorkbook(input);
-        XSSFSheet sheet = wb.getSheetAt(0);
-        //Get Data From Excel File
-        String webpath = sheet.getRow(3).getCell(2).getStringCellValue();
-        System.out.println(webpath);
+    public void Setup(){
+        //get WebDriver Path
+        String webDriverPath = sheet.getRow(3).getCell(2).getStringCellValue();
+        System.out.println(webDriverPath);
+
+        //get UserName & Password
         String username = sheet.getRow(1).getCell(2).getStringCellValue();
         System.out.println(username);
         String password = sheet.getRow(2).getCell(2).getStringCellValue();
         System.out.println(password);
-        //Get sObject Url
-        String Sobject = sheet.getRow(14).getCell(2).getStringCellValue();
-        System.out.println(Sobject);
 
-        System.setProperty("webdriver.chrome.driver", webpath);
-        ChromeOptions opt = new ChromeOptions();
-        ArrayList<String> l1 = new ArrayList<String>();
-        l1.add("--disable-notifications");
-        opt.addArguments(l1);
-        driver = new ChromeDriver(opt);
+        //Open Chrome & go to Salesforce login page
+        System.setProperty("webdriver.chrome.driver", webDriverPath);
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications");
+        //all other arguments(if need then add)
+        //options.addArguments("--always-authorize-plugins"); options.addArguments("--no-sandbox"); options.addArguments("--disable-dev-shm-usage"); options.addArguments("--aggressive-cache-discard"); options.addArguments("--disable-cache"); options.addArguments("--disable-application-cache"); options.addArguments("--disable-offline-load-stale-cache"); options.addArguments("--disk-cache-size=0"); options.addArguments("--headless"); options.addArguments("--disable-gpu"); options.addArguments("--dns-prefetch-disable"); options.addArguments("--no-proxy-server"); options.addArguments("--log-level=3"); options.addArguments("--silent"); options.addArguments("--disable-browser-side-navigation"); options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
+
+        driver = new ChromeDriver(options);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
         driver.get("https://login.salesforce.com");
 
+        //give UserName & Password & Click to Login
         driver.findElement(By.xpath("//input[@id='username']")).sendKeys(username);
         driver.findElement(By.xpath("//input[@id='password']")).sendKeys(password);
         driver.findElement(By.id("Login")).click();
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
-        driver.get(Sobject);
+
+        //get sObject URL
+        String sObject = sheet.getRow(14).getCell(2).getStringCellValue();
+        System.out.println(sObject);
+
+        //redirect to sObject
+        driver.get(sObject);
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
     @Test(priority = 1)
     public void CreateNewProject () throws InterruptedException {
@@ -85,7 +98,7 @@ public class ProjectCreateEdit {
         driver.findElement(By.xpath("//a[@title=\"Initialize\"]")).click();
       Thread.sleep(1000);
         //Name of Project
-        driver.findElement(By.xpath("(//input[@class=\" input\"])[1]")).sendKeys("New Selenium Project");
+        driver.findElement(By.xpath("(//input[@class=\" input\"])[1]")).sendKeys("Test Selenium Project");
         //project description
         driver.findElement(By.xpath("//textarea[@class=\" textarea\"]")).sendKeys("Testing");
         //target start date
@@ -139,6 +152,7 @@ public class ProjectCreateEdit {
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment");
 
         Thread.sleep(1000);
+        //Save
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
 
         //get Toast Message
@@ -146,7 +160,7 @@ public class ProjectCreateEdit {
         String ToastMessage = myDynamicElement.getAttribute("innerHTML");
 
         //Expected Toast Message Value Set
-        String ExpectedValue = "Project \"New Selenium Project\" was created.";
+        String ExpectedValue = "Project \"Test Selenium Project\" was created.";
 
         //Check
         Assert.assertEquals(ToastMessage,ExpectedValue);
@@ -156,40 +170,65 @@ public class ProjectCreateEdit {
 
     }
 
-    /*@Test(priority = 2)
+    @Test(priority = 2)
     public void EditProject () throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        //drop down to edit
-        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@class=\"slds-grid slds-grid--vertical-align-center slds-grid--align-center sldsButtonHeightFix\"]")));
+        //Edit Button
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//lightning-icon[@class=\"slds-button__icon slds-icon-utility-down slds-icon_container forceIcon\"])[2]")));
         myDynamicElement.click();
-        Thread.sleep(1000);
-        // edit
+
+        //Edit
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Edit\"]")));
         myDynamicElement.click();
 
-        //edit popup
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[4]/div[2]/div/div[2]/div/div[2]/div/div/div/div[2]/section/div/footer/button[1]")));
+        //Edit Popup
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Edit']")));
         myDynamicElement.click();
+        Thread.sleep(2000);
+
+        //Rejection Flag
+        driver.findElement(By.xpath("(//span[text()='Rejection Flag'])[2]")).click();
+
+        //Approver
+        driver.findElement(By.xpath("(//span[text()='approver'])[2]")).click();
+
+        //Minor Edit
+        driver.findElement(By.xpath("(//span[text()='Minor Edit'])[2]")).click();
+        Thread.sleep(2000);
 
         //Name of Project
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/article/div[3]/div/div[2]/div/div/div[1]/div/div/div/div/input")));
         myDynamicElement.clear();
-        myDynamicElement.sendKeys("Test Selenium Project");
+        myDynamicElement.sendKeys("Test Selenium Project-Edit");
 
-        //project phase
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/article/div[3]/div/div[2]/div/div/div[4]/div[2]/div/div/div/div/div[1]/div/div/a")).click();
-        driver.findElement(By.xpath("//a[@title=\"ASAP: 1- Preparation\"]")).click();
 
+        Thread.sleep(2000);
         //Historical Comment
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/article/div[3]/div/div[5]/div/div/div/div/div/div/div/div/div[2]/div[1]")).sendKeys("Test Historical Comment for Project");
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment-Edit");
 
-        //save
+
+        //Save
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
 
+        //get Toast Message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
 
-    }*/
+        //Expected Toast Message Value Set
+        String ExpectedValue = "Project \"Test Selenium Project-Edit\" was saved.";
 
+        //Check
+        Assert.assertEquals(ToastMessage,ExpectedValue);
 
+        Thread.sleep(5000);
+
+    }
+
+    @AfterTest
+    public void close(){
+        //closing the chrome
+        driver.quit();
+    }
 
 }
 
