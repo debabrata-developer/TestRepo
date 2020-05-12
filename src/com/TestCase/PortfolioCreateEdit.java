@@ -8,12 +8,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import sun.awt.windows.ThemeReader;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -147,7 +149,111 @@ public class PortfolioCreateEdit {
         Thread.sleep(5000);
 
     }
+    @Test(priority = 3)
+    public void AddUser() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        //Add User Button
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Add User\"]")));
+        myDynamicElement.click();
+        Thread.sleep(2000);
+        //Search User
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")));
+        myDynamicElement.sendKeys("Subhajit Mishra");
+        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Subhajit Mishra']")));
+        myDynamicElement.click();
 
+        //Save
+        driver.findElement(By.xpath("//button[text()='Save']")).click();
+        Thread.sleep(2000);
+    }
+    @Test(priority = 4)
+    public void AddPrpgram() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        //Add Program Button
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Add Program\"]")));
+        myDynamicElement.click();
+
+        //Program Name
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@name=\"Program Name\"]")));
+        myDynamicElement.sendKeys("Test Selenium Program");
+       Thread.sleep(2000);
+        //Program Description
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
+
+
+        //Program Sponsor
+        //driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[3]")).sendKeys("");
+
+        //Business Lead
+       //driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[4]")).sendKeys();
+
+        //Technology Lead
+       // driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[5]")).sendKeys();
+
+        //Program Manager
+        //driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[6]")).sendKeys();
+
+        //Financial Advisor
+        //driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[7]")).sendKeys();
+
+       //Administrator
+       // driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[8]")).sendKeys();
+
+        //Solution Integrator
+        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[9]")).sendKeys("Extron Solution Integrator");
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Solution Integrator']")));
+        myDynamicElement.click();
+        Thread.sleep(2000);
+
+
+        //Sensitive Data
+        WebElement element = driver.findElement(By.xpath("//span[text()='HR Sensitive Data']"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).click().build().perform();
+
+        WebElement element1 = driver.findElement(By.xpath("//button[@title=\"Move selection to Chosen\"]"));
+        Actions actions1 = new Actions(driver);
+        actions1.moveToElement(element1).click().build().perform();
+
+
+
+
+
+        //Target Start Date
+        driver.findElement(By.xpath("(//a[@class=\"datePicker-openIcon display\"])[1]")).click();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='24']")));
+        myDynamicElement.click();
+
+
+        //Target Completion Date
+        driver.findElement(By.xpath("(//a[@class=\"datePicker-openIcon display\"])[2]")).click();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Go to next month\"]")));
+        myDynamicElement.click();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='18']")));
+        myDynamicElement.click();
+        Thread.sleep(2000);
+
+        //Estimated Budget
+        driver.findElement(By.xpath("//input[@name=\"EstimatedBudget\"]")).sendKeys("300000");
+
+        //Program Phase
+        driver.findElement(By.xpath("(//select[@class=\"slds-select\"])[1]")).click();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='ASAP: 0- Initiation']")));
+        myDynamicElement.click();
+
+        //Program Condition
+        driver.findElement(By.xpath("//select[@name=\"progCondition\"]")).click();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Yellow']")));
+        myDynamicElement.click();
+
+        //Historical Comment
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment");
+
+        //Save
+        driver.findElement(By.xpath("//button[text()='Save']")).click();
+
+    }
     @AfterTest
     public void terminateBrowser(){
 
