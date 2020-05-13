@@ -123,6 +123,7 @@ public class ProgramCreateEdit {
 
         //Financial advisor
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[5]")).sendKeys("Techcloud Developer");
+       Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\"Techcloud Developer\"])[5]")));
         myDynamicElement.click();
 
@@ -187,7 +188,7 @@ public class ProgramCreateEdit {
     public void EditProgram() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Edit Button
-        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//lightning-icon[@class=\"slds-button__icon slds-icon-utility-down slds-icon_container forceIcon\"])[2]")));
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@type=\"button\"and @class=\"slds-button slds-button_icon-border-filled\"]")));
         myDynamicElement.click();
 
         //Edit
@@ -275,7 +276,7 @@ public class ProgramCreateEdit {
          Thread.sleep(2000);
 
          //Target Start Date
-        WebElement element1 = driver.findElement(By.xpath("//div[@title=\"Add Project\"]"));
+       /* WebElement element1 = driver.findElement(By.xpath("//div[@title=\"Add Project\"]"));
         Actions actions1 = new Actions(driver);
         actions1.moveToElement(element1).sendKeys("May 14,2020").build().perform();
        // myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='14']")));
@@ -325,7 +326,7 @@ public class ProgramCreateEdit {
         Thread.sleep(2000);
 
         //Expense Approver
-      //driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[7]"))
+      //driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[7]"))*/
 
         //Historical Comment
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment");

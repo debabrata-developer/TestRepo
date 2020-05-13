@@ -8,6 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -92,7 +93,9 @@ public class ProjectCreateEdit {
         driver.findElement(By.xpath("//div[@title=\"Extron Portfolio\"]")).click();
         //clicking on associated program
         driver.findElement(By.xpath("//input[@placeholder=\"Search Programs...\"]")).sendKeys("Extron Program");
-        driver.findElement(By.xpath("//div[@title=\"Extron Program\"]")).click();
+       Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Program\"]")));
+        myDynamicElement.click();
         //Merge Current Status
         driver.findElement(By.xpath("(//a[@class=\"select\"])[2]")).click();
         driver.findElement(By.xpath("//a[@title=\"Initialize\"]")).click();
@@ -174,30 +177,30 @@ public class ProjectCreateEdit {
     public void EditProject () throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Edit Button
-        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//lightning-icon[@class=\"slds-button__icon slds-icon-utility-down slds-icon_container forceIcon\"])[2]")));
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class=\"slds-button slds-button_icon-border-filled\"]")));
         myDynamicElement.click();
 
         //Edit
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Edit\"]")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@name=\"PlatinumPMO__Project__c.PlatinumPMO__Edit\"]")));
         myDynamicElement.click();
 
         //Edit Popup
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Edit']")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//span[text()='Edit'])[2]")));
         myDynamicElement.click();
         Thread.sleep(2000);
 
         //Rejection Flag
-        driver.findElement(By.xpath("(//span[text()='Rejection Flag'])[2]")).click();
+        //driver.findElement(By.xpath("(//span[text()='Rejection Flag'])[2]")).click();
 
         //Approver
-        driver.findElement(By.xpath("(//span[text()='approver'])[2]")).click();
+        //driver.findElement(By.xpath("(//span[text()='approver'])[2]")).click();
 
         //Minor Edit
-        driver.findElement(By.xpath("(//span[text()='Minor Edit'])[2]")).click();
-        Thread.sleep(2000);
+        //driver.findElement(By.xpath("(//span[text()='Minor Edit'])[2]")).click();
+       // Thread.sleep(2000);
 
         //Name of Project
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/article/div[3]/div/div[2]/div/div/div[1]/div/div/div/div/input")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@class=\" input\"])[1]")));
         myDynamicElement.clear();
         myDynamicElement.sendKeys("Test Selenium Project-Edit");
 
@@ -223,12 +226,173 @@ public class ProjectCreateEdit {
         Thread.sleep(5000);
 
     }
+    @Test(priority = 3)
+    public void AddRaci() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        //Add Raci Chart
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Project__c.PlatinumPMO__RACI_Chart\"]")));
+        myDynamicElement.click();
 
-    @AfterTest
+        //User Type
+        myDynamicElement= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[@class=\"slds-select\"]")));
+        myDynamicElement.click();
+        Thread.sleep(2000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Responsible']")));
+        myDynamicElement.click();
+
+        //User
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
+       Thread.sleep(5000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
+        driver.findElement(By.xpath("//textarea[@name=\"HistoricalComment\"]")).sendKeys("Test Historical Comment");
+
+        //Save
+        driver.findElement(By.xpath("//button[text()='Save']")).click();
+
+        Thread.sleep(4000);
+    }
+    @Test(priority = 4)
+    public void AddDeliverable() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        //Add Deliverable
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[text()='Add Deliverable']")));
+        myDynamicElement.click();
+
+        //Deliverable Name
+        driver.findElement(By.xpath("//input[@name=\"Deliverable Name\"]")).sendKeys("Test Selenium Delivrable");
+
+        //Deleverable Description
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
+        Thread.sleep(2000);
+
+        //Sensitive Data
+        WebElement element = driver.findElement(By.xpath("//span[text()='HR Sensitive Data']"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).click().build().perform();
+
+        WebElement element1 = driver.findElement(By.xpath("//button[@title=\"Move selection to Chosen\"]"));
+        Actions actions1 = new Actions(driver);
+        actions1.moveToElement(element1).click().build().perform();
+
+        Thread.sleep(2000);
+
+        //Deliverable Type
+        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[5]")).sendKeys("Extron ");
+        Thread.sleep(2000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron  DT']")));
+        myDynamicElement.click();
+
+        //Associated Business Process
+        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[6]")).sendKeys("Extron Business Process");
+       Thread.sleep(2000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Business Process']")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
+        //Measure And Metrics
+        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[7]")).sendKeys("Extron Metrics");
+       Thread.sleep(2000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Metrics']")));
+        myDynamicElement.click();
+
+        //StakeHolder Group
+        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[8]")).sendKeys("Extron Stakeholder Group");
+        Thread.sleep(2000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Stakeholder Group']")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
+        //Associated Object
+        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[9]")).sendKeys("Extron Object");
+       Thread.sleep(2000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Object']")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
+        //Scope Description
+        driver.findElement(By.xpath("(//select[@class=\"slds-select\"])[1]")).click();
+       Thread.sleep(2000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='In Scope']")));
+        myDynamicElement.click();
+
+        //Capital
+        driver.findElement(By.xpath("(//select[@class=\"slds-select\"])[2]")).click();
+        Thread.sleep(2000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Capital']")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+        //Scope Lever
+        driver.findElement(By.xpath("(//select[@class=\"slds-select\"])[3]")).click();
+       Thread.sleep(2000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Business Process']")));
+        myDynamicElement.click();
+
+       //Historical Comment
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment");
+
+        //Save
+        driver.findElement(By.xpath("//button[text()='Save']")).click();
+
+        Thread.sleep(5000);
+    }
+    @Test(priority = 5)
+    public void getbacktosObject() throws InterruptedException {
+        //get sObject URL
+        String sObject = sheet.getRow(14).getCell(2).getStringCellValue();
+        System.out.println(sObject);
+
+        //redirect to sObject
+        driver.get(sObject);
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+
+       Thread.sleep(2000);
+
+       driver.findElement(By.xpath("//a[@class=\"slds-truncate outputLookupLink slds-truncate outputLookupLink-a0F1Q00000bpQeSUAU-2393:0 forceOutputLookup\"]")).click();
+
+    }
+    @Test(priority = 6)
+    public void AddTemplate() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        //Add Deliverable
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Project__c.PlatinumPMO__Add_Template\"]")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
+        //Project Template
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("DEMO DKS");
+        Thread.sleep(2000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='DEMO DKS']")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+        //Historical Comment
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment");
+
+        Thread.sleep(2000);
+
+        //Save
+        driver.findElement(By.xpath("//button[text()='Add']"));
+
+
+
+    }
+
+
+
+   /* @AfterTest
     public void close(){
         //closing the chrome
         driver.quit();
-    }
+    }*/
 
 }
 
