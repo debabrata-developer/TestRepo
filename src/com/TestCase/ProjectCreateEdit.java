@@ -247,15 +247,78 @@ public class ProjectCreateEdit {
         myDynamicElement.click();
 
         Thread.sleep(2000);
-
+        //Historical Comment
         driver.findElement(By.xpath("//textarea[@name=\"HistoricalComment\"]")).sendKeys("Test Historical Comment");
 
         //Save
         driver.findElement(By.xpath("//button[text()='Save']")).click();
 
         Thread.sleep(4000);
+
+        //Add Raci Chart
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Project__c.PlatinumPMO__RACI_Chart\"]")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
+        //User Type
+        myDynamicElement= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[@class=\"slds-select\"]")));
+        myDynamicElement.click();
+        Thread.sleep(2000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Accountable']")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
+        //User
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
+        Thread.sleep(3000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement.click();
+
+        //Historical Comment
+        driver.findElement(By.xpath("//textarea[@name=\"HistoricalComment\"]")).sendKeys("Test Historical Comment");
+
+        //Save
+        driver.findElement(By.xpath("//button[text()='Save']")).click();
+
+        Thread.sleep(4000);
+
+        //Add Raci Chart
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Project__c.PlatinumPMO__RACI_Chart\"]")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
+        //User Type
+        myDynamicElement= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[@class=\"slds-select\"]")));
+        myDynamicElement.click();
+        Thread.sleep(2000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Consulted']")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
+        //User
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
+        Thread.sleep(3000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement.click();
+
+        //Historical Comment
+        driver.findElement(By.xpath("//textarea[@name=\"HistoricalComment\"]")).sendKeys("Test Historical Comment");
+
+        //Save
+        driver.findElement(By.xpath("//button[text()='Save']")).click();
+
+        Thread.sleep(4000);
+
+
+
+
+
     }
-    @Test(priority = 4)
+   /* @Test(priority = 4)
     public void AddDeliverable() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Add Deliverable
@@ -353,16 +416,23 @@ public class ProjectCreateEdit {
         driver.get(sObject);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
-       Thread.sleep(2000);
+       //Thread.sleep(2000);
 
-       driver.findElement(By.xpath("//a[@class=\"slds-truncate outputLookupLink slds-truncate outputLookupLink-a0F1Q00000bpQeSUAU-2393:0 forceOutputLookup\"]")).click();
+      // driver.findElement(By.xpath("//a[@class=\"slds-truncate outputLookupLink slds-truncate outputLookupLink-a0F1Q00000bpQeSUAU-2393:0 forceOutputLookup\"]")).click();
 
+       Thread.sleep(10000);
+       driver.findElement(By.xpath("//input[@name=\"PlatinumPMO__Project__c-search-input\"]")).sendKeys("Test Selenium Project-Edit\n");
+
+       Thread.sleep(7000);
+       WebElement obj = driver.findElement(By.xpath("(//a[text()='Test Selenium Project-Edit'])[1]"));
+        obj.click();
+        Thread.sleep(4000);
     }
     @Test(priority = 6)
     public void AddTemplate() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Add Deliverable
-        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Project__c.PlatinumPMO__Add_Template\"]")));
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[text()='Add Template']")));
         myDynamicElement.click();
 
         Thread.sleep(2000);
@@ -380,11 +450,11 @@ public class ProjectCreateEdit {
         Thread.sleep(2000);
 
         //Save
-        driver.findElement(By.xpath("//button[text()='Add']"));
+        driver.findElement(By.xpath("//button[text()='Add']")).click();
 
 
 
-    }
+    }*/
 
 
 
