@@ -255,6 +255,17 @@ public class ProjectCreateEdit {
 
         Thread.sleep(4000);
 
+       /* //get Toast Message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+
+        //checking Toast Message Value Set
+        String Chechval = "Successfully Created";
+
+        //Check
+        Assert.assertTrue(ToastMessage.contains(Chechval));
+        Thread.sleep(5000);*/
+
         //Add Raci Chart
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Project__c.PlatinumPMO__RACI_Chart\"]")));
         myDynamicElement.click();
@@ -300,9 +311,9 @@ public class ProjectCreateEdit {
         Thread.sleep(2000);
 
         //User
-        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Subhajit Mishra\n");
         Thread.sleep(3000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Subhajit Mishra']")));
         myDynamicElement.click();
 
         //Historical Comment
@@ -318,7 +329,7 @@ public class ProjectCreateEdit {
 
 
     }
-   /* @Test(priority = 4)
+  /* @Test(priority = 4)
     public void AddDeliverable() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Add Deliverable
@@ -426,7 +437,7 @@ public class ProjectCreateEdit {
        Thread.sleep(7000);
        WebElement obj = driver.findElement(By.xpath("(//a[text()='Test Selenium Project-Edit'])[1]"));
         obj.click();
-        Thread.sleep(4000);
+        Thread.sleep(10000);
     }
     @Test(priority = 6)
     public void AddTemplate() throws InterruptedException {
@@ -458,7 +469,7 @@ public class ProjectCreateEdit {
 
 
 
-   /* @AfterTest
+    /* @AfterTest
     public void close(){
         //closing the chrome
         driver.quit();

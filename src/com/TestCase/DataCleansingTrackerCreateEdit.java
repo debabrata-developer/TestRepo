@@ -73,7 +73,7 @@ public class DataCleansingTrackerCreateEdit {
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
     @Test(priority = 1)
-    public void DataCleansingTrackerCreateEdit() throws InterruptedException {
+    public void DataCleansingTrackerCreate() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Click On New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[text()='New']")));
@@ -88,15 +88,16 @@ public class DataCleansingTrackerCreateEdit {
 
         //Associated portfolio
         driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys("Extron Portfolio");
+        Thread.sleep(200);
         driver.findElement(By.xpath("//div[@title=\"Extron Portfolio\"]")).click();
 
         Thread.sleep(2000);
         //Associated Program
-        driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys("Extron Portfolio");
+        driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys("Extron Program");
         driver.findElement(By.xpath("//div[@title=\"Extron Program\"]")).click();
 
         //Associated Project
-        driver.findElement(By.xpath("//input[@title=\"Search Projects\"]")).sendKeys("Extron Projects");
+        driver.findElement(By.xpath("//input[@title=\"Search Projects\"]")).sendKeys("Extron Project");
         driver.findElement(By.xpath("//div[@title=\"Extron Project\"]")).click();
 
         //Data Cleasing Tracker Name
@@ -166,14 +167,14 @@ public class DataCleansingTrackerCreateEdit {
     }
 
     @Test(priority = 2)
-    public void EditDataCleansingTracker() throws InterruptedException {
+    public void DataCleansingTrackerEdit() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Dropdown to edit
-        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("/html/body/div[4]/div[1]/section/div/div/div[1]/div[2]/div/div[1]/div/div[1]/div[1]/header/div[2]/div/div[2]/ul/li[4]/div/div[1]/div/div/a/lightning-icon/lightning-primitive-icon")));
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class=\"slds-button slds-button_icon-border-filled\"]")));
         myDynamicElement.click();
 
         //edit option in Dropdown
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"EDIT\"]")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@name=\"PlatinumPMO__Data_Cleansing_Tracker__c.PlatinumPMO__EDIT\"]")));
         myDynamicElement.click();
 
         //Edit popup
@@ -207,11 +208,131 @@ public class DataCleansingTrackerCreateEdit {
 
         Thread.sleep(5000);
 
+    }
+     @Test(priority = 3)
+    public void AddRaciChart() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        //Add Raci Chart
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Data_Cleansing_Tracker__c.PlatinumPMO__RACI_Chart\"]")));
+        myDynamicElement.click();
 
+        //User Type
+        myDynamicElement= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[@class=\"slds-select\"]")));
+        myDynamicElement.click();
+        Thread.sleep(2000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Responsible']")));
+        myDynamicElement.click();
+
+        //User
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
+        Thread.sleep(5000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+        //Change Description
+        driver.findElement(By.xpath("//textarea[@name=\"HistoricalComment\"]")).sendKeys("Test Historical Comment");
+
+        //Save
+        driver.findElement(By.xpath("//button[text()='Save']")).click();
+
+        Thread.sleep(4000);
+
+
+        //Add Raci Chart
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Data_Cleansing_Tracker__c.PlatinumPMO__RACI_Chart\"]")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
+        //User Type
+        myDynamicElement= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[@class=\"slds-select\"]")));
+        myDynamicElement.click();
+        Thread.sleep(2000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Accountable']")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
+        //User
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
+        Thread.sleep(3000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement.click();
+
+        //Change Description
+        driver.findElement(By.xpath("//textarea[@name=\"HistoricalComment\"]")).sendKeys("Test Historical Comment");
+
+        //Save
+        driver.findElement(By.xpath("//button[text()='Save']")).click();
+
+        Thread.sleep(4000);
+
+        //Add Raci Chart
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Data_Cleansing_Tracker__c.PlatinumPMO__RACI_Chart\"]")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
+        //User Type
+        myDynamicElement= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[@class=\"slds-select\"]")));
+        myDynamicElement.click();
+        Thread.sleep(2000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Consulted']")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
+        //User
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Subhajit Mishra\n");
+        Thread.sleep(3000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Subhajit Mishra']")));
+        myDynamicElement.click();
+
+        //Chasnge Description
+        driver.findElement(By.xpath("//textarea[@name=\"HistoricalComment\"]")).sendKeys("Test Historical Comment");
+
+        //Save
+        driver.findElement(By.xpath("//button[text()='Save']")).click();
+
+        Thread.sleep(4000);
 
     }
 
-    @AfterTest
+     @Test(priority = 4)
+     public void AddDataCleansingTrackerMatrics() throws InterruptedException {
+         WebDriverWait wait = new WebDriverWait(driver, 30);
+         //Add Data Cleansing Matric
+         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Data_Cleansing_Tracker__c.PlatinumPMO__Data_Cleansing_Tracker_Metrics\"]")));
+         myDynamicElement.click();
+
+         Thread.sleep(3000);
+
+         //Data Cleansing Metric Name
+         driver.findElement(By.xpath("//input[@class=\" input\"]")).sendKeys("Test Selenium Data Cleansing Metric");
+         Thread.sleep(2000);
+
+         //Data Set Description
+         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
+
+         //Number of Record To Cleanse
+         driver.findElement(By.xpath("//input[@class=\"input uiInputSmartNumber\"]")).sendKeys("14");
+
+         Thread.sleep(2000);
+
+         //Minimal Acceptable Result
+         driver.findElement(By.xpath("//input[@class=\"input uiInputSmartNumber\"]")).sendKeys("50");
+
+         //Historical comment
+         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment");
+
+         //Save
+         driver.findElement(By.xpath("(//span[text()='Save'])[3]")).click();
+
+
+
+         }
+   @AfterTest
     public void close(){
         //closing the chrome
         driver.quit();

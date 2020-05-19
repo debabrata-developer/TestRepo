@@ -145,7 +145,7 @@ public class CEJCreateEdit {
     public void EditCEJ() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Edit Button
-        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Edit\"]")));
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Cutover_Event_Journal__c.PlatinumPMO__Edit\"]")));
         myDynamicElement.click();
 
         //Edit popup
@@ -185,10 +185,10 @@ public class CEJCreateEdit {
          Thread.sleep(5000);
 
     }
-    @AfterTest
+   /* @AfterTest
     public void close(){
         //closing the chrome
         driver.quit();
-    }
+    }*/
 
 }
