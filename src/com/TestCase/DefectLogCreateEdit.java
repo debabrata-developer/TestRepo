@@ -169,7 +169,7 @@ public class DefectLogCreateEdit {
        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
 
        //Associated Test Plan
-       driver.findElement(By.xpath("//input[@title=\"Search Test Plans\"]")).sendKeys("Extron Test Plan");
+       driver.findElement(By.xpath("//input[@title=\"Search Test Plans\"]")).sendKeys("Extron  RJC Test Plan 1");
        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron RJC Test Plan 1\"]")));
        myDynamicElement.click();
        //Test Plan Details
@@ -202,12 +202,15 @@ public class DefectLogCreateEdit {
 
        //Check
        Assert.assertEquals(ToastMessage,ExpectedValue);
+
     }
+
     @Test(priority=2)
     public void EditDefectLog() throws InterruptedException {
+       Thread.sleep(4000);
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Edit Button
-        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Edit\"]")));
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Defect_Log__c.PlatinumPMO__Edit\"]")));
         myDynamicElement.click();
 
         //Edit popup
@@ -237,9 +240,9 @@ public class DefectLogCreateEdit {
         Thread.sleep(5000);
     }
 
-    @AfterTest
+    /*@AfterTest
     public void close() {
         //closing the chrome
         driver.quit();
-    }
+    }*/
 }

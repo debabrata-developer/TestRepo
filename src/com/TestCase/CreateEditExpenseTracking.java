@@ -147,7 +147,7 @@ public class CreateEditExpenseTracking {
     public void EditExpenseTracking() throws InterruptedException {
        WebDriverWait wait = new WebDriverWait(driver, 30);
        //Edit Button
-       WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Edit\"]")));
+       WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"Edit\"]")));
        myDynamicElement.click();
 
        //Expense Name
@@ -183,10 +183,10 @@ public class CreateEditExpenseTracking {
        Thread.sleep(5000);
 
     }
-    @AfterTest
+    /*@AfterTest
     public void close(){
         //closing the chrome
         driver.quit();
-    }
+    }*/
 
 }

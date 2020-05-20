@@ -192,3 +192,4 @@
 [0506/122413.272:ERROR:process_memory_win.cc(73)] ReadMemory at 0x7fffffdd000 of 6024 bytes failed: Only part of a ReadProcessMemory or WriteProcessMemory request was completed. (0x12B)
 [0506/122413.272:ERROR:process_memory_win.cc(73)] ReadMemory at 0x7fffffdf000 of 852 bytes failed: Only part of a ReadProcessMemory or WriteProcessMemory request was completed. (0x12B)
 [0506/122413.273:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
+[0520/105657.736:ERROR:prune_crash_reports.cc(35)] PruneCrashReportDatabase: Failed to get pending reports
