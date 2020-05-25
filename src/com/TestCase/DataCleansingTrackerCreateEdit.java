@@ -166,7 +166,7 @@ public class DataCleansingTrackerCreateEdit {
 
     }
 
-    @Test(priority = 2)
+   /* @Test(priority = 2)
     public void DataCleansingTrackerEdit() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Dropdown to edit
@@ -208,7 +208,7 @@ public class DataCleansingTrackerCreateEdit {
 
         Thread.sleep(5000);
 
-    }
+    }*/
      @Test(priority = 3)
     public void AddRaciChart() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -299,7 +299,7 @@ public class DataCleansingTrackerCreateEdit {
 
     }
 
-     @Test(priority = 4)
+     /*@Test(priority = 4)
      public void AddDataCleansingTrackerMatrics() throws InterruptedException {
          WebDriverWait wait = new WebDriverWait(driver, 30);
          //Add Data Cleansing Matric
@@ -331,12 +331,12 @@ public class DataCleansingTrackerCreateEdit {
 
 
 
-         }
-   @AfterTest
+         }*/
+  /* @AfterTest
     public void close(){
         //closing the chrome
         driver.quit();
-    }
+    }*/
 
 
 

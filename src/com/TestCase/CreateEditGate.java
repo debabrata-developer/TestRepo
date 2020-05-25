@@ -31,7 +31,7 @@ public class CreateEditGate {
     }
 
     @BeforeTest
-    public void Setup(){
+    public void Setup() {
         //get WebDriver Path
         String webDriverPath = sheet.getRow(3).getCell(2).getStringCellValue();
         System.out.println(webDriverPath);
@@ -70,6 +70,7 @@ public class CreateEditGate {
         driver.get(sObject);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
+
     @Test(priority = 0)
     public void CreateGate() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
@@ -129,7 +130,7 @@ public class CreateEditGate {
         String ExpectedValue = "Gate \"Test Selenium Gate\" was created.";
 
         //Check
-        Assert.assertEquals(ToastMessage,ExpectedValue);
+        Assert.assertEquals(ToastMessage, ExpectedValue);
 
         Thread.sleep(5000);
 
@@ -172,6 +173,10 @@ public class CreateEditGate {
 
         Thread.sleep(5000);
 
+        driver.navigate().refresh();
+
+        Thread.sleep(10000);
+
     }
 
     @Test(priority = 2)
@@ -182,16 +187,16 @@ public class CreateEditGate {
         myDynamicElement.click();
 
         //User Type
-        myDynamicElement= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[@class=\"slds-select\"]")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[@class=\"slds-select\"]")));
         myDynamicElement.click();
         Thread.sleep(2000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Responsible']")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Responsible']")));
         myDynamicElement.click();
 
         //User
         driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
         Thread.sleep(5000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
         myDynamicElement.click();
 
         Thread.sleep(2000);
@@ -202,6 +207,18 @@ public class CreateEditGate {
         driver.findElement(By.xpath("//button[text()='Save']")).click();
 
         Thread.sleep(4000);
+
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+
+        //checking Toast Message Value Set
+        String Chechval = "The record was successfully created.";
+
+
+        //Check
+        Assert.assertTrue(ToastMessage.contains(Chechval));
+        Thread.sleep(5000);
+
 
 
         //Add Raci Chart
@@ -233,7 +250,20 @@ public class CreateEditGate {
 
         Thread.sleep(4000);
 
-        //Add Raci Chart
+        //Get Toast Message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
+        String ToastMessage1 = myDynamicElement.getAttribute("innerHTML");
+
+        //checking Toast Message Value Set
+        String Chechval1 = "The record was successfully created.";
+
+
+        //Check
+        Assert.assertTrue(ToastMessage1.contains(Chechval1));
+        Thread.sleep(5000);
+
+
+        /*//Add Raci Chart
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Gate__c.PlatinumPMO__RACI_Chart\"]")));
         myDynamicElement.click();
 
@@ -261,6 +291,17 @@ public class CreateEditGate {
         driver.findElement(By.xpath("//button[text()='Save']")).click();
 
         Thread.sleep(4000);
+
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
+        String ToastMessage2 = myDynamicElement.getAttribute("innerHTML");
+
+        //checking Toast Message Value Set
+        String Chechval2 = "The record was successfully created.";
+
+
+        //Check
+        Assert.assertTrue(ToastMessage2.contains(Chechval2));
+        Thread.sleep(5000);*/
     }
 
    @Test(priority = 3)
@@ -306,16 +347,30 @@ public class CreateEditGate {
        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment");
 
        //Save
-       driver.findElement(By.xpath("(//span[text()='Save'])[3]")).click();
+       driver.findElement(By.xpath("(//span[text()='Save'])[2]")).click();
+
+       Thread.sleep(4000);
+
+       myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
+       String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+
+       //checking Toast Message Value Set
+       String Chechval = "Successfully Create";
+
+
+       //Check
+       Assert.assertTrue(ToastMessage.contains(Chechval));
+       Thread.sleep(5000);
 
 
    }
 
 
-    @AfterTest
+    /*@AfterTest
     public void close(){
         //closing the chrome
         driver.quit();
+    }*/
+
     }
 
-}

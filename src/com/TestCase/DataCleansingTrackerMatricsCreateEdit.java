@@ -120,7 +120,7 @@ public class DataCleansingTrackerMatricsCreateEdit {
 
     }
 
-       @Test(priority=2)
+       /*@Test(priority=2)
        public void EditDataCleansingTrackerMatrics() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Edit Button
@@ -154,9 +154,9 @@ public class DataCleansingTrackerMatricsCreateEdit {
            //Check
            Assert.assertTrue(ToastMessage.contains(Chechval));
            Thread.sleep(5000);
-    }
+    }*/
 
-    @Test(priority = 3)
+    @Test(priority = 2)
     public void AddRaci() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Add Raci Chart
@@ -186,7 +186,7 @@ public class DataCleansingTrackerMatricsCreateEdit {
         Thread.sleep(4000);
 
 
-        //Add Raci Chart
+       /* //Add Raci Chart
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Data_Cleansing_Tracker_Metrics__c.PlatinumPMO__RACI_Chart\"]")));
         myDynamicElement.click();
 
@@ -244,7 +244,7 @@ public class DataCleansingTrackerMatricsCreateEdit {
         //Save
         driver.findElement(By.xpath("//button[text()='Save']")).click();
 
-        Thread.sleep(4000);
+        Thread.sleep(4000);*/
     }
 
    /* @AfterTest
