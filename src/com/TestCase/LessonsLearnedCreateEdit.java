@@ -88,16 +88,19 @@ public class LessonsLearnedCreateEdit {
 
         //Associated portfolio
         driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys("Extron Portfolio");
+       Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Portfolio\"]")));
         myDynamicElement.click();
 
         //Associated Program
         driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys("Extron Program");
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Program\"]")));
         myDynamicElement.click();
 
         //Associated Project
         driver.findElement(By.xpath("//input[@title=\"Search Projects\"]")).sendKeys("Extron Project");
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Project\"]")));
         myDynamicElement.click();
 
@@ -109,16 +112,19 @@ public class LessonsLearnedCreateEdit {
 
         //Lessons Learned Coordinator
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys("Techcloud Developer");
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Techcloud Developer\"]")));
         myDynamicElement.click();
 
         //Lessons Learned Owner
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys("Techcloud Developer");
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\"Techcloud Developer\"])[2]")));
         myDynamicElement.click();
 
         //Lessons Learned Signoff
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys("Techcloud Developer");
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\"Techcloud Developer\"])[3]")));
         myDynamicElement.click();
 
@@ -127,16 +133,19 @@ public class LessonsLearnedCreateEdit {
 
         //Primary Stakeholder Group
         driver.findElement(By.xpath("//input[@title=\"Search Stakeholder Groups\"]")).sendKeys("Extron Stakeholder Group");
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Stakeholder Group\"]")));
         myDynamicElement.click();
 
         //Lesson Learned Type
         driver.findElement(By.xpath("(//a[@class=\"select\"])[2]")).click();
+       Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Room for Improvement\"]")));
         myDynamicElement.click();
 
         //Target Implementation Date
         driver.findElement(By.xpath("//a[@class=\"datePicker-openIcon display\"]")).click();
+       Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='20']")));
         myDynamicElement.click();
 
@@ -162,7 +171,7 @@ public class LessonsLearnedCreateEdit {
     public void EditLessonsLearned() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Edit Button
-        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Edit\"]")));
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Lessons_Learned__c.PlatinumPMO__Edit\"]")));
         myDynamicElement.click();
 
         //Edit
@@ -191,6 +200,7 @@ public class LessonsLearnedCreateEdit {
         Assert.assertEquals(ToastMessage,ExpectedValue);
 
         Thread.sleep(5000);
+        driver.navigate().refresh();
 
     }
     @AfterTest

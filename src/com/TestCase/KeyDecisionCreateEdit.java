@@ -318,10 +318,28 @@ public class KeyDecisionCreateEdit {
         driver.findElement(By.xpath("//span[text()='Add Project']")).click();
 
         Thread.sleep(5000);
+    }
 
+    @Test(priority = 5)
+    public void AddDeliverable() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        //Add Deliverable
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Key_Decision__c.PlatinumPMO__Add_Deliverable\"]")));
+        myDynamicElement.click();
 
+        myDynamicElement= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder=\"search..\"]")));
+        myDynamicElement.sendKeys("Test Selenium Deliverable");
+
+        Thread.sleep(3000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Test Selenium Delivrable']")));
+        myDynamicElement.click();
+
+        driver.findElement(By.xpath("//span[text()='Add Deliverable']")).click();
+
+        Thread.sleep(5000);
 
     }
+
 
     /*@AfterTest
     public void close(){

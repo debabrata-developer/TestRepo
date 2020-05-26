@@ -32,7 +32,7 @@ public class RiskRegisterCreateEdit {
     }
 
     @BeforeTest
-    public void Setup(){
+    public void Setup() {
         //get WebDriver Path
         String webDriverPath = sheet.getRow(3).getCell(2).getStringCellValue();
         System.out.println(webDriverPath);
@@ -71,8 +71,9 @@ public class RiskRegisterCreateEdit {
         driver.get(sObject);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
+
     @Test(priority = 1)
-    public void CreateRiskRegister()throws InterruptedException{
+    public void CreateRiskRegister() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Click On New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
@@ -182,7 +183,7 @@ public class RiskRegisterCreateEdit {
         //Contingency Plan Details
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
 
-         //Historical Comment
+        //Historical Comment
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
 
         //Save
@@ -196,19 +197,20 @@ public class RiskRegisterCreateEdit {
         String ExpectedValue = "Risk Register \"Test Selenium Risk Register\" was created.";
 
         //Check
-        Assert.assertEquals(ToastMessage,ExpectedValue);
+        Assert.assertEquals(ToastMessage, ExpectedValue);
 
         Thread.sleep(5000);
     }
+
     @Test(priority = 2)
     public void EditRiskRegister() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Edit Button
-        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//lightning-icon[@class=\"slds-button__icon slds-icon-utility-down slds-icon_container forceIcon\"])[2]")));
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class=\"slds-button slds-button_icon-border-filled\"]")));
         myDynamicElement.click();
 
         //Edit
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Edit\"]")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Edit']")));
         myDynamicElement.click();
 
         Thread.sleep(2000);
@@ -219,10 +221,10 @@ public class RiskRegisterCreateEdit {
         myDynamicElement.sendKeys("Test Selenium Risk Register-Edit");
 
         //Critical Path Checkbox
-        driver.findElement(By.xpath("(//span[text()='Critical Path?'])[2]")).click();
+        driver.findElement(By.xpath("(//span[text()='Critical Path?'])[3]")).click();
 
         //Contingency Plan Checkbox
-        driver.findElement(By.xpath("(//span[text()='Contingency Plan?'])[2]")).click();
+        driver.findElement(By.xpath("(//span[text()='Contingency Plan?'])[3]")).click();
 
         //Historical Comment
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Selenium Risk Register-Edit");
@@ -238,14 +240,182 @@ public class RiskRegisterCreateEdit {
         String ExpectedValue = "Risk Register \"Test Selenium Risk Register-Edit\" was saved.";
 
         //Check
-        Assert.assertEquals(ToastMessage,ExpectedValue);
+        Assert.assertEquals(ToastMessage, ExpectedValue);
 
         Thread.sleep(5000);
+
+        driver.navigate().refresh();
+        Thread.sleep(10000);
     }
 
-    @AfterTest
+    @Test(priority = 3)
+    public void AddRaci() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        //Add Raci Chart
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Risk_Register__c.PlatinumPMO__RACI_Chart\"]")));
+        myDynamicElement.click();
+
+        //User Type
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[@class=\"slds-select\"]")));
+        myDynamicElement.click();
+        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Responsible']")));
+        myDynamicElement.click();
+
+        //User
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
+        Thread.sleep(5000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+        //Change Description
+        driver.findElement(By.xpath("//textarea[@name=\"HistoricalComment\"]")).sendKeys("Test Historical Comment");
+
+        //Save
+        driver.findElement(By.xpath("//button[text()='Save']")).click();
+
+        Thread.sleep(4000);
+
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+
+        //checking Toast Message Value Set
+        String Chechval = "The record was successfully created.";
+
+
+        //Check
+        Assert.assertTrue(ToastMessage.contains(Chechval));
+        Thread.sleep(5000);
+
+
+        //Add Raci Chart
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Risk_Register__c.PlatinumPMO__RACI_Chart\"]")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
+        //User Type
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[@class=\"slds-select\"]")));
+        myDynamicElement.click();
+        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Accountable']")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
+        //User
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
+        Thread.sleep(3000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement.click();
+
+        //Change Description
+        driver.findElement(By.xpath("//textarea[@name=\"HistoricalComment\"]")).sendKeys("Test Historical Comment");
+
+        //Save
+        driver.findElement(By.xpath("//button[text()='Save']")).click();
+
+        Thread.sleep(4000);
+
+        //Get Toast Message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
+        String ToastMessage1 = myDynamicElement.getAttribute("innerHTML");
+
+        //checking Toast Message Value Set
+        String Chechval1 = "The record was successfully created.";
+
+
+        //Check
+        Assert.assertTrue(ToastMessage1.contains(Chechval1));
+        Thread.sleep(5000);
+
+
+        //Add Raci Chart
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Risk_Register__c.PlatinumPMO__RACI_Chart\"]")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
+        //User Type
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[@class=\"slds-select\"]")));
+        myDynamicElement.click();
+        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Consulted']")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
+        //User
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Subhajit Mishra\n");
+        Thread.sleep(3000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Subhajit Mishra']")));
+        myDynamicElement.click();
+
+        //Chasnge Description
+        driver.findElement(By.xpath("//textarea[@name=\"HistoricalComment\"]")).sendKeys("Test Historical Comment");
+
+        //Save
+        driver.findElement(By.xpath("//button[text()='Save']")).click();
+
+        Thread.sleep(4000);
+
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
+        String ToastMessage2 = myDynamicElement.getAttribute("innerHTML");
+
+        //checking Toast Message Value Set
+        String Chechval2 = "The record was successfully created.";
+
+
+        //Check
+        Assert.assertTrue(ToastMessage2.contains(Chechval2));
+        Thread.sleep(5000);
+
+    }
+
+    @Test(priority = 4)
+    public void AddProject() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        //Add Project
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Risk_Register__c.PlatinumPMO__Project\"]")));
+        myDynamicElement.click();
+
+        //Project Name
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder=\"search..\"]")));
+        myDynamicElement.sendKeys("Extron Project");
+        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Project']")));
+        myDynamicElement.click();
+
+        //Add Project Button
+        driver.findElement(By.xpath("//span[text()='Add Project']")).click();
+        Thread.sleep(5000);
+
+    }
+
+    @Test(priority = 5)
+     public void AddDeliverable() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        //Add Deliverable
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Risk_Register__c.PlatinumPMO__Deliverable\"]")));
+        myDynamicElement.click();
+
+        //Deliverable Name
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder=\"search..\"]")));
+        myDynamicElement.sendKeys("Extron Deliverable Retest");
+        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Deliverable Retest']")));
+        myDynamicElement.click();
+
+        //Add Deliverable Button
+        driver.findElement(By.xpath("//span[text()='Add Deliverable']")).click();
+
+    }
+
+
+   /* @AfterTest
     public void close(){
         //closing the chrome
         driver.quit();
-    }
+    }*/
 }

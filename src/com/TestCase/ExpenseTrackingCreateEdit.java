@@ -19,7 +19,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class CreateEditExpenseTracking {
+public class ExpenseTrackingCreateEdit {
     static WebDriver driver;
     // Read Excel File
     File src = new File("C:\\AMIGO Selenium Excel Sheet.xlsx");
@@ -27,7 +27,7 @@ public class CreateEditExpenseTracking {
     XSSFWorkbook workbook = new XSSFWorkbook(input);
     XSSFSheet sheet = workbook.getSheetAt(0);
 
-    public CreateEditExpenseTracking() throws IOException {
+    public ExpenseTrackingCreateEdit() throws IOException {
     }
 
     @BeforeTest
