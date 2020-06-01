@@ -413,9 +413,9 @@ public class RiskRegisterCreateEdit {
     }
 
 
-   /* @AfterTest
+    @AfterTest
     public void close(){
         //closing the chrome
         driver.quit();
-    }*/
+    }
 }

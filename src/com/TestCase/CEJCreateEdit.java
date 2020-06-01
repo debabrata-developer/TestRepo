@@ -47,7 +47,7 @@ public class CEJCreateEdit {
         System.out.println(password);
 
         //Open Chrome & go to Salesforce login page
-        System.setProperty("webdriver.chrome.driver", webDriverPath);
+        System.setProperty("webdriver.chrome.driver",webDriverPath );
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications");
         //all other arguments(if need then add)
@@ -90,10 +90,12 @@ public class CEJCreateEdit {
 
         //Click On Associated Portfolio
         driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys("Extron Portfolio");
+        Thread.sleep(2000);
         driver.findElement(By.xpath("//div[@title=\"Extron Portfolio\"]")).click();
 
         //Click On Associated Program
         driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys("Extron Program");
+        Thread.sleep(2000);
         driver.findElement(By.xpath("//div[@title=\"Extron Program\"]")).click();
 
         //Cutover Event Journal Name
@@ -101,6 +103,7 @@ public class CEJCreateEdit {
 
         //Priority
         driver.findElement(By.xpath("//a[@class=\"select\"]")).click();
+        Thread.sleep(2000);
         driver.findElement(By.xpath("//a[@title=\"Normal\"]")).click();
 
         //Event Description
@@ -108,14 +111,17 @@ public class CEJCreateEdit {
 
         //Cutover Event Coordinator
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys("Techcloud Developer");
+        Thread.sleep(2000);
         driver.findElement(By.xpath("(//div[@title=\"Techcloud Developer\"])[1]")).click();
          Thread.sleep(2000);
         //Cutover Event Owner
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys("Techcloud Developer");
+        Thread.sleep(2000);
         driver.findElement(By.xpath("(//div[@title=\"Techcloud Developer\"])[2]")).click();
         Thread.sleep(2000);
         //Cutover Event Resolution Signoff
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys("Techcloud Developer");
+        Thread.sleep(2000);
         driver.findElement(By.xpath("(//div[@title=\"Techcloud Developer\"])[3]")).click();
 
         //Cutover Resolution

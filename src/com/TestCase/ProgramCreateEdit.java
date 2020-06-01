@@ -90,6 +90,7 @@ public class ProgramCreateEdit {
         Thread.sleep(2000);
         //Associated portfolio
         driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys("Extron Portfolio");
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Portfolio\"]")));
         myDynamicElement.click();
 
@@ -98,26 +99,31 @@ public class ProgramCreateEdit {
 
         //Sensitive Data
         driver.findElement(By.xpath("//span[@title=\"HR Sensitive Data\"]")).click();
+        Thread.sleep(1000);
         driver.findElement(By.xpath("//button[@title=\"Move selection to Chosen\"]")).click();
 
         //Program Sponsor
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys("Techcloud Developer");
+       Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\"Techcloud Developer\"])[1]")));
         myDynamicElement.click();
 
         Thread.sleep(2000);
         //Business Lead
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys("Techcloud Developer");
+       Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\"Techcloud Developer\"])[2]")));
         myDynamicElement.click();
 
         //Technology Lead
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys("Techcloud Developer");
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\"Techcloud Developer\"])[3]")));
         myDynamicElement.click();
        Thread.sleep(2000);
         //Program manager
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[4]")).sendKeys("Techcloud Developer");
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\"Techcloud Developer\"])[4]")));
         myDynamicElement.click();
 
@@ -130,17 +136,20 @@ public class ProgramCreateEdit {
         //Administrator
         Thread.sleep(2000);
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[6]")).sendKeys("Techcloud Developer");
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\"Techcloud Developer\"])[6]")));
         myDynamicElement.click();
 
         //Solution Integrator
         driver.findElement(By.xpath("//input[@title=\"Search Solution Integrator\"]")).sendKeys("Extron Solution Integrator");
+       Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Solution Integrator\"]")));
         myDynamicElement.click();
 
         Thread.sleep(2000);
         //Target Star Date
         driver.findElement(By.xpath("(//a[@class=\"datePicker-openIcon display\"])[1]")).click();
+       Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='20']")));
         myDynamicElement.click();
 
@@ -225,6 +234,10 @@ public class ProgramCreateEdit {
 
         Thread.sleep(5000);
 
+        driver.navigate().refresh();
+
+        Thread.sleep(10000);
+
     }
     @Test(priority = 3)
     public void AddRaci() throws InterruptedException {
@@ -234,16 +247,16 @@ public class ProgramCreateEdit {
         myDynamicElement.click();
 
         //User Type
-        myDynamicElement= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[@class=\"slds-select\"]")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//select[@class=\"slds-select\"]")));
         myDynamicElement.click();
         Thread.sleep(2000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Responsible']")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Responsible']")));
         myDynamicElement.click();
 
         //User
         driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
         Thread.sleep(5000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
         myDynamicElement.click();
 
         Thread.sleep(2000);
@@ -255,8 +268,21 @@ public class ProgramCreateEdit {
 
         Thread.sleep(4000);
 
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+
+        //checking Toast Message Value Set
+        String Chechval = "The record was successfully created.";
+
+
+        //Check
+        Assert.assertTrue(ToastMessage.contains(Chechval));
+        Thread.sleep(5000);
+
+
+
         //Add Raci Chart
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Project__c.PlatinumPMO__RACI_Chart\"]")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Program__c.PlatinumPMO__RACI_Chart\"]")));
         myDynamicElement.click();
 
         Thread.sleep(2000);
@@ -276,7 +302,7 @@ public class ProgramCreateEdit {
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
         myDynamicElement.click();
 
-        //Change description
+        //Change Description
         driver.findElement(By.xpath("//textarea[@name=\"HistoricalComment\"]")).sendKeys("Test Historical Comment");
 
         //Save
@@ -284,8 +310,21 @@ public class ProgramCreateEdit {
 
         Thread.sleep(4000);
 
+        //Get Toast Message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
+        String ToastMessage1 = myDynamicElement.getAttribute("innerHTML");
+
+        //checking Toast Message Value Set
+        String Chechval1 = "The record was successfully created.";
+
+
+        //Check
+        Assert.assertTrue(ToastMessage1.contains(Chechval1));
+        Thread.sleep(5000);
+
+
         //Add Raci Chart
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Project__c.PlatinumPMO__RACI_Chart\"]")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Program__c.PlatinumPMO__RACI_Chart\"]")));
         myDynamicElement.click();
 
         Thread.sleep(2000);
@@ -305,50 +344,92 @@ public class ProgramCreateEdit {
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Subhajit Mishra']")));
         myDynamicElement.click();
 
-        //Change Description
+        //Chasnge Description
         driver.findElement(By.xpath("//textarea[@name=\"HistoricalComment\"]")).sendKeys("Test Historical Comment");
 
         //Save
         driver.findElement(By.xpath("//button[text()='Save']")).click();
 
         Thread.sleep(4000);
+
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
+        String ToastMessage2 = myDynamicElement.getAttribute("innerHTML");
+
+        //checking Toast Message Value Set
+        String Chechval2 = "The record was successfully created.";
+
+
+        //Check
+        Assert.assertTrue(ToastMessage2.contains(Chechval2));
+        Thread.sleep(5000);
     }
 
-   /* @Test(priority = 4)
+    @Test(priority = 4)
+    public void AddUser() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        //Add User Button
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Program__c.PlatinumPMO__Add_User\"]")));
+        myDynamicElement.click();
+        Thread.sleep(2000);
+        //Search User
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")));
+        myDynamicElement.sendKeys("Rupak Maity");
+        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Rupak Maity']")));
+        myDynamicElement.click();
+
+        //Save
+        driver.findElement(By.xpath("//button[text()='Save']")).click();
+
+        Thread.sleep(4000);
+        //get toast message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+
+        //checking Toast Message Value Set
+        String Chechval = "The Record was Saved";
+
+
+        //Check
+        Assert.assertTrue(ToastMessage.contains(Chechval));
+        Thread.sleep(5000);
+    }
+
+    @Test(priority = 5)
     public void AddProject() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Add Project
-        WebElement element = driver.findElement(By.xpath("//div[@title=\"Add Project\"]"));
+        WebElement element = driver.findElement(By.xpath("//button[@name=\"PlatinumPMO__Program__c.PlatinumPMO__AddNewProject\"]"));
         Actions actions = new Actions(driver);
         actions.moveToElement(element).click().build().perform();
 
 
         //Project Name
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@name=\"Project Name\"]")));
-       Thread.sleep(2000);
-       myDynamicElement.sendKeys("Test Selenium Project");
+        Thread.sleep(2000);
+        myDynamicElement.sendKeys("Test Selenium Project");
 
         Thread.sleep(2000);
 
         //Project Description
-        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
-         Thread.sleep(2000);*/
+         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
+         Thread.sleep(4000);
 
-         //Target Start Date
-       /* WebElement element1 = driver.findElement(By.xpath("//div[@title=\"Add Project\"]"));
+        //Target Start Date
+        WebElement element1 = driver.findElement(By.xpath("//input[@name=\"TargetStartDate\"]"));
         Actions actions1 = new Actions(driver);
-        actions1.moveToElement(element1).sendKeys("May 14,2020").build().perform();
-       // myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='14']")));
-        //myDynamicElement.click();
+        actions1.moveToElement(element1).click().build().perform();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//span[text()='17']")).click();
 
         Thread.sleep(2000);
 
         //Target Completion Date
-        driver.findElement(By.xpath("//input[@name=\"TargetCompletionDate\"]")).click();
-       //myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@class=\"slds-align-middle\"])[2]")));
-        //myDynamicElement.click();
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='31']")));
-        myDynamicElement.click();
+        WebElement element2 = driver.findElement(By.xpath("//input[@name=\"TargetCompletionDate\"]"));
+        Actions actions2 = new Actions(driver);
+        actions2.moveToElement(element2).click().build().perform();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//span[text()='30']")).click();
 
         //Estimated Budget
         driver.findElement(By.xpath("//input[@name=\"EstimatedBudget\"]")).sendKeys("2000");
@@ -356,51 +437,89 @@ public class ProgramCreateEdit {
 
         //Capital
         driver.findElement(By.xpath("(//select[@class=\"slds-select\"])[3]")).click();
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Capital']")));
         myDynamicElement.click();
 
         Thread.sleep(2000);
+       //Business Process Manager
+        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[4]")).sendKeys("Techcloud Developer");
+        Thread.sleep(4000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//span[text()='Techcloud Developer'])[1]")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
+
 
         //Timesheet Approver
-        //driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[6]")).sendKeys("");
+        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[6]")).sendKeys("Techcloud Developer");
+       Thread.sleep(4000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//span[text()='Techcloud Developer'])[4]")));
+        myDynamicElement.click();
+
+        Thread.sleep(2000);
 
         //project Condition
         driver.findElement(By.xpath("(//select[@class=\"slds-select\"])[1]")).click();
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Red']")));
         myDynamicElement.click();
 
+        Thread.sleep(2000);
+
         //Project Phase
         driver.findElement(By.xpath("(//select[@class=\"slds-select\"])[2]")).click();
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='ASAP: 0- Initiation']")));
         myDynamicElement.click();
 
         Thread.sleep(2000);
 
-        //Business Process Manager
-        //driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[4]"))
+
 
          //Associated Solution Integrator
         driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[5]")).sendKeys("Extron Solution Integrator");
-
+        Thread.sleep(4000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Solution Integrator']")));
+        myDynamicElement.click();
         Thread.sleep(2000);
 
         //Expense Approver
-      //driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[7]"))*/
+        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[7]")).sendKeys("Techcloud Developer");
+        Thread.sleep(4000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//span[text()='Techcloud Developer'])[7]")));
+        myDynamicElement.click();
 
-        /*//Historical Comment
+        Thread.sleep(2000);
+
+        //Historical Comment
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment");
 
         //Save
         driver.findElement(By.xpath("//button[text()='Save']")).click();
 
-    }*/
+        Thread.sleep(5000);
+
+        //get toast message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--info slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+
+        //checking Toast Message Value Set
+        String Chechval = "The record was saved.";
 
 
-   /* @AfterTest
+        //Check
+        Assert.assertTrue(ToastMessage.contains(Chechval));
+        Thread.sleep(5000);
+
+    }
+
+
+   @AfterTest
     public void close(){
         //closing the chrome
         driver.quit();
-    }*/
+    }
 
 
     }
