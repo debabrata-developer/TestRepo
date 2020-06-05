@@ -67,5 +67,10 @@
             <class name="com.testCase.Gate"/>
         </classes>
     </test>
+    <test name="AMIGO Automation 14">
+        <classes>
+            <class name="com.testCase.Gate_Metrics_And_Result"/>
+        </classes>
+    </test>
 
 </suite>
