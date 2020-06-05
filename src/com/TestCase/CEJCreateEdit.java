@@ -191,10 +191,10 @@ public class CEJCreateEdit {
          Thread.sleep(5000);
 
     }
-   /* @AfterTest
+    @AfterTest
     public void close(){
         //closing the chrome
         driver.quit();
-    }*/
+    }
 
 }

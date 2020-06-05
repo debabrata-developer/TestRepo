@@ -1,14 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite">
-    <test verbose="2" preserve-order="true"
-          name="C:/Users/SUKANYA/IdeaProjects/AMIGO-Automated-Testing/Selenium Automated Testing.iml">
+<suite name="All Test Suite" parallel="false">
+  <test name="AMIGO Automation1">
         <classes>
+            <class name="com.TestCase.PortfolioCreateEdit">
 
-            <class name="com.testCase.PortfolioCreateEdit"/>
-            <class name = "com.testCase.ProgramCreateEdit"/>
-            <class name="com.testCase.ProjectCreateEdit"/>
+              </class>
+        </classes>
+  </test>
+    <test name="AMIGO Automation2">
+        <classes>
+            <class name ="com.TestCase.ProgramCreateEdit">
 
+            </class>
+
+        </classes>
+    </test>
+
+    <test name="AMIGO Automation3">
+        <classes>
+            <class name="com.TestCase.ProjectCreateEdit">
+
+            </class>
+        </classes>
+    </test>
+
+    <test name="AMIGO Automation4">
+        <classes>
+            <class name="com.TestCase.CEJCreateEdit">
+
+            </class>
+        </classes>
+    </test>
+
+    <test name="AMIGO Automation5">
+        <classes>
+            <class name="com.TestCase.DataCleansingTrackerCreateEdit">
+
+            </class>
+        </classes>
+    </test>
+
+    <test name="AMIGO Automation6">
+        <classes>
+            <class name="com.TestCase.DataCleansingTrackerMatricsCreateEdit">
+
+            </class>
+
+        </classes>
+    </test>
+
+    <test name="AMIGO Automation7">
+        <classes>
+            <class name="com.TestCase.DefectLogCreateEdit">
+            </class>
+        </classes>
+    </test>
+
+    <test name="AMIGO Automation8">
+        <classes>
+            <class name="com.TestCase.ExpenseTrackingCreateEdit">
+            </class>
+        </classes>
+    </test>
+
+    <test name="AMIGO Automation9">
+        <classes>
+            <class name="com.TestCase.GateCreateEdit">
+
+            </class>
+        </classes>
+    </test>
+
+    <test name="AMIGO Automation10">
+        <classes>
+            <class name="com.TestCase.GateMetricsAndResultsCreateEdit">
+
+            </class>
+        </classes>
+    </test>
+
+    <test name="AMIGO Automation11">
+        <classes>
+            <class name="com.TestCase.KeyDecisionCreateEdit">
+
+            </class>
+        </classes>
+    </test>
+
+    <test name="AMIGO Automation12">
+        <classes>
+            <class name="com.TestCase.LessonsLearnedCreateEdit">
+
+            </class>
+        </classes>
+    </test>
+
+    <test name="AMIGO Automation13">
+        <classes>
+            <class name="com.TestCase.ObjectCreateEdit">
+
+            </class>
+        </classes>
+    </test>
+
+    <test name="AMIGO Automation14">
+        <classes>
+            <class name="com.TestCase.RiskRegisterCreateEdit">
+
+            </class>
         </classes>
     </test>
 </suite>

@@ -309,10 +309,10 @@ public class KeyDecisionCreateEdit {
         myDynamicElement.click();
 
         myDynamicElement= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder=\"search..\"]")));
-        myDynamicElement.sendKeys("Test Selenium Project");
+        myDynamicElement.sendKeys("Extron Project");
 
         Thread.sleep(3000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Test Selenium Project-Edit']")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Project']")));
         myDynamicElement.click();
 
         driver.findElement(By.xpath("//span[text()='Add Project']")).click();
@@ -328,10 +328,10 @@ public class KeyDecisionCreateEdit {
         myDynamicElement.click();
 
         myDynamicElement= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder=\"search..\"]")));
-        myDynamicElement.sendKeys("Test Selenium Deliverable");
+        myDynamicElement.sendKeys("Extron Deliverable");
 
         Thread.sleep(3000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Test Selenium Delivrable']")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Deliverable Retest']")));
         myDynamicElement.click();
 
         driver.findElement(By.xpath("//span[text()='Add Deliverable']")).click();
@@ -341,9 +341,9 @@ public class KeyDecisionCreateEdit {
     }
 
 
-    /*@AfterTest
+    @AfterTest
     public void close(){
         //closing the chrome
         driver.quit();
-    }*/
+    }
 }

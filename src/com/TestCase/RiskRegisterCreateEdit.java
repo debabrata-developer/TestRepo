@@ -277,6 +277,7 @@ public class RiskRegisterCreateEdit {
 
         Thread.sleep(4000);
 
+        //get toast message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
         String ToastMessage = myDynamicElement.getAttribute("innerHTML");
 
@@ -360,6 +361,7 @@ public class RiskRegisterCreateEdit {
 
         Thread.sleep(4000);
 
+        //get toast message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
         String ToastMessage2 = myDynamicElement.getAttribute("innerHTML");
 

@@ -305,11 +305,11 @@ public class PortfolioCreateEdit {
         Thread.sleep(5000);
 
     }
-   /*@AfterTest
+   @AfterTest
     public void terminateBrowser(){
 
         driver.close();
-    }*/
+    }
 
 
 
