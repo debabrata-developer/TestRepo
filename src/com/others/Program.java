@@ -1,4 +1,4 @@
-package com.testCase.createEdit;
+package com.others;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-public class ProgramCreateEdit {
+public class Program {
     static WebDriver driver;
     // Read Excel File
     File src = new File("C:\\AMIGO Selenium Excel Sheet.xlsx");
@@ -29,7 +29,7 @@ public class ProgramCreateEdit {
     XSSFWorkbook workbook = new XSSFWorkbook(input);
     XSSFSheet sheet = workbook.getSheetAt(0);
 
-    public ProgramCreateEdit() throws IOException {
+    public Program() throws IOException {
     }
 
     @BeforeTest
@@ -321,3 +321,4 @@ public class ProgramCreateEdit {
         driver.quit();
     }
 }
+

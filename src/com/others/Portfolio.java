@@ -1,4 +1,4 @@
-package com.testCase;
+package com.others;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -17,10 +17,9 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.security.Key;
 import java.util.concurrent.TimeUnit;
 
-public class All {
+public class Portfolio {
     static WebDriver driver;
     // Read Excel File
     File src = new File("C:\\AMIGO Selenium Excel Sheet.xlsx");
@@ -28,7 +27,7 @@ public class All {
     XSSFWorkbook workbook = new XSSFWorkbook(input);
     XSSFSheet sheet = workbook.getSheetAt(0);
 
-    public All() throws IOException {
+    public Portfolio() throws IOException {
     }
 
     @BeforeTest
@@ -65,7 +64,8 @@ public class All {
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
 
         //get sObject URL
-        String sObject = sheet.getRow(11).getCell(2).getStringCellValue();
+        String sObject = sheet.getRow(12).getCell(2).getStringCellValue();
+        System.out.println(sObject);
 
         //redirect to sObject
         driver.get(sObject);
@@ -73,92 +73,7 @@ public class All {
     }
 
     @Test(priority = 1)
-    public void CreateOrganization() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-
-        //click New Button
-        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\" and text()='New']")));
-        myDynamicElement.click();
-
-        //Organization Name
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/input[@class=\" input\" and @type=\"text\"]")));
-        myDynamicElement.sendKeys("Selenium Test Organization");
-
-        //Timesheet Auto Approval Days
-        driver.findElement(By.xpath("(//*[@data-aura-class=\"uiInputSmartNumber\"])[1]")).sendKeys("7");
-
-        //Expense Auto Approval Days
-        driver.findElement(By.xpath("(//*[@data-aura-class=\"uiInputSmartNumber\"])[2]")).sendKeys("9");
-
-        //Historical Comments
-        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\" ]")).sendKeys("Selenium Test Historical Comment");
-
-        //Click Save Button
-        driver.findElement(By.xpath("//button[@title=\"Save\" ]//span[text()='Save']")).click();
-
-        //get Toast Message
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
-        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
-        System.out.println("the toast message value--->"+ToastMessage);
-
-        //Expected Toast Message Value Set
-        String ExpectedValue = "Organization \"Selenium Test Organization\" was created.";
-        System.out.println("the ExpectedValue--->"+ExpectedValue);
-
-        //Check
-        Assert.assertEquals(ToastMessage,ExpectedValue);
-
-        Thread.sleep(5000);
-    }
-
-    @Test(priority = 2)
-    public void EditOrganization() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-
-        //Click Edit Button
-        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Edit\"]//div[text()='Edit']")));
-        myDynamicElement.click();
-
-        //Organization Name
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/input[@class=\" input\" and @type=\"text\"]")));
-        myDynamicElement.sendKeys(" Edit");
-
-        //Timesheet Auto Approval Days
-        driver.findElement(By.xpath("(//*[@data-aura-class=\"uiInputSmartNumber\"])[1]")).sendKeys("1");
-
-        //Expense Auto Approval Days
-        driver.findElement(By.xpath("(//*[@data-aura-class=\"uiInputSmartNumber\"])[2]")).sendKeys("9");
-
-        //Historical Comments
-        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\" ]")).sendKeys("Selenium Test Historical Comment Edit");
-
-        //Click Save Button
-        driver.findElement(By.xpath("//button[@title=\"Save\" ]//span[text()='Save']")).click();
-
-        //get Toast Message
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
-        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
-        System.out.println("the toast message value--->"+ToastMessage);
-
-        //Expected Toast Message Value Set
-        String ExpectedValue = "Organization \"Selenium Test Organization Edit\" was saved.";
-        System.out.println("the ExpectedValue--->"+ExpectedValue);
-
-        //Check
-        Assert.assertEquals(ToastMessage,ExpectedValue);
-
-        Thread.sleep(5000);
-    }
-
-    @Test(priority = 3)
     public void CreatePortfolio() throws InterruptedException {
-        //get sObject URL
-        String sObject = sheet.getRow(12).getCell(2).getStringCellValue();
-
-        //redirect to sObject
-        driver.get(sObject);
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
         //click New Button
@@ -204,12 +119,12 @@ public class All {
         Thread.sleep(5000);
     }
 
-    @Test(priority = 4)
+    @Test(priority = 2)
     public void EditPortfolio() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
         //Click Edit Button
-        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Edit\"]//div[text()='Edit']")));
+        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name='Edit' and text()='Edit']")));
         myDynamicElement.click();
 
         //Select Organization
@@ -261,3 +176,5 @@ public class All {
         driver.quit();
     }
 }
+
+

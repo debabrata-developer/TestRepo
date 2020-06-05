@@ -1,0 +1,14 @@
+<changelist name="Uncommitted_changes_before_Checkout_at_05-06-2020_13_23_[Default_Changelist]" date="1591343620241" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_05-06-2020_13_23_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Checkout at 05-06-2020 13:23 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Selenium Automated Testing/com/TestCase/createEdit/OrganizationCreateEdit.class" />
+    <option name="AFTER_PATH" value="out/production/Selenium Automated Testing/com/TestCase/createEdit/OrganizationCreateEdit.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_05-06-2020_13_23_[Default_Changelist]/OrganizationCreateEdit.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Selenium Automated Testing/com/TestCase/createEdit/PortfolioCreateEdit.class" />
+    <option name="AFTER_PATH" value="out/production/Selenium Automated Testing/com/TestCase/createEdit/PortfolioCreateEdit.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_05-06-2020_13_23_[Default_Changelist]/PortfolioCreateEdit.class" />
+  </binary>
+</changelist>

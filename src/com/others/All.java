@@ -1,8 +1,9 @@
-package com.testCase.createEdit;
+package com.others;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,9 +17,10 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.security.Key;
 import java.util.concurrent.TimeUnit;
 
-public class OrganizationCreateEdit {
+public class All {
     static WebDriver driver;
     // Read Excel File
     File src = new File("C:\\AMIGO Selenium Excel Sheet.xlsx");
@@ -26,7 +28,7 @@ public class OrganizationCreateEdit {
     XSSFWorkbook workbook = new XSSFWorkbook(input);
     XSSFSheet sheet = workbook.getSheetAt(0);
 
-    public OrganizationCreateEdit() throws IOException {
+    public All() throws IOException {
     }
 
     @BeforeTest
@@ -64,7 +66,6 @@ public class OrganizationCreateEdit {
 
         //get sObject URL
         String sObject = sheet.getRow(11).getCell(2).getStringCellValue();
-        System.out.println(sObject);
 
         //redirect to sObject
         driver.get(sObject);
@@ -115,7 +116,7 @@ public class OrganizationCreateEdit {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
         //Click Edit Button
-        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name='Edit' and text()='Edit']")));
+        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Edit\"]//div[text()='Edit']")));
         myDynamicElement.click();
 
         //Organization Name
@@ -149,9 +150,115 @@ public class OrganizationCreateEdit {
         Thread.sleep(5000);
     }
 
+    @Test(priority = 3)
+    public void CreatePortfolio() throws InterruptedException {
+        //get sObject URL
+        String sObject = sheet.getRow(12).getCell(2).getStringCellValue();
+
+        //redirect to sObject
+        driver.get(sObject);
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+
+        //click New Button
+        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\" and text()='New']")));
+        myDynamicElement.click();
+
+        //Select Organization
+        String OrgLookup = sheet.getRow(11).getCell(3).getStringCellValue();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/input[@placeholder=\"Search Organization...\"]")));
+        myDynamicElement.sendKeys(OrgLookup);
+        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+OrgLookup+"\"]")));
+        myDynamicElement.click();
+
+        //Portfolio Name
+        driver.findElement(By.xpath("//div/input[@class=\" input\" and @type=\"text\"]")).sendKeys("Selenium Test Portfolio");
+
+        //Select Portfolio Owner
+        String UserLookup = sheet.getRow(37).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//div/input[@placeholder=\"Search People...\" and @title=\"Search People\"]")).sendKeys(UserLookup);
+        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+UserLookup+"\"]")));
+        myDynamicElement.click();
+
+        //Historical Comments
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\" ]")).sendKeys("Selenium Test Historical Comment");
+
+        //Click Save Button
+        driver.findElement(By.xpath("//button[@title=\"Save\" ]//span[text()='Save']")).click();
+
+        //get Toast Message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+        System.out.println("the toast message value--->"+ToastMessage);
+
+        //Expected Toast Message Value Set
+        String ExpectedValue = "Portfolio \"Selenium Test Portfolio\" was created.";
+        System.out.println("the ExpectedValue--->"+ExpectedValue);
+
+        //Check
+        Assert.assertEquals(ToastMessage,ExpectedValue);
+
+        Thread.sleep(5000);
+    }
+
+    @Test(priority = 4)
+    public void EditPortfolio() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+
+        //Click Edit Button
+        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Edit\"]//div[text()='Edit']")));
+        myDynamicElement.click();
+
+        //Select Organization
+        String OrgLookup = sheet.getRow(11).getCell(3).getStringCellValue();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//a[@class=\"pill focused uiPill--default uiPill\"])")));
+        myDynamicElement.sendKeys(Keys.BACK_SPACE);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/input[@placeholder=\"Search Organization...\"]")));
+        myDynamicElement.sendKeys(OrgLookup);
+        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\"Extron Organization\"]")));
+        myDynamicElement.click();
+
+        //Portfolio Name
+        driver.findElement(By.xpath("//div/input[@class=\" input\" and @type=\"text\"]")).sendKeys(" Edit");
+
+        //Select Portfolio Owner
+        String UserLookup = sheet.getRow(37).getCell(3).getStringCellValue();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//a[@class=\"pill focused uiPill--default uiPill\"])")));
+        myDynamicElement.sendKeys(Keys.BACK_SPACE);
+        driver.findElement(By.xpath("//div/input[@placeholder=\"Search People...\" and @title=\"Search People\"]")).sendKeys(UserLookup);
+        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"primaryLabel slds-truncate slds-lookup__result-text\" and @title=\""+UserLookup+"\"]")));
+        myDynamicElement.click();
+
+        //Historical Comments
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\" ]")).sendKeys("Selenium Test Historical Comment");
+
+        //Click Save Button
+        driver.findElement(By.xpath("//button[@title=\"Save\" ]//span[text()='Save']")).click();
+
+        //get Toast Message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+        System.out.println("the toast message value--->"+ToastMessage);
+
+        //Expected Toast Message Value Set
+        String ExpectedValue = "Portfolio \"Selenium Test Portfolio Edit\" was saved.";
+        System.out.println("the ExpectedValue--->"+ExpectedValue);
+
+        //Check
+        Assert.assertEquals(ToastMessage,ExpectedValue);
+
+        Thread.sleep(5000);
+    }
+
     @AfterTest
     public void close(){
         //closing the chrome
         driver.quit();
     }
 }
+

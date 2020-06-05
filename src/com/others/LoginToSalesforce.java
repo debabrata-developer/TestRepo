@@ -1,5 +1,5 @@
-package com.basic;
-import com.extraTesting.AddRACIinProgram;
+package com.others;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -170,7 +170,7 @@ public class LoginToSalesforce extends AddRACIinProgram {
 
     public static void main(String[] args) {
         try {
-            LoginToSalesforce obj = new LoginToSalesforce();
+            com.others.LoginToSalesforce obj = new com.others.LoginToSalesforce();
             AddRACIinProgram obj1 = new AddRACIinProgram();
 
             obj.openBrowserOnChrome();
@@ -191,4 +191,5 @@ public class LoginToSalesforce extends AddRACIinProgram {
     }
 
 }
+
 

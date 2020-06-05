@@ -1,10 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Test Suite" >
+<suite name="Test Suite" parallel="false">
 
-    <test name="sObject Create and Edit" >
+    <test name="test 1" >
         <classes>
             <class name="com.testCase.createEdit.OrganizationCreateEdit" />
+        </classes>
+    </test>
+    <test name="test 2" >
+        <classes>
             <class name="com.testCase.createEdit.PortfolioCreateEdit" />
         </classes>
     </test>
