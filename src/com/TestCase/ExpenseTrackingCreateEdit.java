@@ -102,8 +102,8 @@ public class ExpenseTrackingCreateEdit {
         myDynamicElement.click();
 
         //Expense Report
-        driver.findElement(By.xpath("//input[@title=\"Search Expense Reports\"]")).sendKeys("ER-00058");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"ER-00058\"]")));
+        driver.findElement(By.xpath("//input[@title=\"Search Expense Reports\"]")).sendKeys("ER-00060");
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"ER-00060\"]")));
         myDynamicElement.click();
 
         //Expense Name
