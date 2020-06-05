@@ -4,12 +4,12 @@
 
     <test name="test 1" >
         <classes>
-            <class name="com.testCase.createEdit.OrganizationCreateEdit" />
+            <class name="com.others.Organization" />
         </classes>
     </test>
     <test name="test 2" >
         <classes>
-            <class name="com.testCase.createEdit.PortfolioCreateEdit" />
+            <class name="com.others.Portfolio" />
         </classes>
     </test>
 
