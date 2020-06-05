@@ -506,7 +506,6 @@ public class Program{
         //checking Toast Message Value Set
         String Chechval = "The record was saved.";
 
-
         //Check
         Assert.assertTrue(ToastMessage.contains(Chechval));
         Thread.sleep(5000);
