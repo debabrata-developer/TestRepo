@@ -1,4 +1,4 @@
-package com.others;
+package com.testCase;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -30,7 +30,7 @@ public class Organization {
     }
 
     @BeforeTest
-    public void Setup(){
+    public void Setup() {
 
         //get WebDriver Path
         String webDriverPath = sheet.getRow(3).getCell(2).getStringCellValue();
@@ -98,14 +98,14 @@ public class Organization {
         //get Toast Message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
         String ToastMessage = myDynamicElement.getAttribute("innerHTML");
-        System.out.println("the toast message value--->"+ToastMessage);
+        System.out.println("the toast message value--->" + ToastMessage);
 
         //Expected Toast Message Value Set
         String ExpectedValue = "Organization \"Selenium Test Organization\" was created.";
-        System.out.println("the ExpectedValue--->"+ExpectedValue);
+        System.out.println("the ExpectedValue--->" + ExpectedValue);
 
         //Check
-        Assert.assertEquals(ToastMessage,ExpectedValue);
+        Assert.assertEquals(ToastMessage, ExpectedValue);
 
         Thread.sleep(5000);
     }
@@ -115,7 +115,7 @@ public class Organization {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
         //Click Edit Button
-        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name='Edit' and text()='Edit']")));
+        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"Edit\"]")));
         myDynamicElement.click();
 
         //Organization Name
@@ -137,22 +137,62 @@ public class Organization {
         //get Toast Message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
         String ToastMessage = myDynamicElement.getAttribute("innerHTML");
-        System.out.println("the toast message value--->"+ToastMessage);
+        System.out.println("the toast message value--->" + ToastMessage);
 
         //Expected Toast Message Value Set
         String ExpectedValue = "Organization \"Selenium Test Organization Edit\" was saved.";
-        System.out.println("the ExpectedValue--->"+ExpectedValue);
+        System.out.println("the ExpectedValue--->" + ExpectedValue);
 
         //Check
-        Assert.assertEquals(ToastMessage,ExpectedValue);
+        Assert.assertEquals(ToastMessage, ExpectedValue);
 
         Thread.sleep(5000);
     }
 
-    @AfterTest
-    public void close(){
-        //closing the chrome
-        driver.quit();
-    }
-}
+    @Test(priority = 3)
+    public void InviteUser() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
 
+        //Add Invite User
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Organization__c.PlatinumPMO__Add_User\"]")));
+        myDynamicElement.click();
+        Thread.sleep(3000);
+
+        //User
+        driver.findElement(By.xpath("//input[@placeholder=\"search..\"]")).sendKeys("Rajdeep Chakraborty");
+        Thread.sleep(3000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Rajdeep Chakraborty']")));
+        myDynamicElement.click();
+
+        //Save
+        driver.findElement(By.xpath("//button[@class=\"slds-button slds-button_brand\"]")).click();
+        Thread.sleep(4000);
+
+    }
+
+    @Test(priority = 4)
+    public void AddPortfolio() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+
+        //Click Add Portfolio
+        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Organization__c.PlatinumPMO__Add_Portfolio2\"]")));
+        myDynamicElement.click();
+        Thread.sleep(4000);
+
+        //Portfolio Name
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@name=\"Portfolio Name\"]")));
+        myDynamicElement.sendKeys(" New Portfolio");
+
+        //Historical Comments
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\" ]")).sendKeys("Selenium Test Portfolio");
+
+        //Click Save Button
+        driver.findElement(By.xpath("//button[@type=\"button\" and text()='Save']")).click();
+    }
+    @AfterTest
+    //Closing the Chrome
+    public void terminateBrowser(){
+        driver.close();
+    }
+
+}
