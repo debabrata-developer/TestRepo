@@ -267,7 +267,7 @@ public class ProgramCreateEdit {
         driver.findElement(By.xpath("//button[text()='Save']")).click();
 
         Thread.sleep(4000);
-
+        //Get Toast Message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
         String ToastMessage = myDynamicElement.getAttribute("innerHTML");
 
@@ -278,7 +278,6 @@ public class ProgramCreateEdit {
         //Check
         Assert.assertTrue(ToastMessage.contains(Chechval));
         Thread.sleep(5000);
-
 
 
         //Add Raci Chart

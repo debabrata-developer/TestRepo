@@ -301,9 +301,9 @@ public class GateMetricsAndResultsCreateEdit {
 
 
 
-    /* @AfterTest
+     @AfterTest
     public void close(){
         //closing the chrome
         driver.quit();
-    }*/
+    }
 }
