@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Test Suite" parallel="false">
+
+    <test name="test 1" >
+        <classes>
+            <class name="com.others.Organization_DG" />
+        </classes>
+    </test>
+    <test name="test 2" >
+        <classes>
+            <class name="com.others.Portfolio_DG" />
+        </classes>
+    </test>
+
+</suite>
