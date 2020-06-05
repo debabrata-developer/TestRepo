@@ -125,7 +125,7 @@ public class PortfolioCreateEdit {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
         //Click Edit Button
-        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Edit\"]//div[text()='Edit']")));
+        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name='Edit' and text()='Edit']")));
         myDynamicElement.click();
 
         //Select Organization

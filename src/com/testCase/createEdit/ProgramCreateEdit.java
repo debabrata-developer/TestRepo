@@ -199,7 +199,7 @@ public class ProgramCreateEdit {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
         //click New Button
-        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\" and text()='New']")));
+        WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name='Edit' and text()='Edit']")));
         myDynamicElement.click();
 
         //Select Organization
