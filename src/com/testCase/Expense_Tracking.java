@@ -3,6 +3,7 @@ package com.testCase;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,12 +14,13 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class Lessons_Learned {
+public class Expense_Tracking {
     static WebDriver driver;
     // Read Excel File
     File src = new File("C:\\AMIGO Selenium Excel Sheet.xlsx");
@@ -26,7 +28,7 @@ public class Lessons_Learned {
     XSSFWorkbook workbook = new XSSFWorkbook(input);
     XSSFSheet sheet = workbook.getSheetAt(0);
 
-    public Lessons_Learned() throws IOException {
+    public Expense_Tracking() throws IOException {
     }
 
     @BeforeTest
@@ -62,15 +64,15 @@ public class Lessons_Learned {
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
 
         //get sObject URL
-        String sObject = sheet.getRow(30).getCell(2).getStringCellValue();
+        String sObject = sheet.getRow(26).getCell(2).getStringCellValue();
         System.out.println(sObject);
 
         //redirect to sObject
         driver.get(sObject);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
-    @Test(priority = 1)
-    public void CreateLessonsLearned() throws InterruptedException {
+    @Test(priority=1)
+    public void CreateExpenseTracking() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Click On New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
@@ -89,73 +91,50 @@ public class Lessons_Learned {
         //Associated portfolio
         String PortName = sheet.getRow(12).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys(PortName);
-        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+PortName+"\"]")));
         myDynamicElement.click();
 
         //Associated Program
         String ProgName = sheet.getRow(13).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys(ProgName);
-        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProgName+"\"]")));
         myDynamicElement.click();
 
         //Associated Project
         String ProjName = sheet.getRow(14).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("//input[@title=\"Search Projects\"]")).sendKeys(ProjName);
-        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProjName+"\"]")));
         myDynamicElement.click();
 
-        //Lesson Learned Name
-        driver.findElement(By.xpath("(//input[@class=\" input\"])[1]")).sendKeys("Test Selenium Lessons Learned");
+        //Expense Report
 
-        //Description
-        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
-
-        //Lessons Learned Coordinator
-        String userName = sheet.getRow(37).getCell(4).getStringCellValue();
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys(userName);
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+userName+"\"]")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Expense Reports\"]")));
         myDynamicElement.click();
-
-        //Lessons Learned Owner
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys(userName);
         Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\""+userName+"\"])[2]")));
-        myDynamicElement.click();
+        myDynamicElement.sendKeys(Keys.ARROW_DOWN);
+        myDynamicElement.sendKeys(Keys.ENTER);
 
-        //Lessons Learned Signoff
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys(userName);
+        //Expense Name
+        driver.findElement(By.xpath("//input[@class=\" input\"]")).sendKeys("Test Selenium Expense");
         Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\""+userName+"\"])[3]")));
-        myDynamicElement.click();
-
-        //Corrective Action Plan
-        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
-
-        //Primary Stakeholder Group
-        String StakeName = sheet.getRow(42).getCell(4).getStringCellValue();
-        driver.findElement(By.xpath("//input[@title=\"Search Stakeholder Groups\"]")).sendKeys(StakeName);
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+StakeName+"\"]")));
-        myDynamicElement.click();
-
-        //Lesson Learned Type
-        driver.findElement(By.xpath("(//a[@class=\"select\"])[2]")).click();
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Room for Improvement\"]")));
-        myDynamicElement.click();
-
-        //Target Implementation Date
+        //Expense Date
         driver.findElement(By.xpath("//a[@class=\"datePicker-openIcon display\"]")).click();
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='20']")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='30']")));
         myDynamicElement.click();
 
-        //Historical Comment
-        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment");
+        //Expense Category
+        driver.findElement(By.xpath("(//a[@class=\"select\"])[1]")).click();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Cell Phone\"]")));
+        myDynamicElement.click();
+
+        //Expense Amount
+        driver.findElement(By.xpath("//input[@class=\"input uiInputSmartNumber\"]")).sendKeys("10");
+
+        //Expense Description
+        driver.findElement(By.xpath("//textarea[@class=\" textarea\"]")).sendKeys("Test Selenium Expense Description");
+
+        //Attach Photo
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
 
         //Save
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
@@ -165,47 +144,51 @@ public class Lessons_Learned {
         String ToastMessage = myDynamicElement.getAttribute("innerHTML");
 
         //Expected Toast Message Value Set
-        String ExpectedValue ="Lessons Learned \"Test Selenium Lessons Learned\" was created.";
+        String ExpectedValue = "Expense Tracking \"Test Selenium Expense\" was created.";
 
         //Check
         Assert.assertEquals(ToastMessage,ExpectedValue);
 
         Thread.sleep(5000);
     }
-    @Test(priority = 2)
-    public void EditLessonsLearned() throws InterruptedException {
+    @Test(priority=2)
+    public void EditExpenseTracking() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
         //Edit Button
-        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Lessons_Learned__c.PlatinumPMO__Edit\"]")));
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"Edit\"]")));
         myDynamicElement.click();
 
-        //Edit
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Edit']")));
-        myDynamicElement.click();
-
-        //Lessons Learned Name
+        //Expense Name
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@class=\" input\"])[1]")));
         myDynamicElement.clear();
-        myDynamicElement.sendKeys("Test Selenium Lessons Learned-Edit");
+        myDynamicElement.sendKeys("Test Selenium Expense-Edit");
 
-        //Historical Comment
-        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment-Edit");
+
+        //Expense Amount
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@class=\"input uiInputSmartNumber\"]")));
+        myDynamicElement.clear();
+        myDynamicElement.sendKeys("20");
+        Thread.sleep(2000);
+        //Expense Description
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//textarea[@class=\" textarea\"]")));
+        myDynamicElement.clear();
+        myDynamicElement.sendKeys("Test Selenium Expense Description-Edit");
 
         //Save
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
+
 
         //get Toast Message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
         String ToastMessage = myDynamicElement.getAttribute("innerHTML");
 
         //Expected Toast Message Value Set
-        String ExpectedValue = "Lessons Learned \"Test Selenium Lessons Learned-Edit\" was saved.";
+        String ExpectedValue = "Expense Tracking \"Test Selenium Expense-Edit\" was saved.";
 
         //Check
         Assert.assertEquals(ToastMessage,ExpectedValue);
 
         Thread.sleep(5000);
-        driver.navigate().refresh();
 
     }
     @AfterTest
@@ -213,4 +196,5 @@ public class Lessons_Learned {
         //closing the chrome
         driver.quit();
     }
+
 }

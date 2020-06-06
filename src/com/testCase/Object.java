@@ -72,29 +72,32 @@ public class Object {
     @Test(priority = 1)
     public void CreateObject()throws InterruptedException{
         WebDriverWait wait = new WebDriverWait(driver, 30);
+
         //Click On New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
         myDynamicElement.click();
 
         //Associated Organization
+        String OrgName = sheet.getRow(11).getCell(3).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Organization\"]")));
-        myDynamicElement.sendKeys("Extron Organization");
+        myDynamicElement.sendKeys(OrgName);
         Thread.sleep(1000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Organization\"]")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+OrgName+"\"]")));
         myDynamicElement.click();
-
         Thread.sleep(2000);
 
         //Associated portfolio
-        driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys("Extron Portfolio");
+        String PortName = sheet.getRow(12).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys(PortName);
         Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Portfolio\"]")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+PortName+"\"]")));
         myDynamicElement.click();
 
         //Associated Program
-        driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys("Extron Program");
+        String ProgName = sheet.getRow(11).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys(ProgName);
         Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Program\"]")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProgName+"\"]")));
         myDynamicElement.click();
 
         //Name Of Object
@@ -179,9 +182,10 @@ public class Object {
         myDynamicElement.click();
 
         //User
-        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
+        String userName = sheet.getRow(37).getCell(4).getStringCellValue();
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys(userName+"\n");
         Thread.sleep(5000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+userName+"']")));
         myDynamicElement.click();
 
         Thread.sleep(2000);
@@ -222,9 +226,9 @@ public class Object {
         Thread.sleep(2000);
 
         //User
-        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys(userName+"\n");
         Thread.sleep(3000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+userName+"']")));
         myDynamicElement.click();
 
         //Change Description
@@ -264,9 +268,10 @@ public class Object {
         Thread.sleep(2000);
 
         //User
-        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Subhajit Mishra\n");
+        userName = sheet.getRow(37).getCell(6).getStringCellValue();
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys(userName+"\n");
         Thread.sleep(3000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Subhajit Mishra']")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+userName+"']")));
         myDynamicElement.click();
 
         //Chasnge Description
@@ -297,10 +302,11 @@ public class Object {
         myDynamicElement.click();
 
         //Successor Object
+        String ObjName = sheet.getRow(31).getCell(3).getStringCellValue();
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder=\"search..\"]")));
-        myDynamicElement.sendKeys("Extron Object");
+        myDynamicElement.sendKeys(ObjName);
         Thread.sleep(4000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Object']")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+ObjName+"']")));
         myDynamicElement.click();
 
         Thread.sleep(2000);
@@ -329,10 +335,11 @@ public class Object {
         myDynamicElement.click();
 
         //Predecessor Object
+        String ObjName = sheet.getRow(31).getCell(4).getStringCellValue();
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder=\"search..\"]")));
-        myDynamicElement.sendKeys("Extron Object R");
+        myDynamicElement.sendKeys(ObjName);
         Thread.sleep(2000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Object R']")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+ObjName+"']")));
         myDynamicElement.click();
         Thread.sleep(2000);
 

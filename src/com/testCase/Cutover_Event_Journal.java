@@ -76,26 +76,30 @@ public class Cutover_Event_Journal {
     @Test(priority = 1)
     public void CreateCEJ() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
+
         //Click On New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
         myDynamicElement.click();
+        Thread.sleep(2000);
 
-        Thread.sleep(2000);
         //Click On Associated Organization
+        String OrgName = sheet.getRow(11).getCell(3).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Organization\"]")));
-        myDynamicElement.sendKeys("Extron Organization");
+        myDynamicElement.sendKeys(OrgName);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@title=\"Extron Organization\"]")).click();
+        driver.findElement(By.xpath("//div[@title=\""+OrgName+"\"]")).click();
 
         //Click On Associated Portfolio
-        driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys("Extron Portfolio");
+        String PortName = sheet.getRow(12).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys(PortName);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@title=\"Extron Portfolio\"]")).click();
+        driver.findElement(By.xpath("//div[@title=\""+PortName+"\"]")).click();
 
         //Click On Associated Program
-        driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys("Extron Program");
+        String ProgName = sheet.getRow(13).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys(ProgName);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@title=\"Extron Program\"]")).click();
+        driver.findElement(By.xpath("//div[@title=\""+ProgName+"\"]")).click();
 
         //Cutover Event Journal Name
         driver.findElement(By.xpath("//input[@class=\" input\"]")).sendKeys("Test Selenium CEJ");
@@ -109,19 +113,20 @@ public class Cutover_Event_Journal {
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing Event");
 
         //Cutover Event Coordinator
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys("Techcloud Developer");
+        String userName = sheet.getRow(37).getCell(4).getStringCellValue();
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys(userName);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("(//div[@title=\"Techcloud Developer\"])[1]")).click();
+        driver.findElement(By.xpath("(//div[@title=\""+userName+"\"])[1]")).click();
         Thread.sleep(2000);
         //Cutover Event Owner
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys("Techcloud Developer");
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys(userName);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("(//div[@title=\"Techcloud Developer\"])[2]")).click();
+        driver.findElement(By.xpath("(//div[@title=\""+userName+"\"])[2]")).click();
         Thread.sleep(2000);
         //Cutover Event Resolution Signoff
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys("Techcloud Developer");
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys(userName);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("(//div[@title=\"Techcloud Developer\"])[3]")).click();
+        driver.findElement(By.xpath("(//div[@title=\""+userName+"\"])[3]")).click();
 
         //Cutover Resolution
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing Cutover Resolution");

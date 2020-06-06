@@ -78,27 +78,31 @@ public class Gate{
         myDynamicElement.click();
 
         //Associated Organization
+        String OrgName = sheet.getRow(11).getCell(3).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Organization\"]")));
-        myDynamicElement.sendKeys("Extron Organization");
+        myDynamicElement.sendKeys(OrgName);
         Thread.sleep(1000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Organization\"]")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+OrgName+"\"]")));
         myDynamicElement.click();
 
         Thread.sleep(2000);
 
         //Associated portfolio
-        driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys("Extron Portfolio");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Portfolio\"]")));
+        String PortName = sheet.getRow(12).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys(PortName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+PortName+"\"]")));
         myDynamicElement.click();
 
         //Associated Program
-        driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys("Extron Program");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Program\"]")));
+        String ProgName = sheet.getRow(13).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys(ProgName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProgName+"\"]")));
         myDynamicElement.click();
 
         //Associated Project
-        driver.findElement(By.xpath("//input[@title=\"Search Projects\"]")).sendKeys("Extron Project");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Project\"]")));
+        String ProjName = sheet.getRow(14).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Projects\"]")).sendKeys(ProjName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProjName+"\"]")));
         myDynamicElement.click();
 
         //Gate Name
@@ -193,9 +197,10 @@ public class Gate{
         myDynamicElement.click();
 
         //User
-        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
+        String userName = sheet.getRow(37).getCell(4).getStringCellValue();
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys(userName+"\n");
         Thread.sleep(5000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+userName+"']")));
         myDynamicElement.click();
 
         Thread.sleep(2000);
@@ -236,9 +241,9 @@ public class Gate{
         Thread.sleep(2000);
 
         //User
-        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys(userName+"\n");
         Thread.sleep(3000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+userName+"']")));
         myDynamicElement.click();
 
         //Change Description
@@ -278,9 +283,10 @@ public class Gate{
         Thread.sleep(2000);
 
         //User
-        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Subhajit Mishra\n");
+        userName = sheet.getRow(37).getCell(6).getStringCellValue();
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys(userName+"\n");
         Thread.sleep(3000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Subhajit Mishra']")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+userName+"']")));
         myDynamicElement.click();
 
         //Chasnge Description

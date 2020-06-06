@@ -79,22 +79,25 @@ public class Risk_Register{
         myDynamicElement.click();
 
         //Associated Organization
+        String OrgName = sheet.getRow(11).getCell(3).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Organization\"]")));
-        myDynamicElement.sendKeys("Extron Organization");
+        myDynamicElement.sendKeys(OrgName);
         Thread.sleep(1000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Organization\"]")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+OrgName+"\"]")));
         myDynamicElement.click();
 
         Thread.sleep(2000);
 
         //Associated portfolio
-        driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys("Extron Portfolio");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Portfolio\"]")));
+        String PortName = sheet.getRow(12).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys(PortName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+PortName+"\"]")));
         myDynamicElement.click();
 
         //Associated Program
-        driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys("Extron Program");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Program\"]")));
+        String ProgName = sheet.getRow(13).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys(ProgName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProgName+"\"]")));
         myDynamicElement.click();
         Thread.sleep(2000);
 
@@ -102,8 +105,9 @@ public class Risk_Register{
         driver.findElement(By.xpath("//input[@class=\" input\"]")).sendKeys("Test Selenium Risk Register");
 
         //Risk Register Owner
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys("Techcloud Developer");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\"Techcloud Developer\"])[1]")));
+        String userName = sheet.getRow(37).getCell(4).getStringCellValue();
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys(userName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\""+userName+"\"])[1]")));
         myDynamicElement.click();
 
         //The Cause
@@ -135,8 +139,8 @@ public class Risk_Register{
         Thread.sleep(2000);
 
         //Risk Evolution Owner
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys("Techcloud Developer");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\"Techcloud Developer\"])[2]")));
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys(userName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\""+userName+"\"])[2]")));
         myDynamicElement.click();
 
         //Probability Of Occurence
@@ -151,7 +155,6 @@ public class Risk_Register{
         driver.findElement(By.xpath("(//a[@class=\"select\"])[4]")).click();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"3: Some impact to specific areas of quality\"]")));
         myDynamicElement.click();
-
         Thread.sleep(2000);
 
         //Schedule Impact Values
@@ -165,8 +168,8 @@ public class Risk_Register{
         myDynamicElement.click();
 
         //Risk Planning Owner
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys("Techcloud Developer");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\"Techcloud Developer\"])[3]")));
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys(userName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\""+userName+"\"])[3]")));
         myDynamicElement.click();
 
         Thread.sleep(2000);
@@ -262,9 +265,10 @@ public class Risk_Register{
         myDynamicElement.click();
 
         //User
-        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
+        String userName = sheet.getRow(37).getCell(4).getStringCellValue();
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys(userName+"\n");
         Thread.sleep(5000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+userName+"']")));
         myDynamicElement.click();
 
         Thread.sleep(2000);
@@ -305,9 +309,9 @@ public class Risk_Register{
         Thread.sleep(2000);
 
         //User
-        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys(userName+"\n");
         Thread.sleep(3000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+userName+"']")));
         myDynamicElement.click();
 
         //Change Description
@@ -347,9 +351,10 @@ public class Risk_Register{
         Thread.sleep(2000);
 
         //User
-        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Subhajit Mishra\n");
+        userName = sheet.getRow(37).getCell(6).getStringCellValue();
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys(userName+"\n");
         Thread.sleep(3000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Subhajit Mishra']")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+userName+"']")));
         myDynamicElement.click();
 
         //Chasnge Description

@@ -284,7 +284,7 @@ public class Deliverable {
         Thread.sleep(5000);
     }
 
-    @Test(priority = 3)
+    /*@Test(priority = 3)
     public void AddTemplate() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
@@ -317,7 +317,7 @@ public class Deliverable {
         Assert.assertTrue(ToastMessage.contains(Chechval));
         Thread.sleep(5000);
 
-    }
+    }*/
 
 
     @Test(priority = 4)

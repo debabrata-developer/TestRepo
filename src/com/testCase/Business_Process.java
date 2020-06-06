@@ -112,12 +112,14 @@ public class Business_Process {
         myDynamicElement.click();
 
         //BP Level
-        driver.findElement(By.xpath("//input[@name=\"BpLevel\"]")).sendKeys("1");
+        driver.findElement(By.xpath("//input[@name=\"BpLevel\"]")).sendKeys("2");
 
         //Parent Process UID
-        //driver.findElement(By.xpath("")).sendKeys("");
-        //myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("")));
-        //myDynamicElement.click();
+        String BPName = sheet.getRow(19).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("(//input[@placeholder=\"search..\"])[4]")).sendKeys(BPName);
+        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()=\""+BPName+"\"]")));
+        myDynamicElement.click();
 
         //BP Description
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("test");

@@ -159,9 +159,10 @@ public class Organization {
         Thread.sleep(3000);
 
         //User
-        driver.findElement(By.xpath("//input[@placeholder=\"search..\"]")).sendKeys("Rajdeep Chakraborty");
+        String userName = sheet.getRow(37).getCell(4).getStringCellValue();
+        driver.findElement(By.xpath("//input[@placeholder=\"search..\"]")).sendKeys(userName);
         Thread.sleep(3000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Rajdeep Chakraborty']")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+userName+"']")));
         myDynamicElement.click();
 
         //Save
@@ -195,10 +196,11 @@ public class Organization {
         myDynamicElement.sendKeys(" New Portfolio");
 
         //Portfolio Owner
+        String userName = sheet.getRow(37).getCell(4).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\" and @placeholder=\"search..\"])[2]")));
-        myDynamicElement.sendKeys("Rajdeep Chakraborty");
+        myDynamicElement.sendKeys(userName);
         Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Rajdeep Chakraborty']")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+userName+"']")));
         myDynamicElement.click();
 
         //Historical Comments

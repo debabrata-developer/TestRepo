@@ -15,11 +15,11 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class Deliverable {
-
+public class Business_Process {
     static WebDriver driver;
     // Read Excel File
     File src = new File("C:\\AMIGO Selenium Excel Sheet.xlsx");
@@ -27,11 +27,11 @@ public class Deliverable {
     XSSFWorkbook workbook = new XSSFWorkbook(input);
     XSSFSheet sheet = workbook.getSheetAt(0);
 
-    public Deliverable() throws IOException {
+    public Business_Process() throws IOException, IOException {
     }
 
     @BeforeTest
-    public void Setup(){
+    public void Setup() throws IOException {
         //get WebDriver Path
         String webDriverPath = sheet.getRow(3).getCell(2).getStringCellValue();
         System.out.println(webDriverPath);
@@ -63,7 +63,7 @@ public class Deliverable {
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
 
         //get sObject URL
-        String sObject = sheet.getRow(15).getCell(2).getStringCellValue();
+        String sObject = sheet.getRow(19).getCell(2).getStringCellValue();
         System.out.println(sObject);
 
         //redirect to sObject
@@ -71,8 +71,8 @@ public class Deliverable {
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
 
-    @Test(priority = 1)
-    public void CreateDeliverable() throws InterruptedException {
+    @Test(priority = 0)
+    public void CreateBusinessProcess() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
         //click New Button
@@ -81,78 +81,52 @@ public class Deliverable {
 
         //Associated Organization
         String OrgName = sheet.getRow(11).getCell(3).getStringCellValue();
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Organization\"]")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@placeholder=\"search..\"])[1]")));
         myDynamicElement.sendKeys(OrgName);
         Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+OrgName+"\"]")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+OrgName+"']")));
         myDynamicElement.click();
+
 
         //Associated portfolio
         String PortName = sheet.getRow(12).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys(PortName);
+        driver.findElement(By.xpath("(//input[@placeholder=\"search..\"])[2]")).sendKeys(PortName);
         Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+PortName+"\"]")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+PortName+"']")));
         myDynamicElement.click();
 
         //Associated Program
-        String ProgName = sheet.getRow(13).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys(ProgName);
+        String progName = sheet.getRow(13).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("(//input[@placeholder=\"search..\"])[3]")).sendKeys(progName);
         Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProgName+"\"]")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+progName+"']")));
         myDynamicElement.click();
 
-        //Associated Project
-        String ProjName = sheet.getRow(14).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("//input[@title=\"Search Projects\"]")).sendKeys(ProjName);
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProjName+"\"]")));
+        //Business Process Name
+        String BusiName = sheet.getRow(19).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//div/input[@type=\"text\" and @maxlength=\"80\"]")).sendKeys(BusiName);
+
+        //Business prefix
+        driver.findElement(By.xpath("//select[@name=\"BpPrefix\"]")).click();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[@value=\"LTC: Lead to Cash\"]")));
         myDynamicElement.click();
 
-        //Deliverable Name
-        String DelivName = sheet.getRow(15).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("//div/input[@type=\"text\" and @maxlength=\"80\"]")).sendKeys(DelivName);
+        //BP Level
+        driver.findElement(By.xpath("//input[@name=\"BpLevel\"]")).sendKeys("1");
 
-        //Deliverable Description
-        driver.findElement(By.xpath("(//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"])[1]")).sendKeys(" Des");
+        //Parent Process UID
+        //driver.findElement(By.xpath("(//input[@placeholder=\"search..\"])[4]")).sendKeys("");
+        //myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()=\"tyr6t\"]")));
+        //myDynamicElement.click();
 
-        //Deliverable Type
-        driver.findElement(By.xpath("//div/input[@title=\"Search Deliverable Types\" and @placeholder=\"Search Deliverable Types...\"]")).sendKeys("Extron DT ");
-        driver.findElement(By.xpath("//div[@title=\"Extron  DT\"]")).click();
-
-        //Associted Object
-        String ObjName = sheet.getRow(31).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("//div/input[@title=\"Search Objects\" and @role=\"combobox\"]")).sendKeys(ObjName);
-        driver.findElement(By.xpath("//div[@title=\""+ObjName+"\"]")).click();
-
-        //Associted BP
-        String BPName = sheet.getRow(19).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("//div/input[@title=\"Search Business Processes\" and @role=\"combobox\"]")).sendKeys(BPName);
-        driver.findElement(By.xpath("//div[@title=\""+BPName+"\"]")).click();
-
-        //Measures & Metrics
-        String MandMName = sheet.getRow(43).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("//div/input[@placeholder=\"Search Measures and Metrics...\" and @title=\"Search Measures and Metrics\"]")).sendKeys(MandMName);
-        driver.findElement(By.xpath("//div[@title=\""+MandMName+"\"]")).click();
-
-        //Capital or Expense
-        driver.findElement(By.xpath("(//a[@class=\"select\"])[2]")).sendKeys("Capital");
-
-        //Scope Lever
-        driver.findElement(By.xpath("(//a[@class=\"select\"])[3]")).sendKeys("Form");
-
-        //Associated Project Team/Stakeholder Grp
-        String StakeName = sheet.getRow(42).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("//div/input[@title=\"Search Stakeholder Groups\"]")).sendKeys(StakeName);
-        driver.findElement(By.xpath("//div[@title=\""+StakeName+"\"]")).click();
-
-        //Deliverable Narrative
-        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("ok");
+        //BP Description
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("test");
 
         //Historical Comment
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("test");
 
-        //Save Deliverable
-        driver.findElement(By.xpath("//div//button[@title=\"Save\"]")).click();
+        //Save BP
+        driver.findElement(By.xpath("//button[@class=\"slds-button slds-button_brand\"]")).click();
         Thread.sleep(5000);
 
         //get Toast Message
@@ -160,18 +134,17 @@ public class Deliverable {
         String ToastMessage = myDynamicElement.getAttribute("innerHTML");
 
         //Expected Toast Message Value Set
-        String ExpectedValue = "Deliverable \""+DelivName+"\" was created.";
+        String ExpectedValue = "Business Process \""+BusiName+"\" was created.";
 
         //Check
         Assert.assertEquals(ToastMessage,ExpectedValue);
-
         Thread.sleep(5000);
 
     }
 
     @AfterTest
-    public void close(){
-        //closing the chrome
-        driver.quit();
+    //Closing the Chrome
+    public void terminateBrowser(){
+        driver.close();
     }
 }

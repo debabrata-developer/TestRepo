@@ -115,21 +115,25 @@ public class Action_Item {
 
         //ActionItem Coordinate
         driver.findElement(By.xpath("(//input[@class=\" default input uiInput uiInputTextForAutocomplete uiInput--default uiInput--input uiInput uiAutocomplete uiInput--default uiInput--lookup\" and @title=\"Search People\"])[1]")).sendKeys("Techcloud Developer");
+        Thread.sleep(2000);
         driver.findElement(By.xpath("//div[@title=\"Techcloud Developer\"]")).click();
 
         //Associted Deliverable
         driver.findElement(By.xpath("//input[@title=\"Search Deliverables\"]")).sendKeys("Extron Deliverable Retest");
+        Thread.sleep(3000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Deliverable Retest\"]")));
         myDynamicElement.click();
 
         //ActionItem Owner
         driver.findElement(By.xpath("(//input[@class=\" default input uiInput uiInputTextForAutocomplete uiInput--default uiInput--input uiInput uiAutocomplete uiInput--default uiInput--lookup\" and @title=\"Search People\"])[2]")).sendKeys("Riya Samanta");
-        driver.findElement(By.xpath("(//div[@title=\"Riya Samanta\"])[2]")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("(//div[@title=\"Riya Samanta\"])")).click();
 
 
         //ActionItem Signoff Owner
         driver.findElement(By.xpath("(//input[@placeholder=\"Search People...\"])[3]")).sendKeys("Shoubhik Maity");
-        driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/div/div[1]/div/article/div[3]/div/div[2]/div/div/div[4]/div[1]/div/div/div/div/div/div[1]/div/div/div[2]/ul/li[2]/a/div[2]/div[1]")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("(//div[@title=\"Shoubhik Maity\"])")).click();
 
         //Due Date
         driver.findElement(By.xpath("//a[@class=\"datePicker-openIcon display\"]")).click();
@@ -155,7 +159,7 @@ public class Action_Item {
         String ToastMessage = myDynamicElement.getAttribute("innerHTML");
 
         //Expected Toast Message Value Set
-        String ExpectedValue = "Action Item \" New ActionItem 2 \" was created.";
+        String ExpectedValue = "Action Item \"New ActionItem 2\" was created.";
 
         //Check
         Assert.assertEquals(ToastMessage,ExpectedValue);

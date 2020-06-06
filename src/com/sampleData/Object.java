@@ -1,4 +1,4 @@
-package com.testCase;
+package com.sampleData;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -18,7 +18,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class Lessons_Learned {
+public class Object {
     static WebDriver driver;
     // Read Excel File
     File src = new File("C:\\AMIGO Selenium Excel Sheet.xlsx");
@@ -26,7 +26,7 @@ public class Lessons_Learned {
     XSSFWorkbook workbook = new XSSFWorkbook(input);
     XSSFSheet sheet = workbook.getSheetAt(0);
 
-    public Lessons_Learned() throws IOException {
+    public Object() throws IOException {
     }
 
     @BeforeTest
@@ -62,7 +62,7 @@ public class Lessons_Learned {
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
 
         //get sObject URL
-        String sObject = sheet.getRow(30).getCell(2).getStringCellValue();
+        String sObject = sheet.getRow(31).getCell(2).getStringCellValue();
         System.out.println(sObject);
 
         //redirect to sObject
@@ -70,8 +70,9 @@ public class Lessons_Learned {
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
     @Test(priority = 1)
-    public void CreateLessonsLearned() throws InterruptedException {
+    public void CreateObject()throws InterruptedException{
         WebDriverWait wait = new WebDriverWait(driver, 30);
+
         //Click On New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
         myDynamicElement.click();
@@ -83,7 +84,6 @@ public class Lessons_Learned {
         Thread.sleep(1000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+OrgName+"\"]")));
         myDynamicElement.click();
-
         Thread.sleep(2000);
 
         //Associated portfolio
@@ -100,62 +100,15 @@ public class Lessons_Learned {
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProgName+"\"]")));
         myDynamicElement.click();
 
-        //Associated Project
-        String ProjName = sheet.getRow(14).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("//input[@title=\"Search Projects\"]")).sendKeys(ProjName);
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProjName+"\"]")));
-        myDynamicElement.click();
+        //Name Of Object
+        String ObjName = sheet.getRow(31).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@class=\" input\"]")).sendKeys(ObjName);
 
-        //Lesson Learned Name
-        driver.findElement(By.xpath("(//input[@class=\" input\"])[1]")).sendKeys("Test Selenium Lessons Learned");
-
-        //Description
+        //Object Description
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
-
-        //Lessons Learned Coordinator
-        String userName = sheet.getRow(37).getCell(4).getStringCellValue();
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys(userName);
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+userName+"\"]")));
-        myDynamicElement.click();
-
-        //Lessons Learned Owner
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys(userName);
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\""+userName+"\"])[2]")));
-        myDynamicElement.click();
-
-        //Lessons Learned Signoff
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys(userName);
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\""+userName+"\"])[3]")));
-        myDynamicElement.click();
-
-        //Corrective Action Plan
-        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
-
-        //Primary Stakeholder Group
-        String StakeName = sheet.getRow(42).getCell(4).getStringCellValue();
-        driver.findElement(By.xpath("//input[@title=\"Search Stakeholder Groups\"]")).sendKeys(StakeName);
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+StakeName+"\"]")));
-        myDynamicElement.click();
-
-        //Lesson Learned Type
-        driver.findElement(By.xpath("(//a[@class=\"select\"])[2]")).click();
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Room for Improvement\"]")));
-        myDynamicElement.click();
-
-        //Target Implementation Date
-        driver.findElement(By.xpath("//a[@class=\"datePicker-openIcon display\"]")).click();
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='20']")));
-        myDynamicElement.click();
 
         //Historical Comment
-        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment");
+        driver.findElement(By.xpath("//textarea[@class=\" textarea\"]")).sendKeys("Test Historical Comment");
 
         //Save
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
@@ -165,31 +118,61 @@ public class Lessons_Learned {
         String ToastMessage = myDynamicElement.getAttribute("innerHTML");
 
         //Expected Toast Message Value Set
-        String ExpectedValue ="Lessons Learned \"Test Selenium Lessons Learned\" was created.";
+        String ExpectedValue = "Object \""+ObjName+"\" was created.";
 
         //Check
         Assert.assertEquals(ToastMessage,ExpectedValue);
-
         Thread.sleep(5000);
     }
-    @Test(priority = 2)
-    public void EditLessonsLearned() throws InterruptedException {
+
+    @Test(priority = 1)
+    public void CreateObject2()throws InterruptedException{
+        //get sObject URL
+        String sObject = sheet.getRow(31).getCell(2).getStringCellValue();
+        System.out.println(sObject);
+
+        //redirect to sObject
+        driver.get(sObject);
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        //Edit Button
-        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Lessons_Learned__c.PlatinumPMO__Edit\"]")));
+
+        //Click On New Button
+        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
         myDynamicElement.click();
 
-        //Edit
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Edit']")));
+        //Associated Organization
+        String OrgName = sheet.getRow(11).getCell(3).getStringCellValue();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Organization\"]")));
+        myDynamicElement.sendKeys(OrgName);
+        Thread.sleep(1000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+OrgName+"\"]")));
+        myDynamicElement.click();
+        Thread.sleep(2000);
+
+        //Associated portfolio
+        String PortName = sheet.getRow(12).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys(PortName);
+        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+PortName+"\"]")));
         myDynamicElement.click();
 
-        //Lessons Learned Name
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@class=\" input\"])[1]")));
-        myDynamicElement.clear();
-        myDynamicElement.sendKeys("Test Selenium Lessons Learned-Edit");
+        //Associated Program
+        String ProgName = sheet.getRow(13).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys(ProgName);
+        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProgName+"\"]")));
+        myDynamicElement.click();
+
+        //Name Of Object
+        String ObjName = sheet.getRow(31).getCell(4).getStringCellValue();
+        driver.findElement(By.xpath("//input[@class=\" input\"]")).sendKeys(ObjName);
+
+        //Object Description
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
 
         //Historical Comment
-        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment-Edit");
+        driver.findElement(By.xpath("//textarea[@class=\" textarea\"]")).sendKeys("Test Historical Comment");
 
         //Save
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
@@ -199,18 +182,17 @@ public class Lessons_Learned {
         String ToastMessage = myDynamicElement.getAttribute("innerHTML");
 
         //Expected Toast Message Value Set
-        String ExpectedValue = "Lessons Learned \"Test Selenium Lessons Learned-Edit\" was saved.";
+        String ExpectedValue = "Object \""+ObjName+"\" was created.";
 
         //Check
         Assert.assertEquals(ToastMessage,ExpectedValue);
-
         Thread.sleep(5000);
-        driver.navigate().refresh();
-
     }
+
     @AfterTest
     public void close(){
         //closing the chrome
         driver.quit();
     }
 }
+

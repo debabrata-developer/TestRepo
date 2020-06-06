@@ -3,6 +3,7 @@ package com.testCase;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -109,14 +110,14 @@ public class Data_Mapping_Register {
 
 
         //Associated Deliverable
-        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"  and @placeholder=\"search..\"])[5]")).sendKeys("Extron Deliverable Retest ");
+        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"  and @placeholder=\"search..\"])[5]")).sendKeys("Extron Deliverable Retest");
         Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Deliverable Retest']")));
         myDynamicElement.click();
 
 
         //Associated Workpackage
-        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"  and @placeholder=\"search..\"])[6]")).sendKeys("Extron WP Retest ");
+        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"  and @placeholder=\"search..\"])[6]")).sendKeys("Extron WP Retest");
         Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron WP Retest']")));
         myDynamicElement.click();
@@ -149,7 +150,7 @@ public class Data_Mapping_Register {
         myDynamicElement.click();
 
         //Source Field
-        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"  and @placeholder=\"search..\"])[11]")).sendKeys(" System 1 Table 1 Field 1 ");
+        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"  and @placeholder=\"search..\"])[11]")).sendKeys("System 1 Table 1 Field 1");
         Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='System 1 Table 1 Field 1']")));
         myDynamicElement.click();
@@ -238,54 +239,8 @@ public class Data_Mapping_Register {
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("name=\"PlatinumPMO__Data_Mapping_Register__c.PlatinumPMO__Add_New_Rule\"")));
         myDynamicElement.click();
 
-        //Associated Organization
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"  and @placeholder=\"search..\"])[1]")));
-        myDynamicElement.sendKeys("Extron Organization");
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Organization']")));
-        myDynamicElement.click();
-
-
-        //Associated portfolio
-        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"  and @placeholder=\"search..\"])[2]")).sendKeys("Extron Portfolio");
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Portfolio']")));
-        myDynamicElement.click();
-
-        //Associated Program
-        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"  and @placeholder=\"search..\"])[3]")).sendKeys("Extron Program");
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Program']")));
-        myDynamicElement.click();
-
-        //Associated Project
-        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"  and @placeholder=\"search..\"])[4]")).sendKeys("Extron Project");
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Project']")));
-        myDynamicElement.click();
-
-
-        //Associated Deliverable
-        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"  and @placeholder=\"search..\"])[5]")).sendKeys("Extron Deliverable Retest ");
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Deliverable Retest']")));
-        myDynamicElement.click();
-
-
-        //Associated Workpackage
-        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"  and @placeholder=\"search..\"])[6]")).sendKeys("Extron WP Retest ");
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron WP Retest']")));
-        myDynamicElement.click();
-
-        //Data Mapping Reg
-        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[7]")).sendKeys("DM-00025");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='DM-00025']")));
-        myDynamicElement.click();
-
         //Data Mapping Rule Name
         driver.findElement(By.xpath("//input[@name=\"DMRName\"]")).sendKeys("NEW DMR 2");
-
 
         //Rule Definition
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("ok");

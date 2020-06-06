@@ -72,9 +72,19 @@
             <class name="com.testCase.Gate_Metrics_And_Result"/>
         </classes>
     </test>
+    <test name="AMIGO Automation 14-1">
+        <classes>
+            <class name="com.testCase.Expense_Report"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 14-2">
+        <classes>
+            <class name="com.testCase.Expense_Tracking"/>
+        </classes>
+    </test>
 
 
-    <test name="AMIGO Automation 15">
+    <!--<test name="AMIGO Automation 15">
         <classes>
             <class name="com.testCase.Action_Item"/>
         </classes>
@@ -124,10 +134,10 @@
             <class name="com.testCase.Time_Tracking"/>
         </classes>
     </test>
-    <test name="AMIGO Automation 24">
+    <test name="AMIGO Automation 25">
         <classes>
             <class name="com.testCase.Work_Package"/>
         </classes>
-    </test>
+    </test>-->
 
 </suite>

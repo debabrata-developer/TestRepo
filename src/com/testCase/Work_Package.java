@@ -186,7 +186,7 @@ public class Work_Package {
     }
 
 
-    @Test(priority = 2)
+    /*@Test(priority = 2)
     public void AddTemplate() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
@@ -219,7 +219,7 @@ public class Work_Package {
         Assert.assertTrue(ToastMessage.contains(Chechval));
         Thread.sleep(5000);
 
-    }
+    }*/
 
 
 
