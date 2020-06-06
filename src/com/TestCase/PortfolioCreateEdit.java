@@ -234,13 +234,11 @@ public class PortfolioCreateEdit {
         Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//span[text()='Techcloud Developer'])[16]")));
         myDynamicElement.click();
-
         //Solution Integrator
         driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[9]")).sendKeys("Extron Solution Integrator");
         Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Solution Integrator']")));
         myDynamicElement.click();
-
 
 
         //Sensitive Data

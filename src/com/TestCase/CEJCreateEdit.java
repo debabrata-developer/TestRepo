@@ -167,12 +167,9 @@ public class CEJCreateEdit {
         driver.findElement(By.xpath("//a[@class=\"select\"]")).click();
         driver.findElement(By.xpath("//a[@title=\"Low\"]")).click();
          Thread.sleep(2000);
-        //Cutover event Signoff
-      // driver.findElement(By.xpath("/html/body/div[4]/div[2]/div[1]/div[2]/div/div[2]/div/article/div[3]/div/div[2]/div/div/div[5]/div[1]/div/div/div/div/div/div[1]/div/input")).sendKeys("Debabrata Ghosh");
-       // driver.findElement(By.xpath("//div[@title=\"Debabrata Ghosh\"]")).click();
 
 
-        //Historical comment
+         //Historical comment
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment-Edit");
 
         //Save

@@ -465,9 +465,7 @@ public class ProjectCreateEdit {
         driver.get(sObject);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 
-       //Thread.sleep(2000);
 
-      // driver.findElement(By.xpath("//a[@class=\"slds-truncate outputLookupLink slds-truncate outputLookupLink-a0F1Q00000bpQeSUAU-2393:0 forceOutputLookup\"]")).click();
 
        Thread.sleep(10000);
        driver.findElement(By.xpath("//input[@name=\"PlatinumPMO__Project__c-search-input\"]")).sendKeys("Test Selenium Project-Edit\n");

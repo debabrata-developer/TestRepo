@@ -512,9 +512,85 @@ public class ProgramCreateEdit {
         Thread.sleep(5000);
 
     }
+    @Test(priority = 6)
+    public void getbacktosObject() throws InterruptedException {
+        //get sObject URL
+        String sObject = sheet.getRow(13).getCell(2).getStringCellValue();
+        System.out.println(sObject);
+
+        //redirect to sObject
+        driver.get(sObject);
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+
+        Thread.sleep(10000);
+        driver.findElement(By.xpath("//input[@name=\"PlatinumPMO__Program__c-search-input\"]")).sendKeys("Test Selenium Program-Edit\n");
+
+        Thread.sleep(7000);
+        WebElement obj = driver.findElement(By.xpath("(//a[text()='Test Selenium Program-Edit'])[1]"));
+        obj.click();
+        Thread.sleep(10000);
+
+    }
+
+    @Test(priority = 7)
+      public void AddNewGoal() throws InterruptedException {
+       WebDriverWait wait = new WebDriverWait(driver, 30);
+       //Add New Goal
+       WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@type=\"button\"and @class=\"slds-button slds-button_icon-border-filled\"]")));
+       myDynamicElement.click();
+       Thread.sleep(2000);
+
+       //Click on new goal
+       myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='New Goal']")));
+       myDynamicElement.click();
+
+       Thread.sleep(2000);
+
+       //Project
+       myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@placeholder=\"search..\"])[4]")));
+       myDynamicElement.sendKeys("Test Selenium Project");
+
+       Thread.sleep(3000);
+       myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Test Selenium Project']")));
+       myDynamicElement.click();
+
+       Thread.sleep(3000);
+
+       //Goal Name
+       myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@name=\"GoalName\"]")));
+       myDynamicElement.sendKeys("Test Selenium Goal");
+
+       Thread.sleep(3000);
+
+       //Goal Description
+       myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")));
+       myDynamicElement.sendKeys("Testing");
+
+       Thread.sleep(2000);
+
+       //Historical Commnet
+       driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Commnet");
+
+       Thread.sleep(2000);
+
+       //Save
+       driver.findElement(By.xpath("//button[text()='Save']")).click();
+
+       Thread.sleep(5000);
+       //get toast message
+       myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--info slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
+       String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+
+       //checking Toast Message Value Set
+       String Chechval = "The record was saved.";
 
 
-   @AfterTest
+       //Check
+       Assert.assertTrue(ToastMessage.contains(Chechval));
+       Thread.sleep(5000);
+
+   }
+    @AfterTest
     public void close(){
         //closing the chrome
         driver.quit();
