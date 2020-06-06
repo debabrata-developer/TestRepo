@@ -129,6 +129,17 @@ public class Organization {
         driver.findElement(By.xpath("//button[@class=\"slds-button slds-button_brand\"]")).click();
         Thread.sleep(4000);
 
+        //Get Toast Message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+
+        //checking Toast Message Value Set
+        String Chechval = "The Record was Saved";
+
+        //Check
+        Assert.assertTrue(ToastMessage.contains(Chechval));
+        Thread.sleep(3000);
+
     }
 
     @AfterTest
