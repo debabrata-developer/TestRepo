@@ -10,6 +10,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -251,16 +252,11 @@ public class ExpenseReportCreateEdit {
         Thread.sleep(5000);
 
 
-
-
-
-
-
-
-
-
-
     }
-
+    @AfterTest
+    public void close() {
+        //closing the chrome
+        driver.quit();
+    }
 
 }
