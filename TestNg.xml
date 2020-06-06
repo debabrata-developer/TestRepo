@@ -73,4 +73,61 @@
         </classes>
     </test>
 
+
+    <test name="AMIGO Automation 15">
+        <classes>
+            <class name="com.testCase.Action_Item"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 16">
+        <classes>
+            <class name="com.testCase.Business_Process"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 17">
+        <classes>
+            <class name="com.testCase.Change_Request_Log"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 18">
+        <classes>
+            <class name="com.testCase.Communication_Register"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 19">
+        <classes>
+            <class name="com.testCase.Cutover_Plan_Change_Request"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 20">
+        <classes>
+            <class name="com.testCase.Data_Mapping_Register"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 21">
+        <classes>
+            <class name="com.testCase.Deliverable"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 22">
+        <classes>
+            <class name="com.testCase.Issue_Log"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 23">
+        <classes>
+            <class name="com.testCase.System_obj"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 24">
+        <classes>
+            <class name="com.testCase.Time_Tracking"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 24">
+        <classes>
+            <class name="com.testCase.Work_Package"/>
+        </classes>
+    </test>
+
 </suite>
