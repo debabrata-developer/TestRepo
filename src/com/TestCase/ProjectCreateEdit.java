@@ -480,7 +480,7 @@ public class ProjectCreateEdit {
     @Test(priority = 6)
     public void AddTemplate() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        //Add Deliverable
+        //Add Template
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[text()='Add Template']")));
         myDynamicElement.click();
 
