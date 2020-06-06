@@ -3,6 +3,7 @@ package com.TestCase;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -102,16 +103,19 @@ public class ExpenseTrackingCreateEdit {
         myDynamicElement.click();
 
         //Expense Report
-        driver.findElement(By.xpath("//input[@title=\"Search Expense Reports\"]")).sendKeys("ER-00060");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"ER-00060\"]")));
+
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Expense Reports\"]")));
         myDynamicElement.click();
+        Thread.sleep(2000);
+        myDynamicElement.sendKeys(Keys.ARROW_DOWN);
+        myDynamicElement.sendKeys(Keys.ENTER);
 
         //Expense Name
         driver.findElement(By.xpath("//input[@class=\" input\"]")).sendKeys("Test Selenium Expense");
          Thread.sleep(2000);
         //Expense Date
         driver.findElement(By.xpath("//a[@class=\"datePicker-openIcon display\"]")).click();
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='8']")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='30']")));
         myDynamicElement.click();
 
         //Expense Category

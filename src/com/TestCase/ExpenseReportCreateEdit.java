@@ -65,7 +65,7 @@ public class ExpenseReportCreateEdit {
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
 
         //get sObject URL
-        String sObject = sheet.getRow(37).getCell(2).getStringCellValue();
+        String sObject = sheet.getRow(38).getCell(2).getStringCellValue();
         System.out.println(sObject);
 
         //redirect to sObject
