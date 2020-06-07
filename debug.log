@@ -200,3 +200,4 @@
 [0525/191225.287:ERROR:scoped_process_suspend.cc(40)] NtResumeProcess: An attempt was made to access an exiting process. (0xc000010a)
 [0526/145625.012:ERROR:prune_crash_reports.cc(35)] PruneCrashReportDatabase: Failed to get pending reports
 [0601/165058.749:ERROR:prune_crash_reports.cc(35)] PruneCrashReportDatabase: Failed to get pending reports
+[0607/160039.404:ERROR:prune_crash_reports.cc(35)] PruneCrashReportDatabase: Failed to get pending reports
