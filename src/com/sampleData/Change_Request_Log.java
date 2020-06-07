@@ -159,6 +159,7 @@ public class Change_Request_Log {
         Thread.sleep(3000);
         myDynamicElement.sendKeys(Keys.ARROW_DOWN);
         myDynamicElement.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
 
         //Change Review Board
         driver.findElement(By.xpath("//input[@title=\"Search Stakeholder Groups\"]")).sendKeys("Extron Stakeholder");

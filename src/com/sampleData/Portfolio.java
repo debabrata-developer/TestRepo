@@ -3,6 +3,7 @@ package com.sampleData;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -94,11 +95,12 @@ public class Portfolio {
 
         //Portfolio Owner
         String UserName = sheet.getRow(37).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("//input[@title=\"Search People\"]")).sendKeys(UserName);
-        Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+UserName+"\"]")));
-        myDynamicElement.click();
-        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search People\"]")));
+        myDynamicElement.sendKeys(UserName);
+        Thread.sleep(3000);
+        myDynamicElement.sendKeys(Keys.ARROW_DOWN);
+        myDynamicElement.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
 
         //Historical Comment
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Selenium Portfolio");
@@ -132,9 +134,10 @@ public class Portfolio {
         String UserName = sheet.getRow(37).getCell(6).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")));
         myDynamicElement.sendKeys(UserName);
-        Thread.sleep(4000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+UserName+"']")));
-        myDynamicElement.click();
+        Thread.sleep(3000);
+        myDynamicElement.sendKeys(Keys.ARROW_DOWN);
+        myDynamicElement.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
 
         //Save
         driver.findElement(By.xpath("//button[text()='Save']")).click();

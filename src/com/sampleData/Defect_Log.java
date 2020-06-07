@@ -3,6 +3,7 @@ package com.sampleData;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -75,10 +76,12 @@ public class Defect_Log {
     @Test(priority=1)
     public void CreateDefectLog() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
+
         //Click On New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"New\"]")));
         myDynamicElement.click();
         Thread.sleep(2000);
+
         //Associated Organization
         String OrgName = sheet.getRow(11).getCell(3).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Organization\"]")));
@@ -98,18 +101,20 @@ public class Defect_Log {
         driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys(ProgName);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProgName+"\"]")));
         myDynamicElement.click();
+
         //Associated Project
         String ProjName = sheet.getRow(14).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("//input[@title=\"Search Projects\"]")).sendKeys(ProjName);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProjName+"\"]")));
         myDynamicElement.click();
+
         //Defect Name
         driver.findElement(By.xpath("(//input[@class=\" input\"])[1]")).sendKeys("Test Selenium Defect");
 
         //Defect Description
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing Selenium Defect");
-
         Thread.sleep(2000);
+
         //Type Of Defect
         driver.findElement(By.xpath("(//a[@class=\"select\"])[1]")).click();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Architecture Defect\"]")));
@@ -149,6 +154,7 @@ public class Defect_Log {
         driver.findElement(By.xpath("//input[@title=\"Search Business Transaction Library\"]")).sendKeys(BTName);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+BTName+"\"]")));
         myDynamicElement.click();
+
         //Integration Impacted
         driver.findElement(By.xpath("(//a[@class=\"select\"])[5]")).click();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"1- No Integration Impact\"]")));
@@ -156,18 +162,28 @@ public class Defect_Log {
 
         //Defect Co-ordinator
         String userName = sheet.getRow(37).getCell(4).getStringCellValue();
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys(userName);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\""+userName+"\"])[1]")));
-        myDynamicElement.click();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@title=\"Search People\"])[1]")));
+        myDynamicElement.sendKeys(userName);
+        Thread.sleep(3000);
+        myDynamicElement.sendKeys(Keys.ARROW_DOWN);
+        myDynamicElement.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
+
         //Defect Owner
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys(userName);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\""+userName+"\"])[2]")));
-        myDynamicElement.click();
-        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@title=\"Search People\"])[2]")));
+        myDynamicElement.sendKeys(userName);
+        Thread.sleep(3000);
+        myDynamicElement.sendKeys(Keys.ARROW_DOWN);
+        myDynamicElement.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
+
         //Defect Resolution Signoff
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys(userName);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\""+userName+"\"])[3]")));
-        myDynamicElement.click();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@title=\"Search People\"])[3]")));
+        myDynamicElement.sendKeys(userName);
+        Thread.sleep(3000);
+        myDynamicElement.sendKeys(Keys.ARROW_DOWN);
+        myDynamicElement.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
 
         //What Cause The Defect
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");

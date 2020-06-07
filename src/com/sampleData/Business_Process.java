@@ -87,7 +87,6 @@ public class Business_Process {
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+OrgName+"']")));
         myDynamicElement.click();
 
-
         //Associated portfolio
         String PortName = sheet.getRow(12).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("(//input[@placeholder=\"search..\"])[2]")).sendKeys(PortName);

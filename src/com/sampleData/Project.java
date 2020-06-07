@@ -3,6 +3,7 @@ package com.sampleData;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -140,9 +141,11 @@ public class Project {
 
         //timesheet approver
         String UserName = sheet.getRow(37).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys(UserName);
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@title=\""+UserName+"\"]")).click();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@title=\"Search People\"])[3]")));
+        myDynamicElement.sendKeys(UserName);
+        Thread.sleep(3000);
+        myDynamicElement.sendKeys(Keys.ARROW_DOWN);
+        myDynamicElement.sendKeys(Keys.ENTER);
         Thread.sleep(1000);
 
         //project condition
@@ -150,15 +153,20 @@ public class Project {
         driver.findElement(By.xpath("//a[@title=\"Yellow\"]")).click();
 
         //project manager
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys(UserName);
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@title=\""+UserName+"\"]")).click();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@title=\"Search People\"])[1]")));
+        myDynamicElement.sendKeys(UserName);
+        Thread.sleep(3000);
+        myDynamicElement.sendKeys(Keys.ARROW_DOWN);
+        myDynamicElement.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
 
         //Business Process Manager
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys(UserName);
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("(//div[@title=\""+UserName+"\"])[2]")).click();
-        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@title=\"Search People\"])[2]")));
+        myDynamicElement.sendKeys(UserName);
+        Thread.sleep(3000);
+        myDynamicElement.sendKeys(Keys.ARROW_DOWN);
+        myDynamicElement.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
 
         //Solution Integrator
         String SolutionName = sheet.getRow(39).getCell(3).getStringCellValue();
@@ -167,9 +175,12 @@ public class Project {
         driver.findElement(By.xpath("//div[@title=\""+SolutionName+"\"]")).click();
 
         //Expense Approver
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[4]")).sendKeys(UserName);
-        Thread.sleep(2000);
-        driver.findElement(By.xpath("(//div[@title=\""+UserName+"\"])[4]")).click();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@title=\"Search People\"])[4]")));
+        myDynamicElement.sendKeys(UserName);
+        Thread.sleep(3000);
+        myDynamicElement.sendKeys(Keys.ARROW_DOWN);
+        myDynamicElement.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
 
         //Project Charter
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");

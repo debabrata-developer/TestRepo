@@ -3,6 +3,7 @@ package com.sampleData;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -72,7 +73,7 @@ public class Organization {
     }
 
     @Test(priority = 1)
-    public void CreateOrganizationA() throws InterruptedException {
+    public void CreateOrganization() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
         //click New Button
@@ -120,10 +121,12 @@ public class Organization {
 
         //User
         String UserName = sheet.getRow(37).getCell(4).getStringCellValue();
-        driver.findElement(By.xpath("//input[@placeholder=\"search..\"]")).sendKeys(UserName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder=\"search..\"]")));
+        myDynamicElement.sendKeys(UserName);
         Thread.sleep(3000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+UserName+"']")));
-        myDynamicElement.click();
+        myDynamicElement.sendKeys(Keys.ARROW_DOWN);
+        myDynamicElement.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
 
         //Save
         driver.findElement(By.xpath("//button[@class=\"slds-button slds-button_brand\"]")).click();
