@@ -1,4 +1,4 @@
-package com.testCase;
+package com.sampleData;
 
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -14,13 +14,14 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class Expense_Tracking {
+public class Issue_Log {
+
     static WebDriver driver;
     // Read Excel File
     File src = new File("C:\\AMIGO Selenium Excel Sheet.xlsx");
@@ -28,11 +29,11 @@ public class Expense_Tracking {
     XSSFWorkbook workbook = new XSSFWorkbook(input);
     XSSFSheet sheet = workbook.getSheetAt(0);
 
-    public Expense_Tracking() throws IOException {
+    public Issue_Log() throws IOException, IOException {
     }
 
     @BeforeTest
-    public void Setup(){
+    public void Setup() throws IOException {
         //get WebDriver Path
         String webDriverPath = sheet.getRow(3).getCell(2).getStringCellValue();
         System.out.println(webDriverPath);
@@ -64,17 +65,19 @@ public class Expense_Tracking {
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
 
         //get sObject URL
-        String sObject = sheet.getRow(26).getCell(2).getStringCellValue();
+        String sObject = sheet.getRow(18).getCell(2).getStringCellValue();
         System.out.println(sObject);
 
         //redirect to sObject
         driver.get(sObject);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
-    @Test(priority=1)
-    public void CreateExpenseTracking() throws InterruptedException {
+
+    @Test(priority = 0)
+    public void CreateIssueLog() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
-        //Click On New Button
+
+        //click New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
         myDynamicElement.click();
 
@@ -82,119 +85,110 @@ public class Expense_Tracking {
         String OrgName = sheet.getRow(11).getCell(3).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Organization\"]")));
         myDynamicElement.sendKeys(OrgName);
-        Thread.sleep(1000);
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+OrgName+"\"]")));
         myDynamicElement.click();
-
-        Thread.sleep(2000);
 
         //Associated portfolio
         String PortName = sheet.getRow(12).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys(PortName);
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+PortName+"\"]")));
         myDynamicElement.click();
 
         //Associated Program
         String ProgName = sheet.getRow(13).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys(ProgName);
+        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProgName+"\"]")));
         myDynamicElement.click();
 
-        //Associated Project
-        String ProjName = sheet.getRow(14).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("//input[@title=\"Search Projects\"]")).sendKeys(ProjName);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProjName+"\"]")));
+        //Issue Log Name
+        String ILName = sheet.getRow(18).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@class=\" input\" and @maxlength=\"80\"]")).sendKeys(ILName);
+
+        //Priority
+        driver.findElement(By.xpath("(//a[@class=\"select\"])")).click();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"3-Low\"]")));
         myDynamicElement.click();
 
-        //Expense Report
+        //Risk Register
+        String RiskRegName = sheet.getRow(32).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Risk Register\"]")).sendKeys(RiskRegName);
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//div[@title=\""+RiskRegName+"\"]")).click();
 
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Expense Reports\"]")));
+        //Due Date
+        driver.findElement(By.xpath("//a[@class=\"datePicker-openIcon display\"]")).click();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='17']")));
         myDynamicElement.click();
+
+        //Issue Coordinate
+        String userName = sheet.getRow(37).getCell(4).getStringCellValue();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@class=\" default input uiInput uiInputTextForAutocomplete uiInput--default uiInput--input uiInput uiAutocomplete uiInput--default uiInput--lookup\" and @title=\"Search People\"])[1]")));
+        myDynamicElement.sendKeys(userName);
         Thread.sleep(3000);
         myDynamicElement.sendKeys(Keys.ARROW_DOWN);
         myDynamicElement.sendKeys(Keys.ENTER);
 
-        //Expense Name
-        driver.findElement(By.xpath("//input[@class=\" input\"]")).sendKeys("Test Selenium Expense");
+        //Issue Impacts
+        driver.findElement(By.xpath("(//a[@class=\"select\"])[2]")).click();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"The business\"]")));
+        myDynamicElement.click();
+
+        //Issue Owner
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@class=\" default input uiInput uiInputTextForAutocomplete uiInput--default uiInput--input uiInput uiAutocomplete uiInput--default uiInput--lookup\" and @title=\"Search People\"])[2]")));
+        myDynamicElement.sendKeys(userName);
+        Thread.sleep(3000);
+        myDynamicElement.sendKeys(Keys.ARROW_DOWN);
+        myDynamicElement.sendKeys(Keys.ENTER);
+
+        //Associted Change Request
+        String CRName = sheet.getRow(13).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@placeholder=\"Search Change Request Log...\"]")).sendKeys(CRName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+CRName+"\"]")));
+        myDynamicElement.click();
         Thread.sleep(2000);
-        //Expense Date
-        driver.findElement(By.xpath("//a[@class=\"datePicker-openIcon display\"]")).click();
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='30']")));
-        myDynamicElement.click();
 
-        //Expense Category
-        driver.findElement(By.xpath("(//a[@class=\"select\"])[1]")).click();
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Cell Phone\"]")));
-        myDynamicElement.click();
+        //issue Signoff Resolution
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@placeholder=\"Search People...\"])[3]")));
+        myDynamicElement.sendKeys(userName);
+        Thread.sleep(3000);
+        myDynamicElement.sendKeys(Keys.ARROW_DOWN);
+        myDynamicElement.sendKeys(Keys.ENTER);
 
-        //Expense Amount
-        driver.findElement(By.xpath("//input[@class=\"input uiInputSmartNumber\"]")).sendKeys("10");
+        //Issue Description
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("ok");
 
-        //Expense Description
-        driver.findElement(By.xpath("//textarea[@class=\" textarea\"]")).sendKeys("Test Selenium Expense Description");
+        //Final Resolution
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("ok");
 
-        //Attach Photo
-        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
+        //Recommended Resolution
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("ok");
 
-        //Save
+        //Historical Comment
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("test");
+
+        //Save IssueLog
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
+        Thread.sleep(5000);
 
         //get Toast Message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
         String ToastMessage = myDynamicElement.getAttribute("innerHTML");
 
         //Expected Toast Message Value Set
-        String ExpectedValue = "Expense Tracking \"Test Selenium Expense\" was created.";
+        String ExpectedValue = "Issue Log \""+ILName+"\" was created.";
 
         //Check
         Assert.assertEquals(ToastMessage,ExpectedValue);
 
         Thread.sleep(5000);
     }
-    @Test(priority=2)
-    public void EditExpenseTracking() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, 30);
-        //Edit Button
-        WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"Edit\"]")));
-        myDynamicElement.click();
 
-        //Expense Name
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@class=\" input\"])[1]")));
-        myDynamicElement.clear();
-        myDynamicElement.sendKeys("Test Selenium Expense-Edit");
-
-
-        //Expense Amount
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@class=\"input uiInputSmartNumber\"]")));
-        myDynamicElement.clear();
-        myDynamicElement.sendKeys("20");
-        Thread.sleep(2000);
-        //Expense Description
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//textarea[@class=\" textarea\"]")));
-        myDynamicElement.clear();
-        myDynamicElement.sendKeys("Test Selenium Expense Description-Edit");
-
-        //Save
-        driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
-
-
-        //get Toast Message
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
-        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
-
-        //Expected Toast Message Value Set
-        String ExpectedValue = "Expense Tracking \"Test Selenium Expense-Edit\" was saved.";
-
-        //Check
-        Assert.assertEquals(ToastMessage,ExpectedValue);
-
-        Thread.sleep(5000);
-
-    }
     @AfterTest
-    public void close(){
-        //closing the chrome
-        driver.quit();
+    //Closing the Chrome
+    public void terminateBrowser(){
+        driver.close();
     }
-
 }
