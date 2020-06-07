@@ -78,59 +78,61 @@ public class Business_Transaction {
         //Click On New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         //Business Transaction Name
         String BTName = sheet.getRow(50).getCell(3).getStringCellValue();
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@class=\" input\"])[1]")));
         myDynamicElement.sendKeys(BTName);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Associated System
         String SystemName = sheet.getRow(33).getCell(3).getStringCellValue();
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Systems\"]")));
         myDynamicElement.sendKeys(SystemName);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+SystemName+"\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Associated Object
         String ObjName = sheet.getRow(31).getCell(3).getStringCellValue();
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Objects\"]")));
         myDynamicElement.sendKeys(ObjName);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ObjName+"\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Associated Stakeholder Group
         String StakeName = sheet.getRow(42).getCell(3).getStringCellValue();
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Stakeholder Groups\"]")));
         myDynamicElement.sendKeys(StakeName);
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+StakeName+"\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Transaction Code
         driver.findElement(By.xpath("(//input[@class=\" input\"])[2]")).sendKeys("01");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Transaction Description
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Associated Program
-        driver.findElement(By.xpath("(//input[@class=\" input\"])[3]")).sendKeys("Extron Program");
+        String ProgName = sheet.getRow(13).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("(//input[@class=\" input\"])[3]")).sendKeys(ProgName);
+        Thread.sleep(1000);
 
         //Historical Comment
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment");
+        Thread.sleep(1000);
 
         //Save
         driver.findElement(By.xpath("(//span[text()='Save'])[2]")).click();
-
-        Thread.sleep(4000);
+        Thread.sleep(1000);
 
         //get Toast Message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));

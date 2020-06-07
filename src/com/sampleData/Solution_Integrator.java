@@ -77,29 +77,30 @@ public class Solution_Integrator {
         //Click On New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         //Associated Organization
         String OrgName = sheet.getRow(11).getCell(3).getStringCellValue();
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Organization\"]")));
         myDynamicElement.sendKeys(OrgName);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+OrgName+"\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Solution Integrator Name
         String SolutionName = sheet.getRow(39).getCell(3).getStringCellValue();
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@class=\" input\"]")));
         myDynamicElement.sendKeys(SolutionName);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Historical Comment
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical commnet");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Save
         driver.findElement(By.xpath("(//span[text()='Save'])[2]")).click();
+        Thread.sleep(1000);
 
         //get Toast Message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));

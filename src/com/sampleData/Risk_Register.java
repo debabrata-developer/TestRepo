@@ -18,7 +18,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-public class Stakeholder_Group {
+public class Risk_Register{
+
     static WebDriver driver;
     // Read Excel File
     File src = new File("C:\\AMIGO Selenium Excel Sheet.xlsx");
@@ -26,11 +27,11 @@ public class Stakeholder_Group {
     XSSFWorkbook workbook = new XSSFWorkbook(input);
     XSSFSheet sheet = workbook.getSheetAt(0);
 
-    public Stakeholder_Group() throws IOException {
+    public Risk_Register() throws IOException {
     }
 
     @BeforeTest
-    public void Setup(){
+    public void Setup() {
         //get WebDriver Path
         String webDriverPath = sheet.getRow(3).getCell(2).getStringCellValue();
         System.out.println(webDriverPath);
@@ -62,15 +63,16 @@ public class Stakeholder_Group {
         driver.manage().timeouts().implicitlyWait(90, TimeUnit.SECONDS);
 
         //get sObject URL
-        String sObject = sheet.getRow(42).getCell(2).getStringCellValue();
+        String sObject = sheet.getRow(32).getCell(2).getStringCellValue();
         System.out.println(sObject);
 
         //redirect to sObject
         driver.get(sObject);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
+
     @Test(priority = 1)
-    public void CreateStakeGroup()throws InterruptedException{
+    public void CreateRiskRegister() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
         //Click On New Button
@@ -103,25 +105,116 @@ public class Stakeholder_Group {
         myDynamicElement.click();
         Thread.sleep(1000);
 
-        //Name Of Stakeholder Group
-        String StakeName = sheet.getRow(42).getCell(3).getStringCellValue();
-        driver.findElement(By.xpath("//input[@class=\" input\"]")).sendKeys(StakeName);
+        //Name
+        String RRName = sheet.getRow(32).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@class=\" input\"]")).sendKeys(RRName);
         Thread.sleep(1000);
 
-        //Power Indicator
-        driver.findElement(By.xpath("//input[@class=\"input uiInputSmartNumber\"]")).sendKeys("11");
+        //Risk Register Owner
+        String userName = sheet.getRow(37).getCell(4).getStringCellValue();
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys(userName);
+        Thread.sleep(5000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\""+userName+"\"])[1]")));
+        myDynamicElement.click();
         Thread.sleep(1000);
 
-        //Interest IndicatorIf
-        driver.findElement(By.xpath("//input[@class=\"input uiInputSmartNumber\"]")).sendKeys("12");
+        //The Cause
+        driver.findElement(By.xpath("(//textarea[@class=\" textarea\"])[1]")).sendKeys("Testing");
         Thread.sleep(1000);
 
-        //Group Description
-        driver.findElement(By.xpath("(//textarea[@class=\" textarea\"])[1]")).sendKeys("Test Group Description");
+        //The Risk
+        driver.findElement(By.xpath("(//textarea[@class=\" textarea\"])[2]")).sendKeys("Testing");
+        Thread.sleep(1000);
+
+        //The Consequence
+        driver.findElement(By.xpath("(//textarea[@class=\" textarea\"])[3]")).sendKeys("Testing");
+        Thread.sleep(1000);
+
+        //Risk Trigger Point
+        driver.findElement(By.xpath("(//textarea[@class=\" textarea\"])[4]")).sendKeys("Testing");
+        Thread.sleep(1000);
+
+        //Risk Statement
+        driver.findElement(By.xpath("(//textarea[@class=\" textarea\"])[5]")).sendKeys("Testing");
+        Thread.sleep(1000);
+
+        //Risk Category
+        driver.findElement(By.xpath("(//a[@class=\"select\"])[1]")).click();
+        Thread.sleep(1000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Environment: Economic\"]")));
+        myDynamicElement.click();
+        Thread.sleep(1000);
+
+        //Risk Classification
+        driver.findElement(By.xpath("(//a[@class=\"select\"])[2]")).click();
+        Thread.sleep(1000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Program Risk-  A risk that has potential impact to the overall program\"]")));
+        myDynamicElement.click();
+        Thread.sleep(1000);
+
+        //Risk Evolution Owner
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys(userName);
+        Thread.sleep(5000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\""+userName+"\"])[2]")));
+        myDynamicElement.click();
+        Thread.sleep(1000);
+
+        //Probability Of Occurence
+        driver.findElement(By.xpath("//input[@class=\"input uiInputSmartNumber\"]")).sendKeys("Testing");
+        Thread.sleep(1000);
+
+        //Some Impace Values
+        driver.findElement(By.xpath("(//a[@class=\"select\"])[3]")).click();
+        Thread.sleep(1000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"1: No major impact to overall scope\"]")));
+        myDynamicElement.click();
+        Thread.sleep(1000);
+
+        //Quality Impact Values
+        driver.findElement(By.xpath("(//a[@class=\"select\"])[4]")).click();
+        Thread.sleep(1000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"3: Some impact to specific areas of quality\"]")));
+        myDynamicElement.click();
+        Thread.sleep(1000);
+
+        //Schedule Impact Values
+        driver.findElement(By.xpath("(//a[@class=\"select\"])[5]")).click();
+        Thread.sleep(1000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"3: 3 - 10 days\"]")));
+        myDynamicElement.click();
+        Thread.sleep(1000);
+
+        //Cost Impact Values
+        driver.findElement(By.xpath("(//a[@class=\"select\"])[6]")).click();
+        Thread.sleep(1000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"1: Under $100k\"]")));
+        myDynamicElement.click();
+        Thread.sleep(1000);
+
+        //Risk Planning Owner
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys(userName);
+        Thread.sleep(5000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\""+userName+"\"])[3]")));
+        myDynamicElement.click();
+        Thread.sleep(1000);
+
+        //risk Response Strategy
+        driver.findElement(By.xpath("(//a[@class=\"select\"])[7]")).click();
+        Thread.sleep(1000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Avoid It:  Eliminate the threat of the risk by eliminating the cause\"]")));
+        myDynamicElement.click();
+        Thread.sleep(1000);
+
+        //Risk Response Strstergy
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
+        Thread.sleep(1000);
+
+        //Contingency Plan Details
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
         Thread.sleep(1000);
 
         //Historical Comment
-        driver.findElement(By.xpath("(//textarea[@class=\" textarea\"])[2]")).sendKeys("Test Historical Comment");
+        driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
         Thread.sleep(1000);
 
         //Save
@@ -133,10 +226,11 @@ public class Stakeholder_Group {
         String ToastMessage = myDynamicElement.getAttribute("innerHTML");
 
         //Expected Toast Message Value Set
-        String ExpectedValue = "Stakeholder Group \""+StakeName+"\" was created.";
+        String ExpectedValue = "Risk Register \""+RRName+"\" was created.";
 
         //Check
-        Assert.assertEquals(ToastMessage,ExpectedValue);
+        Assert.assertEquals(ToastMessage, ExpectedValue);
+
         Thread.sleep(5000);
     }
 
@@ -146,5 +240,3 @@ public class Stakeholder_Group {
         driver.quit();
     }
 }
-
-

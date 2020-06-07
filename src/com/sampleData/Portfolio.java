@@ -79,34 +79,38 @@ public class Portfolio {
         //Clicking on New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a/div[@title=\"New\"]")));
         myDynamicElement.click();
+        Thread.sleep(5000);
 
         //Clicking on Associated Organization
         String OrgName = sheet.getRow(11).getCell(3).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder=\"Search Organization...\"]")));
         myDynamicElement.sendKeys(OrgName);
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+OrgName+"\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Portfolio Name
         String PortName = sheet.getRow(12).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("//input[@class=\" input\"]")).sendKeys(PortName);
+        Thread.sleep(1000);
 
         //Portfolio Owner
-        String UserName = sheet.getRow(37).getCell(3).getStringCellValue();
+        String UserName = sheet.getRow(37).getCell(4).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search People\"]")));
         myDynamicElement.sendKeys(UserName);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         myDynamicElement.sendKeys(Keys.ARROW_DOWN);
         myDynamicElement.sendKeys(Keys.ENTER);
         Thread.sleep(1000);
 
         //Historical Comment
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Selenium Portfolio");
+        Thread.sleep(1000);
 
         //Save
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
+        Thread.sleep(1000);
 
         //get Toast Message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
@@ -128,20 +132,20 @@ public class Portfolio {
         //Add User Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Portfolio__c.PlatinumPMO__Add_User\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         //Search User
         String UserName = sheet.getRow(37).getCell(6).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")));
         myDynamicElement.sendKeys(UserName);
-        Thread.sleep(3000);
-        myDynamicElement.sendKeys(Keys.ARROW_DOWN);
-        myDynamicElement.sendKeys(Keys.ENTER);
+        Thread.sleep(5000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+UserName+"']")));
+        myDynamicElement.click();
         Thread.sleep(1000);
 
         //Save
         driver.findElement(By.xpath("//button[text()='Save']")).click();
-        Thread.sleep(4000);
+        Thread.sleep(1000);
 
         //get toast message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));

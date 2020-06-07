@@ -78,20 +78,21 @@ public class Data_Table {
         //Click On New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         //Associated System
         String SystemName = sheet.getRow(33).getCell(3).getStringCellValue();
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Systems\"]")));
         myDynamicElement.sendKeys(SystemName);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+SystemName+"\"]")));
         myDynamicElement.click();
+        Thread.sleep(1000);
 
         //Data Table Name
         String DataTableName = sheet.getRow(46).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("//input[@class=\" input\"]")).sendKeys(DataTableName);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Data Table Description
         driver.findElement(By.xpath("(//textarea[@class=\" textarea\"])[1]")).sendKeys("Testing");
@@ -100,7 +101,7 @@ public class Data_Table {
         //Data Reliability Factor
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//a[@class=\"select\"])[1]")));
         myDynamicElement.click();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"A\"]")));
         myDynamicElement.click();
         Thread.sleep(1000);
@@ -117,18 +118,18 @@ public class Data_Table {
         String userName = sheet.getRow(37).getCell(4).getStringCellValue();
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search People\"]")));
         myDynamicElement.sendKeys(userName);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         myDynamicElement.sendKeys(Keys.ARROW_DOWN);
         myDynamicElement.sendKeys(Keys.ENTER);
         Thread.sleep(1000);
 
         //Historical Commnet
         driver.findElement(By.xpath("(//textarea[@class=\" textarea\"])[2]")).sendKeys("Test Historical Commnet");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Save
         driver.findElement(By.xpath("(//span[text()='Save'])[2]")).click();
-        Thread.sleep(4000);
+        Thread.sleep(1000);
 
         //get Toast Message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));

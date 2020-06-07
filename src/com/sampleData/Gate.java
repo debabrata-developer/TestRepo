@@ -73,56 +73,71 @@ public class Gate{
     @Test(priority = 0)
     public void CreateGate() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
+
         //Click On New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
         myDynamicElement.click();
+        Thread.sleep(5000);
 
         //Associated Organization
         String OrgName = sheet.getRow(11).getCell(3).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Organization\"]")));
         myDynamicElement.sendKeys(OrgName);
-        Thread.sleep(1000);
+        Thread.sleep(5000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+OrgName+"\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Associated portfolio
         String PortName = sheet.getRow(12).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys(PortName);
+        Thread.sleep(5000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+PortName+"\"]")));
         myDynamicElement.click();
+        Thread.sleep(1000);
 
         //Associated Program
         String ProgName = sheet.getRow(13).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys(ProgName);
+        Thread.sleep(5000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProgName+"\"]")));
         myDynamicElement.click();
+        Thread.sleep(1000);
 
         //Associated Project
         String ProjName = sheet.getRow(14).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("//input[@title=\"Search Projects\"]")).sendKeys(ProjName);
+        Thread.sleep(5000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProjName+"\"]")));
         myDynamicElement.click();
+        Thread.sleep(1000);
 
         //Gate Name
         driver.findElement(By.xpath("(//input[@class=\" input\"])[1]")).sendKeys("Test Selenium Gate");
+        Thread.sleep(1000);
 
         //Gate Description
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
+        Thread.sleep(1000);
 
         //Phase Or Milestone
         driver.findElement(By.xpath("//a[@class=\"select\"]")).click();
+        Thread.sleep(1000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Phase\"]")));
         myDynamicElement.click();
+        Thread.sleep(1000);
 
         //Milestone
         driver.findElement(By.xpath("(//input[@class=\" input\"])[2]")).sendKeys("90");
+        Thread.sleep(1000);
 
         //Historical Comment
         driver.findElement(By.xpath("//textarea[@class=\" textarea\"]")).sendKeys("Test Historical Comment");
+        Thread.sleep(1000);
 
         //Save
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
+        Thread.sleep(1000);
 
         //get Toast Message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));

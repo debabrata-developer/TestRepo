@@ -72,14 +72,14 @@ public class Measures_And_Metrics {
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
     }
 
-    @Test
+    @Test(priority = 1)
     public void CreateMeasures_And_Metrics() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
 
         //Click On New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(4000);
 
         //Objectives
         String ObjectiveName = sheet.getRow(40).getCell(3).getStringCellValue();
@@ -88,34 +88,33 @@ public class Measures_And_Metrics {
         Thread.sleep(5000);
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ObjectiveName+"\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Measues And Metrics
         String MandMName = sheet.getRow(43).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("//input[@class=\" input\"]")).sendKeys(MandMName);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Business Process
         String BPName = sheet.getRow(19).getCell(3).getStringCellValue();
         myDynamicElement= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Business Processes\"]")));
         myDynamicElement.sendKeys(BPName);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         myDynamicElement.sendKeys(Keys.ARROW_DOWN);
         myDynamicElement.sendKeys(Keys.ENTER);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Measure/Metrics Description
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Historical Comment
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Save
         driver.findElement(By.xpath("(//span[text()='Save'])[2]")).click();
-
-        Thread.sleep(4000);
+        Thread.sleep(1000);
 
         //get Toast Message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
@@ -133,7 +132,6 @@ public class Measures_And_Metrics {
 
     @AfterTest
     public void terminateBrowser(){
-
         driver.close();
     }
 

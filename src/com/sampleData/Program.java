@@ -79,12 +79,13 @@ public class Program {
         //Click On New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
         myDynamicElement.click();
+        Thread.sleep(5000);
 
         //Associated Organization
         String OrgName = sheet.getRow(11).getCell(3).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Organization\"]")));
         myDynamicElement.sendKeys(OrgName);
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+OrgName+"\"]")));
         myDynamicElement.click();
         Thread.sleep(1000);
@@ -92,38 +93,42 @@ public class Program {
         //Associated portfolio
         String PortName = sheet.getRow(12).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys(PortName);
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+PortName+"\"]")));
         myDynamicElement.click();
+        Thread.sleep(1000);
 
         //Program Name
         String ProgName = sheet.getRow(13).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("(//input[@class=\" input\"])[1]")).sendKeys(ProgName);
+        Thread.sleep(1000);
 
         //Sensitive Data
         driver.findElement(By.xpath("//span[@title=\"HR Sensitive Data\"]")).click();
         Thread.sleep(1000);
         driver.findElement(By.xpath("//button[@title=\"Move selection to Chosen\"]")).click();
+        Thread.sleep(1000);
 
         //Program Sponsor
-        String UserName = sheet.getRow(37).getCell(3).getStringCellValue();
+        String UserName = sheet.getRow(37).getCell(4).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@title=\"Search People\"])[1]")));
         myDynamicElement.sendKeys(UserName);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         myDynamicElement.sendKeys(Keys.ARROW_DOWN);
         myDynamicElement.sendKeys(Keys.ENTER);
         Thread.sleep(1000);
 
         //Business Lead
         driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys(UserName);
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\""+UserName+"\"])[2]")));
         myDynamicElement.click();
+        Thread.sleep(1000);
 
         //Technology Lead
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@title=\"Search People\"])[3]")));
         myDynamicElement.sendKeys(UserName);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         myDynamicElement.sendKeys(Keys.ARROW_DOWN);
         myDynamicElement.sendKeys(Keys.ENTER);
         Thread.sleep(1000);
@@ -131,7 +136,7 @@ public class Program {
         //Program manager
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@title=\"Search People\"])[4]")));
         myDynamicElement.sendKeys(UserName);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         myDynamicElement.sendKeys(Keys.ARROW_DOWN);
         myDynamicElement.sendKeys(Keys.ENTER);
         Thread.sleep(1000);
@@ -139,7 +144,7 @@ public class Program {
         //Financial advisor
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@title=\"Search People\"])[5]")));
         myDynamicElement.sendKeys(UserName);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         myDynamicElement.sendKeys(Keys.ARROW_DOWN);
         myDynamicElement.sendKeys(Keys.ENTER);
         Thread.sleep(1000);
@@ -147,7 +152,7 @@ public class Program {
         //Administrator
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@title=\"Search People\"])[6]")));
         myDynamicElement.sendKeys(UserName);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         myDynamicElement.sendKeys(Keys.ARROW_DOWN);
         myDynamicElement.sendKeys(Keys.ENTER);
         Thread.sleep(1000);
@@ -155,16 +160,17 @@ public class Program {
         //Solution Integrator
         String SolutionName = sheet.getRow(39).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("//input[@title=\"Search Solution Integrator\"]")).sendKeys(SolutionName);
-        Thread.sleep(2000);
+        Thread.sleep(5000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+SolutionName+"\"]")));
         myDynamicElement.click();
         Thread.sleep(1000);
 
         //Target Star Date
         driver.findElement(By.xpath("(//a[@class=\"datePicker-openIcon display\"])[1]")).click();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='20']")));
         myDynamicElement.click();
+        Thread.sleep(1000);
 
         //Target Completion Date
         driver.findElement(By.xpath("(//a[@class=\"datePicker-openIcon display\"])[2]")).click();
@@ -173,25 +179,31 @@ public class Program {
         Thread.sleep(1000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='20']")));
         myDynamicElement.click();
+        Thread.sleep(1000);
 
         //Estimated Budget
         driver.findElement(By.xpath("//input[@class=\"input uiInputSmartNumber\"]")).sendKeys("500000");
-
         Thread.sleep(1000);
+
         //Program Description
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
+        Thread.sleep(1000);
 
         //Program Charter
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
+        Thread.sleep(1000);
 
         //Program Charter Overflow
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
+        Thread.sleep(1000);
 
         //Historical Comment
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment");
+        Thread.sleep(1000);
 
         //Save
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
+        Thread.sleep(1000);
 
         //get Toast Message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
@@ -214,21 +226,21 @@ public class Program {
         //Add User Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Program__c.PlatinumPMO__Add_User\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         //Search User
         String UserName = sheet.getRow(37).getCell(8).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")));
         myDynamicElement.sendKeys(UserName);
-        Thread.sleep(3000);
-        myDynamicElement.sendKeys(Keys.ARROW_DOWN);
-        myDynamicElement.sendKeys(Keys.ENTER);
+        Thread.sleep(5000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+UserName+"']")));
+        myDynamicElement.click();
         Thread.sleep(1000);
 
         //Save
         driver.findElement(By.xpath("//button[text()='Save']")).click();
+        Thread.sleep(1000);
 
-        Thread.sleep(4000);
         //get toast message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
         String ToastMessage = myDynamicElement.getAttribute("innerHTML");

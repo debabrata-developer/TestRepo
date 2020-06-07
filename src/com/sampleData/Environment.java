@@ -76,38 +76,36 @@ public class Environment {
         //Click On New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         //Environment Name
         String EnvName = sheet.getRow(49).getCell(3).getStringCellValue();
         myDynamicElement= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@class=\" input\"])[1]")));
         myDynamicElement.sendKeys(EnvName);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Client Number
         driver.findElement(By.xpath("(//input[@class=\" input\"])[2]")).sendKeys("1");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Envireonment Type
         driver.findElement(By.xpath("//a[@class=\"select\"]")).click();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Dev\"]")));
         myDynamicElement.click();
         Thread.sleep(1000);
 
         //Environment Description
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Historical comment
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
-
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Save
         driver.findElement(By.xpath("(//span[text()='Save'])[2]")).click();
-
-        Thread.sleep(4000);
+        Thread.sleep(1000);
 
         //get Toast Message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));

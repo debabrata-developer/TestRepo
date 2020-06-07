@@ -79,23 +79,29 @@ public class Organization {
         //click New Button
         WebElement myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\" and text()='New']")));
         myDynamicElement.click();
+        Thread.sleep(5000);
 
         //Organization Name
         String OrgName = sheet.getRow(11).getCell(3).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div/input[@class=\" input\" and @type=\"text\"]")));
         myDynamicElement.sendKeys(OrgName);
+        Thread.sleep(1000);
 
         //Timesheet Auto Approval Days
         driver.findElement(By.xpath("(//*[@data-aura-class=\"uiInputSmartNumber\"])[1]")).sendKeys("7");
+        Thread.sleep(1000);
 
         //Expense Auto Approval Days
         driver.findElement(By.xpath("(//*[@data-aura-class=\"uiInputSmartNumber\"])[2]")).sendKeys("9");
+        Thread.sleep(1000);
 
         //Historical Comments
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\" ]")).sendKeys("Selenium Test Historical Comment");
+        Thread.sleep(1000);
 
         //Click Save Button
         driver.findElement(By.xpath("//button[@title=\"Save\" ]//span[text()='Save']")).click();
+        Thread.sleep(1000);
 
         //get Toast Message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
@@ -107,7 +113,7 @@ public class Organization {
         //Check
         Assert.assertEquals(ToastMessage,ExpectedValue);
 
-        Thread.sleep(5000);
+        Thread.sleep(6000);
     }
 
     @Test(priority = 2)
@@ -117,20 +123,19 @@ public class Organization {
         //Click Invite User
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@name=\"PlatinumPMO__Organization__c.PlatinumPMO__Add_User\"]")));
         myDynamicElement.click();
-        Thread.sleep(3000);
+        Thread.sleep(5000);
 
         //User
         String UserName = sheet.getRow(37).getCell(4).getStringCellValue();
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder=\"search..\"]")));
-        myDynamicElement.sendKeys(UserName);
-        Thread.sleep(3000);
-        myDynamicElement.sendKeys(Keys.ARROW_DOWN);
-        myDynamicElement.sendKeys(Keys.ENTER);
+        driver.findElement(By.xpath("//input[@placeholder=\"search..\"]")).sendKeys(UserName);
+        Thread.sleep(5000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+UserName+"']")));
+        myDynamicElement.click();
         Thread.sleep(1000);
 
         //Save
         driver.findElement(By.xpath("//button[@class=\"slds-button slds-button_brand\"]")).click();
-        Thread.sleep(4000);
+        Thread.sleep(1000);
 
         //Get Toast Message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));

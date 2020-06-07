@@ -77,55 +77,55 @@ public class Data_Field {
         //Click On New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(5000);
 
         //Data Table
         String DataTableName = sheet.getRow(46).getCell(3).getStringCellValue();
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Data Tables\"]")));
         myDynamicElement.sendKeys(DataTableName);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+DataTableName+"\"]")));
         myDynamicElement.click();
         Thread.sleep(1000);
 
         //Data Table Description
         driver.findElement(By.xpath("(//textarea[@class=\" textarea\"])[1]")).sendKeys("Testing");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Data Field Name
-        String DataFieldName = sheet.getRow(47).getCell(4).getStringCellValue();
+        String DataFieldName = sheet.getRow(47).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("(//input[@class=\" input\"])[1]")).sendKeys(DataFieldName);
         Thread.sleep(1000);
 
         //Field Description
         driver.findElement(By.xpath("(//textarea[@class=\" textarea\"])[2]")).sendKeys("Testing");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Screen ID
         driver.findElement(By.xpath("(//input[@class=\" input\"])[2]")).sendKeys("1");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Segment Name
         driver.findElement(By.xpath("(//input[@class=\" input\"])[3]")).sendKeys("Data Field Segment");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Data Type
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//a[@class=\"select\"])[1]")));
         myDynamicElement.click();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Alpha\"]")));
         myDynamicElement.click();
         Thread.sleep(1000);
 
         //Field Length
         driver.findElement(By.xpath("//input[@class=\"input uiInputSmartNumber\"]")).sendKeys("10");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Associated Object
         String ObjName = sheet.getRow(31).getCell(3).getStringCellValue();
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Objects\"]")));
         myDynamicElement.sendKeys(ObjName);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ObjName+"\"]")));
         myDynamicElement.click();
         Thread.sleep(1000);
@@ -133,18 +133,18 @@ public class Data_Field {
         //Attribute Type
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//a[@class=\"select\"])[2]")));
         myDynamicElement.click();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\"Key Field\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Historical Comment
         driver.findElement(By.xpath("(//textarea[@class=\" textarea\"])[3]")).sendKeys("Test Historical Comment");
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Save
         driver.findElement(By.xpath("(//span[text()='Save'])[2]")).click();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
 
         //get Toast Message
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));

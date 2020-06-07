@@ -68,7 +68,7 @@ public class Objectives {
 
         //redirect to sObject
         driver.get(sObject);
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
     }
 
     @Test(priority = 1)
@@ -78,31 +78,35 @@ public class Objectives {
         //Click On New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"New\"]")));
         myDynamicElement.click();
+        Thread.sleep(4000);
 
         //Set Goals
         String GoalName = sheet.getRow(41).getCell(3).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder=\"Search Goals...\"]")));
         myDynamicElement.sendKeys(GoalName);
-        Thread.sleep(3000);
+        Thread.sleep(5000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+GoalName+"\"]")));
         myDynamicElement.click();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         //Objectives Name
         String ObjectiveName = sheet.getRow(40).getCell(3).getStringCellValue();
         driver.findElement(By.xpath("//input[@class=\" input\"]")).sendKeys(ObjectiveName);
+        Thread.sleep(1000);
 
         //Objective Description
         driver.findElement(By.xpath("(//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"])")).sendKeys("Test Description");
+        Thread.sleep(1000);
 
         //HistoricalComment
         driver.findElement(By.xpath("(//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"])")).sendKeys("Test Historical comment");
+        Thread.sleep(1000);
 
         //Click Save
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
+        Thread.sleep(1000);
 
         //get Toast Message
-        Thread.sleep(2000);
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class=\"toastMessage slds-text-heading--small forceActionsText\"]")));
         String ToastMessage = myDynamicElement.getAttribute("innerHTML");
 

@@ -84,6 +84,11 @@
             <class name="com.sampleData.System_obj"/>
         </classes>
     </test>
+    <test name="Business_Transaction Test Data">
+        <classes>
+            <class name="com.sampleData.Business_Transaction"/>
+        </classes>
+    </test>
     <test name="Defect_Log Test Data">
         <classes>
             <class name="com.sampleData.Defect_Log"/>
@@ -94,14 +99,14 @@
             <class name="com.sampleData.Change_Request_Log"/>
         </classes>
     </test>
+    <test name="Risk_Register Test Data">
+        <classes>
+            <class name="com.sampleData.Risk_Register"/>
+        </classes>
+    </test>
     <test name="Issue_Log Test Data">
         <classes>
             <class name="com.sampleData.Issue_Log"/>
-        </classes>
-    </test>
-    <test name="Business_Transaction Test Data">
-        <classes>
-            <class name="com.sampleData.Business_Transaction"/>
         </classes>
     </test>
     <test name="Gate Test Data">
