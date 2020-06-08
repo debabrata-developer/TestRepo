@@ -3,6 +3,7 @@ package com.sampleData;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -53,28 +54,34 @@ public class Business_Transaction extends LoginClass{
         String SystemName = sheet.getRow(33).getCell(3).getStringCellValue();
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Systems\"]")));
         myDynamicElement.sendKeys(SystemName);
-        Thread.sleep(5000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+SystemName+"\"]")));
-        myDynamicElement.click();
         Thread.sleep(1000);
+        myDynamicElement.sendKeys(Keys.ENTER);
+        Thread.sleep(5000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\""+SystemName+"\"]")));
+        myDynamicElement.click();
+        Thread.sleep(3000);
 
         //Associated Object
         String ObjName = sheet.getRow(31).getCell(3).getStringCellValue();
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Objects\"]")));
         myDynamicElement.sendKeys(ObjName);
-        Thread.sleep(5000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ObjName+"\"]")));
-        myDynamicElement.click();
         Thread.sleep(1000);
+        myDynamicElement.sendKeys(Keys.ENTER);
+        Thread.sleep(5000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\""+ObjName+"\"]")));
+        myDynamicElement.click();
+        Thread.sleep(3000);
 
         //Associated Stakeholder Group
         String StakeName = sheet.getRow(42).getCell(3).getStringCellValue();
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Stakeholder Groups\"]")));
         myDynamicElement.sendKeys(StakeName);
-        Thread.sleep(5000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+StakeName+"\"]")));
-        myDynamicElement.click();
         Thread.sleep(1000);
+        myDynamicElement.sendKeys(Keys.ENTER);
+        Thread.sleep(5000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\""+StakeName+"\"]")));
+        myDynamicElement.click();
+        Thread.sleep(3000);
 
         //Transaction Code
         driver.findElement(By.xpath("(//input[@class=\" input\"])[2]")).sendKeys("01");

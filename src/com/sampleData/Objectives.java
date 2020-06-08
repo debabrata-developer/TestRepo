@@ -3,6 +3,7 @@ package com.sampleData;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -52,10 +53,12 @@ public class Objectives extends LoginClass{
         String GoalName = sheet.getRow(41).getCell(3).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder=\"Search Goals...\"]")));
         myDynamicElement.sendKeys(GoalName);
-        Thread.sleep(5000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+GoalName+"\"]")));
-        myDynamicElement.click();
         Thread.sleep(1000);
+        myDynamicElement.sendKeys(Keys.ENTER);
+        Thread.sleep(5000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\""+GoalName+"\"]")));
+        myDynamicElement.click();
+        Thread.sleep(3000);
 
         //Objectives Name
         String ObjectiveName = sheet.getRow(40).getCell(3).getStringCellValue();

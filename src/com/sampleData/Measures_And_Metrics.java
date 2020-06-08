@@ -53,10 +53,12 @@ public class Measures_And_Metrics extends LoginClass{
         String ObjectiveName = sheet.getRow(40).getCell(3).getStringCellValue();
         myDynamicElement= wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Objectives\"]")));
         myDynamicElement.sendKeys(ObjectiveName);
-        Thread.sleep(5000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ObjectiveName+"\"]")));
-        myDynamicElement.click();
         Thread.sleep(1000);
+        myDynamicElement.sendKeys(Keys.ENTER);
+        Thread.sleep(5000);
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\""+ObjectiveName+"\"]")));
+        myDynamicElement.click();
+        Thread.sleep(3000);
 
         //Measues And Metrics
         String MandMName = sheet.getRow(43).getCell(3).getStringCellValue();

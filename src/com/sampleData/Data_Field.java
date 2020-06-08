@@ -3,6 +3,7 @@ package com.sampleData;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -52,8 +53,10 @@ public class Data_Field extends LoginClass{
         String DataTableName = sheet.getRow(46).getCell(3).getStringCellValue();
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Data Tables\"]")));
         myDynamicElement.sendKeys(DataTableName);
+        Thread.sleep(1000);
+        myDynamicElement.sendKeys(Keys.ENTER);
         Thread.sleep(5000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+DataTableName+"\"]")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\""+DataTableName+"\"]")));
         myDynamicElement.click();
         Thread.sleep(1000);
 
@@ -94,8 +97,10 @@ public class Data_Field extends LoginClass{
         String ObjName = sheet.getRow(31).getCell(3).getStringCellValue();
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Objects\"]")));
         myDynamicElement.sendKeys(ObjName);
+        Thread.sleep(1000);
+        myDynamicElement.sendKeys(Keys.ENTER);
         Thread.sleep(5000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ObjName+"\"]")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@title=\""+ObjName+"\"]")));
         myDynamicElement.click();
         Thread.sleep(1000);
 
