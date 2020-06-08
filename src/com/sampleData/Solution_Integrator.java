@@ -7,6 +7,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 import java.io.File;
 import java.io.FileInputStream;
@@ -77,5 +79,15 @@ public class Solution_Integrator extends LoginClass{
         Assert.assertEquals(ToastMessage,ExpectedValue);
         Thread.sleep(5000);
 
+    }
+
+    @AfterMethod
+    public void afterMethod(ITestResult result)
+    {
+        if(result.getStatus() == ITestResult.FAILURE || result.getStatus() == ITestResult.SKIP)
+        {
+            System.out.println("result Fail--"+result.getStatus());
+            driver.quit();
+        }
     }
 }

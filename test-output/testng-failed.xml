@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Test Suite]">
+  <test thread-count="5" name="Solution_Integrator Test Data(failed)">
+    <classes>
+      <class name="com.sampleData.Solution_Integrator">
+        <methods>
+          <include name="afterSuite"/>
+          <include name="beforeSuite"/>
+          <include name="CreateSolutionIntegrator"/>
+        </methods>
+      </class> <!-- com.sampleData.Solution_Integrator -->
+    </classes>
+  </test> <!-- Solution_Integrator Test Data(failed) -->
+</suite> <!-- Failed suite [Test Suite] -->

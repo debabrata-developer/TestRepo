@@ -11,6 +11,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -233,6 +235,16 @@ public class Change_Request_Log extends LoginClass{
 
         Thread.sleep(5000);
 
+    }
+
+    @AfterMethod
+    public void afterMethod(ITestResult result)
+    {
+        if(result.getStatus() == ITestResult.FAILURE || result.getStatus() == ITestResult.SKIP)
+        {
+            System.out.println("result Fail--"+result.getStatus());
+            driver.quit();
+        }
     }
 
 }
