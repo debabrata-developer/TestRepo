@@ -4,11 +4,7 @@
 
 
     <!-- Line 7 to 131 are Sample Data Creation Script(After use Comment this Line f code) -->
-    <test name="Organization Test Data">
-        <classes>
-            <class name="com.sampleData.Organization"/>
-        </classes>
-    </test>
+    
     <test name="Solution_Integrator Test Data">
         <classes>
             <class name="com.sampleData.Solution_Integrator"/>
