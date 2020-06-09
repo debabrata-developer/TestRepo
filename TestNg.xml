@@ -3,8 +3,8 @@
 <suite name="Test Suite A" parallel="false">
 
 
-    <!-- Line 7 to 131 are Sample Data Creation Script(After use Comment this Line f code) -->
-    
+    <!-- Line 7 to 131 are Sample Data Creation Script(After use Comment this Line-->
+    AVRO
     <test name="Solution_Integrator Test Data">
         <classes>
             <class name="com.sampleData.Solution_Integrator"/>
