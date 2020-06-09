@@ -159,14 +159,26 @@ public class Organization {
         Thread.sleep(3000);
 
         //User
-        driver.findElement(By.xpath("//input[@placeholder=\"search..\"]")).sendKeys("Rajdeep Chakraborty");
+        String userName = sheet.getRow(37).getCell(4).getStringCellValue();
+        driver.findElement(By.xpath("//input[@placeholder=\"search..\"]")).sendKeys(userName);
         Thread.sleep(3000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Rajdeep Chakraborty']")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+userName+"']")));
         myDynamicElement.click();
 
         //Save
         driver.findElement(By.xpath("//button[@class=\"slds-button slds-button_brand\"]")).click();
         Thread.sleep(4000);
+
+        //Get Toast Message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+
+        //checking Toast Message Value Set
+        String Chechval = "The Record was Saved";
+
+        //Check
+        Assert.assertTrue(ToastMessage.contains(Chechval));
+        Thread.sleep(5000);
 
     }
 
@@ -183,11 +195,30 @@ public class Organization {
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@name=\"Portfolio Name\"]")));
         myDynamicElement.sendKeys(" New Portfolio");
 
+        //Portfolio Owner
+        String userName = sheet.getRow(37).getCell(4).getStringCellValue();
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\" and @placeholder=\"search..\"])[2]")));
+        myDynamicElement.sendKeys(userName);
+        Thread.sleep(2000);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+userName+"']")));
+        myDynamicElement.click();
+
         //Historical Comments
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\" ]")).sendKeys("Selenium Test Portfolio");
 
         //Click Save Button
         driver.findElement(By.xpath("//button[@type=\"button\" and text()='Save']")).click();
+
+        //Get Toast Message
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@class=\"slds-theme--success slds-notify--toast slds-notify slds-notify--toast forceToastMessage\"]")));
+        String ToastMessage = myDynamicElement.getAttribute("innerHTML");
+
+        //checking Toast Message Value Set
+        String Chechval = "The record was saved.";
+
+        //Check
+        Assert.assertTrue(ToastMessage.contains(Chechval));
+        Thread.sleep(5000);
     }
     @AfterTest
     //Closing the Chrome

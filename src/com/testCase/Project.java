@@ -17,7 +17,6 @@ import org.testng.annotations.Test;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class Project{
@@ -74,85 +73,110 @@ public class Project{
     @Test(priority = 1)
     public void CreateNewProject () throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
+
         //Clicking on New Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a/div[@title=\"New\"]")));
         myDynamicElement.click();
+
         //Clicking on Associated Organization
+        String OrgName = sheet.getRow(11).getCell(3).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@placeholder=\"Search Organization...\"]")));
-        myDynamicElement.sendKeys("Extron Organization");
+        myDynamicElement.sendKeys(OrgName);
         Thread.sleep(2000);
-        //clicking  on Extron organization
-        driver.findElement(By.xpath("//div[@title=\"Extron Organization\"]")).click();
+        driver.findElement(By.xpath("//div[@title=\""+OrgName+"\"]")).click();
         Thread.sleep(2000);
+
         //clicking on Associated Portfolio
-        driver.findElement(By.xpath("//input[@placeholder=\"Search Portfolios...\"]")).sendKeys("Extron Portfolio");
+        String portName = sheet.getRow(12).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@placeholder=\"Search Portfolios...\"]")).sendKeys(portName);
         Thread.sleep(2000);
-        //clicking on extron portfolio
-        driver.findElement(By.xpath("//div[@title=\"Extron Portfolio\"]")).click();
+        driver.findElement(By.xpath("//div[@title=\""+portName+"\"]")).click();
+
         //clicking on associated program
-        driver.findElement(By.xpath("//input[@placeholder=\"Search Programs...\"]")).sendKeys("Extron Program");
+        String ProgName = sheet.getRow(13).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@placeholder=\"Search Programs...\"]")).sendKeys(ProgName);
         Thread.sleep(2000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Program\"]")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProgName+"\"]")));
         myDynamicElement.click();
+
         //Merge Current Status
         driver.findElement(By.xpath("(//a[@class=\"select\"])[2]")).click();
         driver.findElement(By.xpath("//a[@title=\"Initialize\"]")).click();
         Thread.sleep(1000);
+
         //Name of Project
         driver.findElement(By.xpath("(//input[@class=\" input\"])[1]")).sendKeys("Test Selenium Project");
+
         //project description
         driver.findElement(By.xpath("//textarea[@class=\" textarea\"]")).sendKeys("Testing");
+
         //target start date
         driver.findElement(By.xpath("(//a[@class=\"datePicker-openIcon display\"])[1]")).click();
+
         //select date
         driver.findElement(By.xpath("//span[text()='14']")).click();
+
         //target completion date
         driver.findElement(By.xpath("(//a[@class=\"datePicker-openIcon display\"])[2]")).click();
+
         //arrow of datepicker
         driver.findElement(By.xpath("//a[@title=\"Go to next month\"]")).click();
+
         //select date
         driver.findElement(By.xpath("//span[text()='20']")).click();
         Thread.sleep(1000);
+
         //Budget
         driver.findElement(By.xpath("//input[@class=\"input uiInputSmartNumber\"]")).sendKeys("5000000");
+
         //capital
         driver.findElement(By.xpath("(//a[@class=\"select\"and@role=\"button\"])[5]")).click();
         driver.findElement(By.xpath("//a[@title=\"Capital\"]")).click();
         Thread.sleep(2000);
+
         //timesheet approver
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys("Techcloud Developer");
+        String userName = sheet.getRow(37).getCell(4).getStringCellValue();
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys(userName);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@title=\"Techcloud Developer\"]")).click();
+        driver.findElement(By.xpath("//div[@title=\""+userName+"\"]")).click();
         Thread.sleep(2000);
+
         //project condition
         driver.findElement(By.xpath("(//a[@class=\"select\"])[3]")).click();
         driver.findElement(By.xpath("//a[@title=\"Yellow\"]")).click();
+
         //project manager
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys("Techcloud Developer");
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys(userName);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@title=\"Techcloud Developer\"]")).click();
+        driver.findElement(By.xpath("//div[@title=\""+userName+"\"]")).click();
+
         //Business Process Manager
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys("Techcloud Developer");
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys(userName);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("(//div[@title=\"Techcloud Developer\"])[2]")).click();
+        driver.findElement(By.xpath("(//div[@title=\""+userName+"\"])[2]")).click();
         Thread.sleep(2000);
+
         //Solution Integrator
-        driver.findElement(By.xpath("//input[@title=\"Search Solution Integrator\"]")).sendKeys("Extron Solution Integrator");
+        String SoluName = sheet.getRow(39).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Solution Integrator\"]")).sendKeys(SoluName);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@title=\"Extron Solution Integrator\"]")).click();
+        driver.findElement(By.xpath("//div[@title=\""+SoluName+"\"]")).click();
+
         //Expense Approver
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[4]")).sendKeys("Techcloud Developer");
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[4]")).sendKeys(userName);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("(//div[@title=\"Techcloud Developer\"])[4]")).click();
+        driver.findElement(By.xpath("(//div[@title=\""+userName+"\"])[4]")).click();
+
         //Project Charter
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
 
         //Project Charter Overflow
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
+
         //Historical Comment
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Test Historical Comment");
-
         Thread.sleep(1000);
+
         //Save
         driver.findElement(By.xpath("//button[@title=\"Save\"]")).click();
 
@@ -174,6 +198,7 @@ public class Project{
     @Test(priority = 2)
     public void EditProject () throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, 30);
+
         //Edit Button
         WebElement myDynamicElement = (new WebDriverWait(driver, 30)).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class=\"slds-button slds-button_icon-border-filled\"]")));
         myDynamicElement.click();
@@ -244,12 +269,13 @@ public class Project{
         myDynamicElement.click();
 
         //User
-        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
+        String userName = sheet.getRow(37).getCell(4).getStringCellValue();
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys(userName+"\n");
         Thread.sleep(5000);
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+userName+"']")));
         myDynamicElement.click();
-
         Thread.sleep(2000);
+
         //Change Description
         driver.findElement(By.xpath("//textarea[@name=\"HistoricalComment\"]")).sendKeys("Test Historical Comment");
 
@@ -287,9 +313,9 @@ public class Project{
         Thread.sleep(2000);
 
         //User
-        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Techcloud Developer\n");
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys(userName+"\n");
         Thread.sleep(3000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Techcloud Developer']")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+userName+"']")));
         myDynamicElement.click();
 
         //Change Description
@@ -325,13 +351,13 @@ public class Project{
         Thread.sleep(2000);
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Consulted']")));
         myDynamicElement.click();
-
         Thread.sleep(2000);
 
         //User
-        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys("Subhajit Mishra\n");
+        userName = sheet.getRow(37).getCell(6).getStringCellValue();
+        driver.findElement(By.xpath("//input[@class=\"slds-lookup__search-input slds-input inputSize input uiInput uiInputText uiInput--default uiInput--input\"]")).sendKeys(userName+"\n");
         Thread.sleep(3000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Subhajit Mishra']")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+userName+"']")));
         myDynamicElement.click();
 
         //Chasnge Description
@@ -379,39 +405,41 @@ public class Project{
         Thread.sleep(2000);
 
         //Deliverable Type
-        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[5]")).sendKeys("Extron ");
+        String DelivName = sheet.getRow(44).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[5]")).sendKeys(DelivName);
         Thread.sleep(2000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron  DT']")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+DelivName+"']")));
         myDynamicElement.click();
 
         //Associated Business Process
-        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[6]")).sendKeys("Extron Business Process");
+        String BPName = sheet.getRow(19).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[6]")).sendKeys(BPName);
         Thread.sleep(2000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Business Process']")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+BPName+"']")));
         myDynamicElement.click();
-
         Thread.sleep(2000);
 
         //Measure And Metrics
-        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[7]")).sendKeys("Extron Metrics");
+        String MandMName = sheet.getRow(43).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[7]")).sendKeys(MandMName);
         Thread.sleep(2000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Metrics']")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+MandMName+"']")));
         myDynamicElement.click();
 
         //StakeHolder Group
-        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[8]")).sendKeys("Extron Stakeholder Group");
+        String StakeName = sheet.getRow(42).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[8]")).sendKeys(StakeName);
         Thread.sleep(2000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Stakeholder Group']")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+StakeName+"']")));
         myDynamicElement.click();
-
         Thread.sleep(2000);
 
         //Associated Object
-        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[9]")).sendKeys("Extron Object");
+        String ObjName = sheet.getRow(31).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("(//input[@class=\"slds-lookup__search-input slds-input leftPaddingClass input uiInput uiInputText uiInput--default uiInput--input\"])[9]")).sendKeys(ObjName);
         Thread.sleep(2000);
-        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='Extron Object']")));
+        myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[text()='"+ObjName+"']")));
         myDynamicElement.click();
-
         Thread.sleep(2000);
 
         //Scope Description
@@ -425,8 +453,8 @@ public class Project{
         Thread.sleep(2000);
         myDynamicElement=wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//option[text()='Capital']")));
         myDynamicElement.click();
-
         Thread.sleep(2000);
+
         //Scope Lever
         driver.findElement(By.xpath("(//select[@class=\"slds-select\"])[3]")).click();
         Thread.sleep(2000);
@@ -453,7 +481,7 @@ public class Project{
         Assert.assertTrue(ToastMessage.contains(Chechval));
         Thread.sleep(5000);
     }
-    @Test(priority = 5)
+    /*@Test(priority = 5)
     public void getbacktosObject() throws InterruptedException {
         //get sObject URL
         String sObject = sheet.getRow(14).getCell(2).getStringCellValue();
@@ -512,7 +540,7 @@ public class Project{
         Assert.assertTrue(ToastMessage.contains(Chechval));
         Thread.sleep(5000);
 
-    }
+    }*/
 
     @AfterTest
     public void close(){

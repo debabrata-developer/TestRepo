@@ -80,24 +80,28 @@ public class Defect_Log {
         myDynamicElement.click();
         Thread.sleep(2000);
         //Associated Organization
+        String OrgName = sheet.getRow(11).getCell(3).getStringCellValue();
         myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@title=\"Search Organization\"]")));
-        myDynamicElement.sendKeys("Extron Organization");
+        myDynamicElement.sendKeys(OrgName);
         Thread.sleep(2000);
-        driver.findElement(By.xpath("//div[@title=\"Extron Organization\"]")).click();
+        driver.findElement(By.xpath("//div[@title=\""+OrgName+"\"]")).click();
 
         //Associated portfolio
-        driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys("Extron Portfolio");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Portfolio\"]")));
+        String PortName = sheet.getRow(12).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Portfolios\"]")).sendKeys(PortName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+PortName+"\"]")));
         myDynamicElement.click();
         Thread.sleep(2000);
 
         //Associated Program
-        driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys("Extron Portfolio");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Program\"]")));
+        String ProgName = sheet.getRow(13).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Programs\"]")).sendKeys(ProgName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProgName+"\"]")));
         myDynamicElement.click();
         //Associated Project
-        driver.findElement(By.xpath("//input[@title=\"Search Projects\"]")).sendKeys("Extron Project");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Project\"]")));
+        String ProjName = sheet.getRow(14).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Projects\"]")).sendKeys(ProjName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+ProjName+"\"]")));
         myDynamicElement.click();
         //Defect Name
         driver.findElement(By.xpath("(//input[@class=\" input\"])[1]")).sendKeys("Test Selenium Defect");
@@ -128,19 +132,22 @@ public class Defect_Log {
         Thread.sleep(2000);
 
         //Associated Deliverables
-        driver.findElement(By.xpath("//input[@title=\"Search Deliverables\"]")).sendKeys("Extron Deliverable");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Deliverable Retest\"]")));
+        String DelijName = sheet.getRow(15).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Deliverables\"]")).sendKeys(DelijName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+DelijName+"\"]")));
         myDynamicElement.click();
         Thread.sleep(2000);
 
         //Associates System
-        driver.findElement(By.xpath("//input[@title=\"Search Systems\"]")).sendKeys("Extron System ");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron System\"]")));
+        String SystemName = sheet.getRow(33).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Systems\"]")).sendKeys(SystemName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+SystemName+"\"]")));
         myDynamicElement.click();
 
         //Business Transaction Impacted
-        driver.findElement(By.xpath("//input[@title=\"Search Business Transaction Library\"]")).sendKeys("Extron Business Transaction");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron Business Transaction\"]")));
+        String BTName = sheet.getRow(50).getCell(3).getStringCellValue();
+        driver.findElement(By.xpath("//input[@title=\"Search Business Transaction Library\"]")).sendKeys(BTName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\""+BTName+"\"]")));
         myDynamicElement.click();
         //Integration Impacted
         driver.findElement(By.xpath("(//a[@class=\"select\"])[5]")).click();
@@ -148,17 +155,18 @@ public class Defect_Log {
         myDynamicElement.click();
 
         //Defect Co-ordinator
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys("Techcloud Developer");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\"Techcloud Developer\"])[1]")));
+        String userName = sheet.getRow(37).getCell(4).getStringCellValue();
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[1]")).sendKeys(userName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\""+userName+"\"])[1]")));
         myDynamicElement.click();
         //Defect Owner
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys("Techcloud Developer");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\"Techcloud Developer\"])[2]")));
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[2]")).sendKeys(userName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\""+userName+"\"])[2]")));
         myDynamicElement.click();
         Thread.sleep(2000);
         //Defect Resolution Signoff
-        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys("Techcloud Developer");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\"Techcloud Developer\"])[3]")));
+        driver.findElement(By.xpath("(//input[@title=\"Search People\"])[3]")).sendKeys(userName);
+        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("(//div[@title=\""+userName+"\"])[3]")));
         myDynamicElement.click();
 
         //What Cause The Defect
@@ -168,9 +176,9 @@ public class Defect_Log {
         driver.findElement(By.xpath("//div[@class=\"ql-editor ql-blank slds-rich-text-area__content slds-text-color_weak slds-grow\"]")).sendKeys("Testing");
 
         //Associated Test Plan
-        driver.findElement(By.xpath("//input[@title=\"Search Test Plans\"]")).sendKeys("Extron  RJC Test Plan 1");
-        myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron RJC Test Plan 1\"]")));
-        myDynamicElement.click();
+        //driver.findElement(By.xpath("//input[@title=\"Search Test Plans\"]")).sendKeys("Extron  RJC Test Plan 1");
+        //myDynamicElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//div[@title=\"Extron RJC Test Plan 1\"]")));
+        //myDynamicElement.click();
         //Test Plan Details
         //driver.findElement(By.xpath("title=\"Search Test Plan Details\"")).sendKeys();
 

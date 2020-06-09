@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -70,11 +72,22 @@ public class CommonClass {
     @Test(priority = 1)
     public void testMethod(){
         System.out.println("it is test method");
+        driver.findElement(By.xpath("//nput[@id='username']")).sendKeys("username");
     }
 
     @AfterTest
     public void close(){
         //closing the chrome
-        driver.quit();
+        //driver.quit();
+    }
+
+    @AfterMethod
+    public void afterMethod(ITestResult result)
+    {
+        if(result.getStatus() == ITestResult.FAILURE || result.getStatus() == ITestResult.SKIP)
+        {
+            System.out.println("result Fail--"+result.getStatus());
+            driver.quit();
+        }
     }
 }

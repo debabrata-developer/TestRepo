@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite guice-stage="DEVELOPMENT" name="Failed suite [Test Suite A]">
+  <test thread-count="5" name="Data_Field Test Data(failed)">
+    <classes>
+      <class name="com.sampleData.Data_Field">
+        <methods>
+          <include name="afterMethod"/>
+          <include name="CreateData_Field"/>
+          <include name="afterSuite"/>
+          <include name="beforeSuite"/>
+        </methods>
+      </class> <!-- com.sampleData.Data_Field -->
+    </classes>
+  </test> <!-- Data_Field Test Data(failed) -->
+</suite> <!-- Failed suite [Test Suite A] -->

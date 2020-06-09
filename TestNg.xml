@@ -1,8 +1,148 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Test Suite" parallel="false">
+<suite name="Test Suite A" parallel="false">
 
-    <test name="AMIGO Automation 1">
+
+    <!-- Line 7 to 131 are Sample Data Creation Script(After use Comment this Line f code) -->
+    <test name="Organization Test Data">
+        <classes>
+            <class name="com.sampleData.Organization"/>
+        </classes>
+    </test>
+    <test name="Solution_Integrator Test Data">
+        <classes>
+            <class name="com.sampleData.Solution_Integrator"/>
+        </classes>
+    </test>
+    <test name="Portfolio Test Data">
+        <classes>
+            <class name="com.sampleData.Portfolio"/>
+        </classes>
+    </test>
+    <test name="Program Test Data">
+        <classes>
+            <class name="com.sampleData.Program"/>
+        </classes>
+    </test>
+    <test name="Project Test Data">
+        <classes>
+            <class name="com.sampleData.Project"/>
+        </classes>
+    </test>
+    <test name="Object Test Data">
+        <classes>
+            <class name="com.sampleData.Object"/>
+        </classes>
+    </test>
+    <test name="Business_Process Test Data">
+        <classes>
+            <class name="com.sampleData.Business_Process"/>
+        </classes>
+    </test>
+    <test name="Goal Test Data">
+        <classes>
+            <class name="com.sampleData.Goal"/>
+        </classes>
+    </test>
+    <test name="Objectives Test Data">
+        <classes>
+            <class name="com.sampleData.Objectives"/>
+        </classes>
+    </test>
+    <test name="Measures_And_Metrics Test Data">
+        <classes>
+            <class name="com.sampleData.Measures_And_Metrics"/>
+        </classes>
+    </test>
+    <test name="Stakeholder_Group Test Data">
+        <classes>
+            <class name="com.sampleData.Stakeholder_Group"/>
+        </classes>
+    </test>
+    <test name="Deliverable_Type Test Data">
+        <classes>
+            <class name="com.sampleData.Deliverable_Type"/>
+        </classes>
+    </test>
+    <test name="Deliverable Test Data">
+        <classes>
+            <class name="com.sampleData.Deliverable"/>
+        </classes>
+    </test>
+    <test name="Work_Package_Type Test Data">
+        <classes>
+            <class name="com.sampleData.Work_Package_Type"/>
+        </classes>
+    </test>
+    <test name="Work_Package Test Data">
+        <classes>
+            <class name="com.sampleData.Work_Package"/>
+        </classes>
+    </test>
+    <test name="System_obj Test Data">
+        <classes>
+            <class name="com.sampleData.System_obj"/>
+        </classes>
+    </test>
+    <test name="Business_Transaction Test Data">
+        <classes>
+            <class name="com.sampleData.Business_Transaction"/>
+        </classes>
+    </test>
+    <test name="Defect_Log Test Data">
+        <classes>
+            <class name="com.sampleData.Defect_Log"/>
+        </classes>
+    </test>
+    <test name="Change_Request_Log Test Data">
+        <classes>
+            <class name="com.sampleData.Change_Request_Log"/>
+        </classes>
+    </test>
+    <test name="Risk_Register Test Data">
+        <classes>
+            <class name="com.sampleData.Risk_Register"/>
+        </classes>
+    </test>
+    <test name="Issue_Log Test Data">
+        <classes>
+            <class name="com.sampleData.Issue_Log"/>
+        </classes>
+    </test>
+    <test name="Gate Test Data">
+        <classes>
+            <class name="com.sampleData.Gate"/>
+        </classes>
+    </test>
+    <test name="Cutover_Task Test Data">
+        <classes>
+            <class name="com.sampleData.Cutover_Task"/>
+        </classes>
+    </test>
+    <test name="Environment Test Data">
+        <classes>
+            <class name="com.sampleData.Environment"/>
+        </classes>
+    </test>
+    <test name="Data_Table Test Data">
+        <classes>
+            <class name="com.sampleData.Data_Table"/>
+        </classes>
+    </test>
+    <test name="Data_Field Test Data">
+        <classes>
+            <class name="com.sampleData.Data_Field"/>
+        </classes>
+    </test>
+
+
+
+
+
+
+
+    <!-- this all for testing -->
+    <!--<test name="AMIGO Automation 1">
         <classes>
             <class name="com.testCase.Organization"/>
         </classes>
@@ -72,5 +212,71 @@
             <class name="com.testCase.Gate_Metrics_And_Result"/>
         </classes>
     </test>
+    <test name="AMIGO Automation 14-1">
+        <classes>
+            <class name="com.testCase.Expense_Report"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 14-2">
+        <classes>
+            <class name="com.testCase.Expense_Tracking"/>
+        </classes>
+    </test>
 
+
+    <test name="AMIGO Automation 15">
+        <classes>
+            <class name="com.testCase.Action_Item"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 16">
+        <classes>
+            <class name="com.testCase.Business_Process"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 17">
+        <classes>
+            <class name="com.testCase.Change_Request_Log"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 18">
+        <classes>
+            <class name="com.testCase.Communication_Register"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 19">
+        <classes>
+            <class name="com.testCase.Cutover_Plan_Change_Request"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 20">
+        <classes>
+            <class name="com.testCase.Data_Mapping_Register"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 21">
+        <classes>
+            <class name="com.testCase.Deliverable"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 22">
+        <classes>
+            <class name="com.testCase.Issue_Log"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 23">
+        <classes>
+            <class name="com.testCase.System_obj"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 24">
+        <classes>
+            <class name="com.testCase.Time_Tracking"/>
+        </classes>
+    </test>
+    <test name="AMIGO Automation 25">
+        <classes>
+            <class name="com.testCase.Work_Package"/>
+        </classes>
+    </test>-->
 </suite>
